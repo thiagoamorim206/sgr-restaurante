@@ -44,7 +44,7 @@ public class TbPedido implements Serializable {
     private Date dtPedido;
     @Basic(optional = false)
     @Column(name = "vl_total_consumo")
-    private float vlTotalConsumo;
+    private double vlTotalConsumo;
     @Basic(optional = false)
     @Column(name = "ds_pago")
     private boolean dsPago;
@@ -54,7 +54,7 @@ public class TbPedido implements Serializable {
     private Collection<TbPagamento> tbPagamentoCollection;
     @JoinColumn(name = "id_mesa", referencedColumnName = "id_mesa")
     @ManyToOne(optional = false)
-    private TbMesa idMesa;
+    private int idMesa;
 
     public TbPedido() {
     }
@@ -86,13 +86,15 @@ public class TbPedido implements Serializable {
         this.dtPedido = dtPedido;
     }
 
-    public float getVlTotalConsumo() {
+    public double getVlTotalConsumo() {
         return vlTotalConsumo;
     }
 
-    public void setVlTotalConsumo(float vlTotalConsumo) {
+    public void setVlTotalConsumo(double vlTotalConsumo) {
         this.vlTotalConsumo = vlTotalConsumo;
     }
+
+ 
 
     public boolean getDsPago() {
         return dsPago;
@@ -120,13 +122,15 @@ public class TbPedido implements Serializable {
         this.tbPagamentoCollection = tbPagamentoCollection;
     }
 
-    public TbMesa getIdMesa() {
+    public int getIdMesa() {
         return idMesa;
     }
 
-    public void setIdMesa(TbMesa idMesa) {
+    public void setIdMesa(int idMesa) {
         this.idMesa = idMesa;
     }
+
+
 
     @Override
     public int hashCode() {

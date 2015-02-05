@@ -1,5 +1,6 @@
 package View;
 
+import ControllerBean.CardapioBean;
 import ControllerBean.TipoCardapioBean;
 import ControllerBean.TipoRestauranteBean;
 import java.util.InputMismatchException;
@@ -77,16 +78,25 @@ public class main {
 
         TipoRestauranteBean teste = new TipoRestauranteBean(tipo);
 
-        // teste.CadastroTipoRestauranteDados(tipo);
+        
         String resul = teste.CadastroTipoRestaurante();
         String tipo2 = "amorim";
         TipoRestauranteBean teste2 = new TipoRestauranteBean(tipo2);
-        // teste.CadastroTipoRestauranteDados(tipo2);
+      
         teste2.CadastroTipoRestaurante();
 
         String tipo4 = "Bebidas";
         TipoCardapioBean cardapioBean = new TipoCardapioBean(tipo4);
         cardapioBean.CadastroTipoCardapio();
+        
+        
+        String nome = "Coca cola";
+        
+        double valor = 5.10;
+        
+        
+        CardapioBean cardapio = new CardapioBean(1, 1, nome, valor);
+        cardapio.CadastroCardapio();
         
         System.out.println("Resultado " + resul);
 

@@ -1,20 +1,20 @@
 package ControllerDAO;
 
-import Model.TbTipoCardapio;
+import Model.TbMesa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class TipoCardapioDAO {
-
-    public TbTipoCardapio inserirTipoCardapio(TbTipoCardapio t) {
+public class MesaDAO {
+    
+    public TbMesa inserirMesa(TbMesa t) {
         Connection cn = null;
 
         try {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "INSERT INTO tb_tipo_cardapio VALUES (nextval('tb_tipo_cardapio_id_tipo_cardapio_seq'), '" + t.getNmTipo() + "')";
+            String SQL = "INSERT INTO tb_mesa VALUES (nextval('tb_mesa_id_mesa_seq'), '" + t.getNrLugares()+ "','" + t.getFlOcupada()+ "','" + t.getDsObs()+ "')";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
             ps.execute();
@@ -31,5 +31,6 @@ public class TipoCardapioDAO {
         }
         return null;
     }
+
 
 }

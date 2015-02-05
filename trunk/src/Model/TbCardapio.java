@@ -6,9 +6,7 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,10 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,15 +36,13 @@ public class TbCardapio implements Serializable {
     private String nmItemCardapio;
     @Basic(optional = false)
     @Column(name = "vl_item")
-    private float vlItem;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCardapio")
-    private Collection<TbPedidoCardapio> tbPedidoCardapioCollection;
+    private double vlItem;
     @JoinColumn(name = "id_tipo_cardapio", referencedColumnName = "id_tipo_cardapio")
     @ManyToOne(optional = false)
-    private TbTipoCardapio idTipoCardapio;
+    private int idTipoCardapio;
     @JoinColumn(name = "id_tipo_restaurante", referencedColumnName = "id_tipo_restaurante")
     @ManyToOne(optional = false)
-    private TbTipoRestaurante idTipoRestaurante;
+    private int idTipoRestaurante;
 
     public TbCardapio() {
     }
@@ -57,7 +51,7 @@ public class TbCardapio implements Serializable {
         this.idCardapio = idCardapio;
     }
 
-    public TbCardapio(Integer idCardapio, String nmItemCardapio, float vlItem) {
+    public TbCardapio(Integer idCardapio, String nmItemCardapio, double vlItem) {
         this.idCardapio = idCardapio;
         this.nmItemCardapio = nmItemCardapio;
         this.vlItem = vlItem;
@@ -79,38 +73,45 @@ public class TbCardapio implements Serializable {
         this.nmItemCardapio = nmItemCardapio;
     }
 
-    public float getVlItem() {
+    public double getVlItem() {
         return vlItem;
     }
 
-    public void setVlItem(float vlItem) {
+    public void setVlItem(double vlItem) {
         this.vlItem = vlItem;
     }
 
-    @XmlTransient
-    public Collection<TbPedidoCardapio> getTbPedidoCardapioCollection() {
-        return tbPedidoCardapioCollection;
-    }
-
-    public void setTbPedidoCardapioCollection(Collection<TbPedidoCardapio> tbPedidoCardapioCollection) {
-        this.tbPedidoCardapioCollection = tbPedidoCardapioCollection;
-    }
-
-    public TbTipoCardapio getIdTipoCardapio() {
+    public int getIdTipoCardapio() {
         return idTipoCardapio;
     }
 
-    public void setIdTipoCardapio(TbTipoCardapio idTipoCardapio) {
+    public void setIdTipoCardapio(int idTipoCardapio) {
         this.idTipoCardapio = idTipoCardapio;
     }
 
-    public TbTipoRestaurante getIdTipoRestaurante() {
+    public int getIdTipoRestaurante() {
         return idTipoRestaurante;
     }
 
-    public void setIdTipoRestaurante(TbTipoRestaurante idTipoRestaurante) {
+    public void setIdTipoRestaurante(int idTipoRestaurante) {
         this.idTipoRestaurante = idTipoRestaurante;
     }
+
+//    public TbTipoCardapio getIdTipoCardapio() {
+//        return idTipoCardapio;
+//    }
+//
+//    public void setIdTipoCardapio(TbTipoCardapio idTipoCardapio) {
+//        this.idTipoCardapio = idTipoCardapio;
+//    }
+//
+//    public TbTipoRestaurante getIdTipoRestaurante() {
+//        return idTipoRestaurante;
+//    }
+//
+//    public void setIdTipoRestaurante(TbTipoRestaurante idTipoRestaurante) {
+//        this.idTipoRestaurante = idTipoRestaurante;
+//    }
 
     @Override
     public int hashCode() {
