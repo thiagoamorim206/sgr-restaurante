@@ -1,5 +1,6 @@
 package View;
 
+import ControllerBean.TipoCardapioBean;
 import ControllerBean.TipoRestauranteBean;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -16,9 +17,9 @@ public class main {
         do {
 
             System.out.println("-----------Menu inicial Restaurante-----------");
-            System.out.println("1- Carregar arquivos com base de dados.");
-            System.out.println("2- Verificar status do aluno.");
-            System.out.println("3- Calcular salário do funcionário.");
+            System.out.println("1 - Carregar arquivos com base de dados.");
+            System.out.println("2 - Verificar status do aluno.");
+            System.out.println("3 - Calcular salário do funcionário.");
             System.out.println("4- Cadastrar Funcionários.");
             System.out.println("5- Cadastrar Alunos.");
             System.out.println("6- Cadastrar Treinos.");
@@ -80,9 +81,13 @@ public class main {
         String resul = teste.CadastroTipoRestaurante();
         String tipo2 = "amorim";
         TipoRestauranteBean teste2 = new TipoRestauranteBean(tipo2);
-        //     teste.CadastroTipoRestauranteDados(tipo2);
+        // teste.CadastroTipoRestauranteDados(tipo2);
         teste2.CadastroTipoRestaurante();
 
+        String tipo4 = "Bebidas";
+        TipoCardapioBean cardapioBean = new TipoCardapioBean(tipo4);
+        cardapioBean.CadastroTipoCardapio();
+        
         System.out.println("Resultado " + resul);
 
     }
