@@ -37,10 +37,10 @@ public class TbPedidoCardapio implements Serializable {
     private Integer idPedidoCardapio;
     @JoinColumn(name = "id_cardapio", referencedColumnName = "id_cardapio")
     @ManyToOne(optional = false)
-    private TbCardapio idCardapio;
+    private int idCardapio;
     @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
     @ManyToOne(optional = false)
-    private TbPedido idPedido;
+    private int idPedido;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPedidoCardapio")
     private Collection<TbFilaPedido> tbFilaPedidoCollection;
 
@@ -59,21 +59,38 @@ public class TbPedidoCardapio implements Serializable {
         this.idPedidoCardapio = idPedidoCardapio;
     }
 
-    public TbCardapio getIdCardapio() {
+    public int getIdCardapio() {
         return idCardapio;
     }
 
-    public void setIdCardapio(TbCardapio idCardapio) {
+    public void setIdCardapio(int idCardapio) {
         this.idCardapio = idCardapio;
     }
 
-    public TbPedido getIdPedido() {
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(TbPedido idPedido) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
+    
+
+//    public TbCardapio getIdCardapio() {
+//        return idCardapio;
+//    }
+//
+//    public void setIdCardapio(TbCardapio idCardapio) {
+//        this.idCardapio = idCardapio;
+//    }
+//
+//    public TbPedido getIdPedido() {
+//        return idPedido;
+//    }
+//
+//    public void setIdPedido(TbPedido idPedido) {
+//        this.idPedido = idPedido;
+//    }
 
     @XmlTransient
     public Collection<TbFilaPedido> getTbFilaPedidoCollection() {

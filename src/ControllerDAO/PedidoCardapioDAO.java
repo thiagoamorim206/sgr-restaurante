@@ -1,20 +1,20 @@
 package ControllerDAO;
 
-import Model.TbTipoCardapio;
+import Model.TbPedidoCardapio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class TipoCardapioDAO {
+public class PedidoCardapioDAO {
 
-    public TbTipoCardapio inserirTipoCardapio(TbTipoCardapio t) {
+    public TbPedidoCardapio inserirPedidoCardapio(TbPedidoCardapio t) {
         Connection cn = null;
 
         try {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "INSERT INTO tb_tipo_cardapio VALUES (nextval('tb_tipo_cardapio_id_tipo_cardapio_seq'), '" + t.getNmTipo() + "')";
+            String SQL = "INSERT INTO tb_pedido_cardapio VALUES (nextval('tb_pedido_cardapio_id_pedido_cardapio_seq'), '" + t.getIdCardapio() + "','" + t.getIdPedido()+ "')";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
             ps.execute();
