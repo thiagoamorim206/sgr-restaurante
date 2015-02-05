@@ -11,12 +11,12 @@
     <class>Model.TbPedido</class>
     <class>Model.TbPedidoCardapio</class>
     <class>Model.TbTipoRestaurante</class>
-    <class>Model.TbCardapio</class>
     <class>Model.TbTipoCardapio</class>
     <class>Model.TbFilaPedido</class>
     <class>Model.TbReserva</class>
     <class>Model.TbCompraProduto</class>
     <class>Model.TbPagamento</class>
+    <class>Model.TbCardapio</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Restaurante"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
