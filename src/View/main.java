@@ -33,8 +33,8 @@ public class main {
             System.out.println("13- Verificar Reserva.");
             System.out.println("14- Fechar Mesa.");
             System.out.println("15- Mostrar Mesas Reservadas.");
-            System.out.println("16- .");
-            System.out.println("17- .");
+            System.out.println("16- Mostrar Cardapio.");
+            System.out.println("17- Mostrar Fila Pedidos.");
             System.out.println("18- .");
             System.out.println("19- Sair.");
             System.out.print("Digite uma opção: ");
