@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "tb_compra_produto")
 @XmlRootElement
 public class TbCompraProduto implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,13 +47,13 @@ public class TbCompraProduto implements Serializable {
     private String dsObs;
     @JoinColumn(name = "id_empregado", referencedColumnName = "id_empregado")
     @ManyToOne(optional = false)
-    private TbEmpregado idEmpregado;
+    private int idEmpregado;
     @JoinColumn(name = "id_fornecedor", referencedColumnName = "id_fornecedor")
     @ManyToOne(optional = false)
-    private TbFornecedor idFornecedor;
+    private int idFornecedor;
     @JoinColumn(name = "id_materia_prima", referencedColumnName = "id_materia_prima")
     @ManyToOne(optional = false)
-    private TbMateriaPrima idMateriaPrima;
+    private int idMateriaPrima;
 
     public TbCompraProduto() {
     }
@@ -100,27 +101,27 @@ public class TbCompraProduto implements Serializable {
         this.dsObs = dsObs;
     }
 
-    public TbEmpregado getIdEmpregado() {
+    public int getIdEmpregado() {
         return idEmpregado;
     }
 
-    public void setIdEmpregado(TbEmpregado idEmpregado) {
+    public void setIdEmpregado(int idEmpregado) {
         this.idEmpregado = idEmpregado;
     }
 
-    public TbFornecedor getIdFornecedor() {
+    public int getIdFornecedor() {
         return idFornecedor;
     }
 
-    public void setIdFornecedor(TbFornecedor idFornecedor) {
+    public void setIdFornecedor(int idFornecedor) {
         this.idFornecedor = idFornecedor;
     }
 
-    public TbMateriaPrima getIdMateriaPrima() {
+    public int getIdMateriaPrima() {
         return idMateriaPrima;
     }
 
-    public void setIdMateriaPrima(TbMateriaPrima idMateriaPrima) {
+    public void setIdMateriaPrima(int idMateriaPrima) {
         this.idMateriaPrima = idMateriaPrima;
     }
 
@@ -148,5 +149,5 @@ public class TbCompraProduto implements Serializable {
     public String toString() {
         return "Model.TbCompraProduto[ idCompraProduto=" + idCompraProduto + " ]";
     }
-    
+
 }

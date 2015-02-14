@@ -1,20 +1,22 @@
 package ControllerDAO;
 
-import Model.TbCliente;
+import Model.TbCompraProduto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ClienteDAO {
-    
-    public TbCliente inserirCliente(TbCliente t) {
+public class CompraProdutoDAO {
+
+    public TbCompraProduto inserirCompraProduto(TbCompraProduto t) {
         Connection cn = null;
 
         try {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "INSERT INTO tb_cliente VALUES (nextval('tb_cliente_id_cliente_seq'), '" + t.getIdMesa()+ "','" + t.getIdPessoa() + "')";
+            String SQL = "INSERT INTO tb_compra_produto VALUES (nextval('tb_compra_produto_id_compra_produto_seq'), '"
+                    + t.getIdEmpregado() + "','" + t.getIdFornecedor() + "','" + t.getIdMateriaPrima() + "','"
+                    + t.getDtCompra() + "','" + t.getNrQtdCompra() + "','" + t.getDsObs() + "')";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
             ps.execute();
@@ -32,5 +34,4 @@ public class ClienteDAO {
         return null;
     }
 
-    
 }

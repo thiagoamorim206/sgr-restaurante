@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "tb_cliente")
 @XmlRootElement
 public class TbCliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +40,10 @@ public class TbCliente implements Serializable {
     private Collection<TbPagamento> tbPagamentoCollection;
     @JoinColumn(name = "id_mesa", referencedColumnName = "id_mesa")
     @ManyToOne(optional = false)
-    private TbMesa idMesa;
+    private int idMesa;
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
     @ManyToOne(optional = false)
-    private TbPessoa idPessoa;
+    private int idPessoa;
 
     public TbCliente() {
     }
@@ -68,19 +69,19 @@ public class TbCliente implements Serializable {
         this.tbPagamentoCollection = tbPagamentoCollection;
     }
 
-    public TbMesa getIdMesa() {
+    public int getIdMesa() {
         return idMesa;
     }
 
-    public void setIdMesa(TbMesa idMesa) {
+    public void setIdMesa(int idMesa) {
         this.idMesa = idMesa;
     }
 
-    public TbPessoa getIdPessoa() {
+    public int getIdPessoa() {
         return idPessoa;
     }
 
-    public void setIdPessoa(TbPessoa idPessoa) {
+    public void setIdPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
     }
 
@@ -108,5 +109,5 @@ public class TbCliente implements Serializable {
     public String toString() {
         return "Model.TbCliente[ idCliente=" + idCliente + " ]";
     }
-    
+
 }

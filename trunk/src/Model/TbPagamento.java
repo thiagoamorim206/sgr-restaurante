@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "tb_pagamento")
 @XmlRootElement
 public class TbPagamento implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,13 +41,13 @@ public class TbPagamento implements Serializable {
     private Date dtPagamento;
     @Basic(optional = false)
     @Column(name = "vl_total_pago")
-    private float vlTotalPago;
+    private double vlTotalPago;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
     @ManyToOne(optional = false)
-    private TbCliente idCliente;
+    private int idCliente;
     @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
     @ManyToOne(optional = false)
-    private TbPedido idPedido;
+    private int idPedido;
 
     public TbPagamento() {
     }
@@ -77,27 +78,27 @@ public class TbPagamento implements Serializable {
         this.dtPagamento = dtPagamento;
     }
 
-    public float getVlTotalPago() {
+    public double getVlTotalPago() {
         return vlTotalPago;
     }
 
-    public void setVlTotalPago(float vlTotalPago) {
+    public void setVlTotalPago(double vlTotalPago) {
         this.vlTotalPago = vlTotalPago;
     }
 
-    public TbCliente getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(TbCliente idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
-    public TbPedido getIdPedido() {
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(TbPedido idPedido) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
@@ -125,5 +126,5 @@ public class TbPagamento implements Serializable {
     public String toString() {
         return "Model.TbPagamento[ idPagamento=" + idPagamento + " ]";
     }
-    
+
 }
