@@ -2,6 +2,7 @@ package ControllerBean;
 
 import Model.TbTipoRestaurante;
 import ControllerDAO.TipoRestauranteDAO;
+import java.util.ArrayList;
 
 public class TipoRestauranteBean {
 
@@ -10,6 +11,9 @@ public class TipoRestauranteBean {
 
     public TipoRestauranteBean(String nome_tipo) {
         tipoRestaurante.setNmTipo(nome_tipo);
+    }
+
+    public TipoRestauranteBean() {
     }
 
     public TbTipoRestaurante getTipoRestaurante() {
@@ -25,6 +29,16 @@ public class TipoRestauranteBean {
         tipoRestaurante = tipoRestauranteDao.inserirTipoRestaurante(tipoRestaurante);//salva
         return "Sucesso"; // Caso de Sucesso
 
+    }
+
+    public String ListarTipoRestaurante() {
+       
+        ArrayList<TbTipoRestaurante> lista = tipoRestauranteDao.listarTipoRestaurante();
+       
+        for (TbTipoRestaurante o : lista) {
+            System.out.println("Codigo: " + o.getIdTipoRestaurante() + " Nome: " + o.getNmTipo());
+        }
+        return "Sucesso";
     }
 
 }
