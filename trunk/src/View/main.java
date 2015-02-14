@@ -18,24 +18,24 @@ public class main {
         do {
 
             System.out.println("-----------Menu inicial Restaurante-----------");
-            System.out.println("1 - Carregar arquivos com base de dados.");
-            System.out.println("2 - Verificar status do aluno.");
-            System.out.println("3 - Calcular salário do funcionário.");
-            System.out.println("4- Cadastrar Funcionários.");
-            System.out.println("5- Cadastrar Alunos.");
-            System.out.println("6- Cadastrar Treinos.");
-            System.out.println("7- Cadastrar Atividades.");
-            System.out.println("8- Cadastrar Aparelhos.");
-            System.out.println("9- Cadastrar Promoções.");
-            System.out.println("10- Dar Promoção.");
-            System.out.println("11- Realizar Manutenção.");
-            System.out.println("12- Finalizar Manutenção.");
-            System.out.println("13- Verificar situação do Aparelho.");
-            System.out.println("14- Entrar com horas extras do Instrutor.");
-            System.out.println("15- Pagar Mensalidade.");
-            System.out.println("16- Excluir Dados.");
-            System.out.println("17- Salvar dados da memória em arquivos.");
-            System.out.println("18- Imprime dados da memória.");
+            System.out.println("1 - Cadastrar Cliente.");
+            System.out.println("2 - Cadastrar Empregado.");
+            System.out.println("3 - Cadastrar Fornecedor.");
+            System.out.println("4 - Cadastrar Produto.");
+            System.out.println("5 - Cadastrar Compra Produto.");
+            System.out.println("6 - Cadastrar Tipo Cardapio.");
+            System.out.println("7 - Cadastrar Tipo Restaurante.");
+            System.out.println("8 - Cadastrar Cardapio.");
+            System.out.println("9 - Cadastrar Pedido.");
+            System.out.println("10- Cadastrar Pagamento.");
+            System.out.println("11- Cadastrar Mesa.");
+            System.out.println("12- Cadastrar Reserva.");
+            System.out.println("13- Verificar Reserva.");
+            System.out.println("14- Fechar Mesa.");
+            System.out.println("15- Mostrar Mesas Reservadas.");
+            System.out.println("16- .");
+            System.out.println("17- .");
+            System.out.println("18- .");
             System.out.println("19- Sair.");
             System.out.print("Digite uma opção: ");
 
