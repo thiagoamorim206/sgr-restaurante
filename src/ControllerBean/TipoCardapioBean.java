@@ -21,11 +21,9 @@ public class TipoCardapioBean {
     }
 
     public String CadastroTipoCardapio() {
-        if (tipoCardapio.getNmTipo() != null) { // verifica se eh nulo
-            tipoCardapio = tipoCardapioDao.inserirTipoCardapio(tipoCardapio);//salva
-            return "Sucesso"; // Caso de Sucesso
-        } else {
-            return "Erro"; // CASO CONTRARIO MANDA UM ALERT DE ERRO
-        }
+
+        tipoCardapio = tipoCardapioDao.inserirTipoCardapio(tipoCardapio);//salva
+        return "Sucesso"; // Caso de Sucesso
+
     }
 }
