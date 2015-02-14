@@ -74,31 +74,34 @@ public class main {
             }
         } while (opMenuPrincipal != 19);
 
-        String tipo = "thiago";
-
-        TipoRestauranteBean teste = new TipoRestauranteBean(tipo);
-
+        TipoRestauranteBean tipoRestauranteBean = new TipoRestauranteBean();
+        tipoRestauranteBean.ListarTipoRestaurante();
         
-        String resul = teste.CadastroTipoRestaurante();
-        String tipo2 = "amorim";
-        TipoRestauranteBean teste2 = new TipoRestauranteBean(tipo2);
-      
-        teste2.CadastroTipoRestaurante();
-
-        String tipo4 = "Bebidas";
-        TipoCardapioBean cardapioBean = new TipoCardapioBean(tipo4);
-        cardapioBean.CadastroTipoCardapio();
-        
-        
-        String nome = "Coca cola";
-        
-        double valor = 5.10;
-        
-        
-        CardapioBean cardapio = new CardapioBean(1, 1, nome, valor);
-        cardapio.CadastroCardapio();
-        
-        System.out.println("Resultado " + resul);
+//        String tipo = "thiago";
+//
+//        TipoRestauranteBean teste = new TipoRestauranteBean(tipo);
+//
+//        
+//        String resul = teste.CadastroTipoRestaurante();
+//        String tipo2 = "amorim";
+//        TipoRestauranteBean teste2 = new TipoRestauranteBean(tipo2);
+//      
+//        teste2.CadastroTipoRestaurante();
+//
+//        String tipo4 = "Bebidas";
+//        TipoCardapioBean cardapioBean = new TipoCardapioBean(tipo4);
+//        cardapioBean.CadastroTipoCardapio();
+//        
+//        
+//        String nome = "Coca cola";
+//        
+//        double valor = 5.10;
+//        
+//        
+//        CardapioBean cardapio = new CardapioBean(1, 1, nome, valor);
+//        cardapio.CadastroCardapio();
+//        
+//        System.out.println("Resultado " + resul);
 
     }
 }
