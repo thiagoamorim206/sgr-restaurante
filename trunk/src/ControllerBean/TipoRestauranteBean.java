@@ -21,12 +21,10 @@ public class TipoRestauranteBean {
     }
 
     public String CadastroTipoRestaurante() {
-        if (tipoRestaurante.getNmTipo()!= null) { // verifica se eh nulo
-            tipoRestaurante = tipoRestauranteDao.inserirTipoRestaurante(tipoRestaurante);//salva
-            return "Sucesso"; // Caso de Sucesso
-        } else {
-            return "Erro"; // CASO CONTRARIO MANDA UM ALERT DE ERRO
-        }
+
+        tipoRestaurante = tipoRestauranteDao.inserirTipoRestaurante(tipoRestaurante);//salva
+        return "Sucesso"; // Caso de Sucesso
+
     }
 
 }

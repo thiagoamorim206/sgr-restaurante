@@ -8,7 +8,7 @@ public class CardapioBean {
     private TbCardapio cardapio = new TbCardapio();
     private final CardapioDAO cardapioDao = new CardapioDAO();
 
-    public CardapioBean(int IdTipoRestaurante, int IdTipoCardapio,String nmItemCardapio, double vlItem) {
+    public CardapioBean(int IdTipoRestaurante, int IdTipoCardapio, String nmItemCardapio, double vlItem) {
         cardapio.setIdTipoRestaurante(IdTipoRestaurante);
         cardapio.setIdTipoCardapio(IdTipoCardapio);
         cardapio.setNmItemCardapio(nmItemCardapio);
@@ -24,12 +24,10 @@ public class CardapioBean {
     }
 
     public String CadastroCardapio() {
-        if (cardapio.getNmItemCardapio() != null) { // verifica se eh nulo
-            cardapio = cardapioDao.inserirCardapio(cardapio);//salva
-            return "Sucesso"; // Caso de Sucesso
-        } else {
-            return "Erro"; // CASO CONTRARIO MANDA UM ALERT DE ERRO
-        }
+
+        cardapio = cardapioDao.inserirCardapio(cardapio);//salva
+        return "Sucesso"; // Caso de Sucesso
+
     }
 
 }
