@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "tb_materia_prima")
 @XmlRootElement
 public class TbMateriaPrima implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +42,7 @@ public class TbMateriaPrima implements Serializable {
     private int nrQtdEstoque;
     @Basic(optional = false)
     @Column(name = "vl_produto")
-    private float vlProduto;
+    private double vlProduto;
     @Basic(optional = false)
     @Column(name = "ds_obs")
     private String dsObs;
@@ -87,11 +88,11 @@ public class TbMateriaPrima implements Serializable {
         this.nrQtdEstoque = nrQtdEstoque;
     }
 
-    public float getVlProduto() {
+    public double getVlProduto() {
         return vlProduto;
     }
 
-    public void setVlProduto(float vlProduto) {
+    public void setVlProduto(double vlProduto) {
         this.vlProduto = vlProduto;
     }
 
@@ -136,5 +137,5 @@ public class TbMateriaPrima implements Serializable {
     public String toString() {
         return "Model.TbMateriaPrima[ idMateriaPrima=" + idMateriaPrima + " ]";
     }
-    
+
 }

@@ -49,10 +49,10 @@ public class TbReserva implements Serializable {
     private int nrLugarReserva;
     @JoinColumn(name = "id_empregado", referencedColumnName = "id_empregado")
     @ManyToOne(optional = false)
-    private TbEmpregado idEmpregado;
+    private int idEmpregado;
     @JoinColumn(name = "id_mesa", referencedColumnName = "id_mesa")
     @ManyToOne(optional = false)
-    private TbMesa idMesa;
+    private int idMesa;
 
     public TbReserva() {
     }
@@ -109,21 +109,23 @@ public class TbReserva implements Serializable {
         this.nrLugarReserva = nrLugarReserva;
     }
 
-    public TbEmpregado getIdEmpregado() {
+    public int getIdEmpregado() {
         return idEmpregado;
     }
 
-    public void setIdEmpregado(TbEmpregado idEmpregado) {
+    public void setIdEmpregado(int idEmpregado) {
         this.idEmpregado = idEmpregado;
     }
 
-    public TbMesa getIdMesa() {
+    public int getIdMesa() {
         return idMesa;
     }
 
-    public void setIdMesa(TbMesa idMesa) {
+    public void setIdMesa(int idMesa) {
         this.idMesa = idMesa;
     }
+
+   
 
     @Override
     public int hashCode() {

@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "tb_fila_pedido")
 @XmlRootElement
 public class TbFilaPedido implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,10 +37,10 @@ public class TbFilaPedido implements Serializable {
     private String dsStatus;
     @JoinColumn(name = "id_empregado", referencedColumnName = "id_empregado")
     @ManyToOne(optional = false)
-    private TbEmpregado idEmpregado;
+    private int idEmpregado;
     @JoinColumn(name = "id_pedido_cardapio", referencedColumnName = "id_pedido_cardapio")
     @ManyToOne(optional = false)
-    private TbPedidoCardapio idPedidoCardapio;
+    private int idPedidoCardapio;
 
     public TbFilaPedido() {
     }
@@ -69,19 +70,19 @@ public class TbFilaPedido implements Serializable {
         this.dsStatus = dsStatus;
     }
 
-    public TbEmpregado getIdEmpregado() {
+    public int getIdEmpregado() {
         return idEmpregado;
     }
 
-    public void setIdEmpregado(TbEmpregado idEmpregado) {
+    public void setIdEmpregado(int idEmpregado) {
         this.idEmpregado = idEmpregado;
     }
 
-    public TbPedidoCardapio getIdPedidoCardapio() {
+    public int getIdPedidoCardapio() {
         return idPedidoCardapio;
     }
 
-    public void setIdPedidoCardapio(TbPedidoCardapio idPedidoCardapio) {
+    public void setIdPedidoCardapio(int idPedidoCardapio) {
         this.idPedidoCardapio = idPedidoCardapio;
     }
 
@@ -109,5 +110,5 @@ public class TbFilaPedido implements Serializable {
     public String toString() {
         return "Model.TbFilaPedido[ idFilaPedido=" + idFilaPedido + " ]";
     }
-    
+
 }

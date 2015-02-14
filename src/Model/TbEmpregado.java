@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "tb_empregado")
 @XmlRootElement
 public class TbEmpregado implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +41,7 @@ public class TbEmpregado implements Serializable {
     private String dsFuncaoRestaurante;
     @JoinColumn(name = "id_pessoa", referencedColumnName = "id_pessoa")
     @ManyToOne(optional = false)
-    private TbPessoa idPessoa;
+    private int idPessoa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpregado")
     private Collection<TbReserva> tbReservaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpregado")
@@ -76,11 +77,11 @@ public class TbEmpregado implements Serializable {
         this.dsFuncaoRestaurante = dsFuncaoRestaurante;
     }
 
-    public TbPessoa getIdPessoa() {
+    public int getIdPessoa() {
         return idPessoa;
     }
 
-    public void setIdPessoa(TbPessoa idPessoa) {
+    public void setIdPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
     }
 
@@ -135,5 +136,5 @@ public class TbEmpregado implements Serializable {
     public String toString() {
         return "Model.TbEmpregado[ idEmpregado=" + idEmpregado + " ]";
     }
-    
+
 }

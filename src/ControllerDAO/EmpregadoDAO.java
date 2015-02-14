@@ -1,20 +1,20 @@
 package ControllerDAO;
 
-import Model.TbCliente;
+import Model.TbEmpregado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ClienteDAO {
+public class EmpregadoDAO {
     
-    public TbCliente inserirCliente(TbCliente t) {
+    public TbEmpregado inserirEmpregado(TbEmpregado t) {
         Connection cn = null;
 
         try {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "INSERT INTO tb_cliente VALUES (nextval('tb_cliente_id_cliente_seq'), '" + t.getIdMesa()+ "','" + t.getIdPessoa() + "')";
+            String SQL = "INSERT INTO tb_empregado VALUES (nextval('tb_empregado_id_empregado_seq'), '" + t.getIdPessoa()+ "','" + t.getDsFuncaoRestaurante()+ "')";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
             ps.execute();
@@ -32,5 +32,5 @@ public class ClienteDAO {
         return null;
     }
 
-    
+
 }
