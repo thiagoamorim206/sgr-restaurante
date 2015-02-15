@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "tb_fornecedor")
 @XmlRootElement
 public class TbFornecedor implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +57,11 @@ public class TbFornecedor implements Serializable {
 
     public TbFornecedor(Integer idFornecedor) {
         this.idFornecedor = idFornecedor;
+    }
+
+    public TbFornecedor(Integer idFornecedor, String nmFornecedor) {
+        this.idFornecedor = idFornecedor;
+        this.nmFornecedor = nmFornecedor;
     }
 
     public TbFornecedor(Integer idFornecedor, String nmFornecedor, String nrCelular, String nrTelefone, String nmEmail, String dsObs) {
@@ -148,5 +154,5 @@ public class TbFornecedor implements Serializable {
     public String toString() {
         return "Model.TbFornecedor[ idFornecedor=" + idFornecedor + " ]";
     }
-    
+
 }
