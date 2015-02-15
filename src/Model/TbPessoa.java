@@ -44,7 +44,7 @@ public class TbPessoa implements Serializable {
     private String nrCelular;
     @Basic(optional = false)
     @Column(name = "nm_sexo")
-    private Character nmSexo;
+    private String nmSexo;
     @Basic(optional = false)
     @Column(name = "nm_email")
     private String nmEmail;
@@ -60,7 +60,7 @@ public class TbPessoa implements Serializable {
         this.idPessoa = idPessoa;
     }
 
-    public TbPessoa(Integer idPessoa, String nmNome, String nrTelefone, String nrCelular, Character nmSexo, String nmEmail) {
+    public TbPessoa(Integer idPessoa, String nmNome, String nrTelefone, String nrCelular, String nmSexo, String nmEmail) {
         this.idPessoa = idPessoa;
         this.nmNome = nmNome;
         this.nrTelefone = nrTelefone;
@@ -101,13 +101,15 @@ public class TbPessoa implements Serializable {
         this.nrCelular = nrCelular;
     }
 
-    public Character getNmSexo() {
+    public String getNmSexo() {
         return nmSexo;
     }
 
-    public void setNmSexo(Character nmSexo) {
+    public void setNmSexo(String nmSexo) {
         this.nmSexo = nmSexo;
     }
+
+
 
     public String getNmEmail() {
         return nmEmail;

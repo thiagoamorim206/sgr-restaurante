@@ -21,7 +21,7 @@ public class ClienteBean {
         this.cliente = cliente;
     }
 
-    public String CadastroPagamento() {
+    public String CadastroCliente() {
 
         cliente = clienteDAO.inserirCliente(cliente);//salva
         return "Sucesso"; // Caso de Sucesso

@@ -2,6 +2,8 @@ package ControllerBean;
 
 import ControllerDAO.CardapioDAO;
 import Model.TbCardapio;
+import Model.TbTipoRestaurante;
+import java.util.ArrayList;
 
 public class CardapioBean {
 
@@ -15,6 +17,9 @@ public class CardapioBean {
         cardapio.setVlItem(vlItem);
     }
 
+    public CardapioBean() {
+    }
+
     public TbCardapio getCardapio() {
         return cardapio;
     }
@@ -25,9 +30,15 @@ public class CardapioBean {
 
     public String CadastroCardapio() {
 
-        cardapio = cardapioDao.inserirCardapio(cardapio);//salva
+        cardapioDao.inserirCardapio(cardapio);//salva
         return "Sucesso"; // Caso de Sucesso
 
+    }
+
+    public String ListarCardapio() {
+
+        cardapioDao.listarCardapio();
+        return "Sucesso";
     }
 
 }
