@@ -2,6 +2,7 @@ package ControllerBean;
 
 import ControllerDAO.PessoaDAO;
 import Model.TbPessoa;
+import java.util.ArrayList;
 
 public class PessoaBean {
 
@@ -28,6 +29,16 @@ public class PessoaBean {
 
         pessoa = pessoaDAO.inserirPessoa(pessoa);//salva
         return "Sucesso"; // Caso de Sucesso
+
+    }
+
+    public int listaUltimo() {
+        ArrayList<TbPessoa> lista = pessoaDAO.listarUltimaLinha();
+
+        for (TbPessoa o : lista) {
+           return o.getIdPessoa();
+        }
+       return 0;
 
     }
 

@@ -122,20 +122,19 @@ public class main {
 
                                     MesaBean mesaBean = new MesaBean();
                                     mesaBean.ListarMesa();
-                                        System.out.println("Digite o codigo da mesa: ");
+                                    System.out.println("Digite o codigo da mesa: ");
                                     int mesa = var.nextInt();
-                                    ClienteBean clienteBean = new ClienteBean(1, mesa);
+
+                                    ClienteBean clienteBean = new ClienteBean(mesa, pessoaBean.listaUltimo());
                                     clienteBean.CadastroCliente();
                                     break;
-
                                 } catch (Exception e) {
                                     System.out.println("Ocoreu um erro digite Novamente! ");
                                     flag = false;
                                 } finally {
-                                var.nextLine();
-                                       
-                                }
+                                    var.nextLine();
 
+                                }
                             } while (!flag);
                             break;
 
