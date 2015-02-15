@@ -13,6 +13,9 @@ public class TipoCardapioBean {
         tipoCardapio.setNmTipo(nome_tipo);
     }
 
+    public TipoCardapioBean() {
+    }
+
     public TbTipoCardapio getTipoCardapio() {
         return tipoCardapio;
     }
@@ -28,7 +31,7 @@ public class TipoCardapioBean {
 
     }
     
-     public String ListarTipoRestaurante() {
+     public String ListarTipoCardapio() {
        
         ArrayList<TbTipoCardapio> lista = tipoCardapioDao.listarTipoCardapio();
        

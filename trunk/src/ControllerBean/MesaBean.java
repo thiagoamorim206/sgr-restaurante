@@ -42,7 +42,7 @@ public class MesaBean {
 
         for (TbMesa o : lista) {
             System.out.println("Codigo: " + o.getIdMesa() + " Nome: " + o.getNmMesa()
-                    + " QTDLugares: " + o.getNrLugares()+ " Ocupada: " + o.getFlOcupada()+ " Obs: " + o.getDsObs());
+                    + " QTDLugares: " + o.getNrLugares()+  " Obs: " + o.getDsObs());
         }
         return "Sucesso";
     }
