@@ -2,6 +2,7 @@ package ControllerBean;
 
 import ControllerDAO.FornecedorDAO;
 import Model.TbFornecedor;
+import java.util.ArrayList;
 
 public class FornecedorBean {
 
@@ -14,6 +15,9 @@ public class FornecedorBean {
         fornecedor.setNrTelefone(NrTelefone);
         fornecedor.setNmEmail(NmEmail);
         fornecedor.setDsObs(DsObs);
+    }
+
+    public FornecedorBean() {
     }
 
     public TbFornecedor getFornecedor() {
@@ -29,6 +33,16 @@ public class FornecedorBean {
         fornecedor = fornecedorDAO.inserirFornecedor(fornecedor);//salva
         return "Sucesso"; // Caso de Sucesso
 
+    }
+
+    public String ListarFornecedor() {
+
+        ArrayList<TbFornecedor> lista = fornecedorDAO.listarFornecedor();
+
+        for (TbFornecedor o : lista) {
+            System.out.println("Codigo: " + o.getIdFornecedor() + " Nome: " + o.getNmFornecedor());
+        }
+        return "Sucesso";
     }
 
 }
