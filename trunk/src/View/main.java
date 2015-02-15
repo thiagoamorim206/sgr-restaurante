@@ -4,13 +4,19 @@ import ControllerBean.CardapioBean;
 import ControllerBean.ClienteBean;
 import ControllerBean.CompraProdutoBean;
 import ControllerBean.EmpregadoBean;
+import ControllerBean.FilaPedidoBean;
 import ControllerBean.FornecedorBean;
 import ControllerBean.MateriaPrimaBean;
 import ControllerBean.MesaBean;
+import ControllerBean.PagamentoBean;
 import ControllerBean.PedidoBean;
+import ControllerBean.PedidoCardapioBean;
 import ControllerBean.PessoaBean;
+import ControllerBean.ReservaBean;
 import ControllerBean.TipoCardapioBean;
 import ControllerBean.TipoRestauranteBean;
+import Model.TbCliente;
+import Model.TbPedido;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,13 +35,14 @@ public class main {
         do {
 
             System.out.println("-----------Menu inicial Restaurante-----------");
-            System.out.println("1 - Cadastrar.");
-            System.out.println("13- Verificar Reserva.");
+            System.out.println("1 - Cadastrar Dados.");
+            System.out.println("2 - Deletar Dados.");
+            System.out.println("3- Verificar Reserva.");
             System.out.println("14- Fechar Mesa.");
             System.out.println("15- Mostrar Mesas Reservadas.");
             System.out.println("16- Mostrar Cardapio.");
             System.out.println("17- Mostrar Fila Pedidos.");
-            System.out.println("18- .");
+            System.out.println("18- Fechar pedido.");
             System.out.println("19- Sair.");
             System.out.print("Digite uma opção: ");
 
@@ -76,9 +83,9 @@ public class main {
             System.out.println("6 - Cadastrar Tipo Restaurante.");
             System.out.println("7 - Cadastrar Cardapio.");
             System.out.println("8 - Cadastrar Mesa.");
-            System.out.println("9- Cadastrar Pedido.");
-            System.out.println("10- Cadastrar Pagamento.");
-            System.out.println("11- Cadastrar Reserva.");
+            System.out.println("9 - Cadastrar Pedido.");
+            System.out.println("10- Cadastrar Reserva.");
+            System.out.println("11- Cadastrar Pagamento.");
             System.out.println("12- Sair.");
             System.out.print("Digite uma opção: ");
 
@@ -97,7 +104,7 @@ public class main {
                 scan.nextLine();
             }
 
-        } while ((optNumberSubMenu < 1 || optNumberSubMenu > 13) || !flag);
+        } while ((optNumberSubMenu < 1 || optNumberSubMenu > 12) || !flag);
         return optNumberSubMenu;
     }
 
@@ -444,16 +451,18 @@ public class main {
                                     try {
                                         System.out.println("------------------Listando Mesas Livres------------------");
                                         MesaBean mesaBean = new MesaBean();
-                                        mesaBean.ListarMesa();
+                                        String teste = mesaBean.ListarMesa();
+
+                                        if (teste.equals("Todas as mesas estão Ocupadas")) {
+                                            System.out.println("Todas as mesas estão Ocupadas");
+                                            break;
+                                        }
 
                                         System.out.println("Digite o codigo da mesa: ");
                                         int mesa = var.nextInt();
                                         var.nextLine();
 
-                                        System.out.println("Digite a Data do Pedido: ");
-                                        String dataRecebida = var.nextLine();
-                                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                                        Date dt = df.parse(dataRecebida);
+                                        Date dt = new Date(System.currentTimeMillis());
 
                                         do {
                                             flag = true;
@@ -482,6 +491,99 @@ public class main {
                                         pedidoBean = new PedidoBean(mesa, dt, 0, situacao);
                                         pedidoBean.CadastroPedido();
 
+                                        boolean x = true;
+                                        mesaBean.AtualizarMesa(x, mesa);
+
+                                        System.out.println("------------------Listando Empregados------------------");
+                                        EmpregadoBean empregadoBean = new EmpregadoBean();
+                                        empregadoBean.ListarEmpregadoFuncao();
+
+                                        System.out.println("Digite o codigo do empregado: ");
+                                        int empregado = var.nextInt();
+                                        var.nextLine();
+
+                                        System.out.println("------------------Listando o Cardapio------------------");
+                                        cardapioBean = new CardapioBean();
+                                        cardapioBean.ListarCardapio();
+
+                                        System.out.println("Digite a quantidade de Itens: ");
+                                        int itens = var.nextInt();
+                                        var.nextLine();
+
+                                        for (int i = 0; i < itens; i++) {
+                                            System.out.println("Digite o codigo do cardapio: ");
+                                            int cardapio = var.nextInt();
+                                            var.nextLine();
+
+                                            PedidoCardapioBean pedidoCardapioBean = new PedidoCardapioBean(cardapio, pedidoBean.listaUltimo());
+                                            pedidoCardapioBean.CadastroPedidoCardapio();
+
+                                            System.out.println("Digite uma obs para o Pedido: ");
+                                            String obs = var.nextLine();
+
+                                            FilaPedidoBean filaPedidoBean = new FilaPedidoBean(pedidoCardapioBean.listaUltimo(), empregado, obs);
+                                            filaPedidoBean.CadastroFilaPedido();
+
+                                        }
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 10:
+                                System.out.println("------------------Cadastrar Reserva------------------");
+
+                                do {
+                                    flag = true;
+                                    try {
+                                        System.out.println("------------------Listando Empregados------------------");
+                                        EmpregadoBean empregadoBean = new EmpregadoBean();
+                                        empregadoBean.ListarEmpregadoFuncao();
+
+                                        System.out.println("Digite o codigo do empregado: ");
+                                        int empregado = var.nextInt();
+                                        var.nextLine();
+
+                                        System.out.println("------------------Listando Mesas Livres------------------");
+                                        MesaBean mesaBean = new MesaBean();
+                                        String teste = mesaBean.ListarMesa();
+
+                                        if (teste.equals("Todas as mesas estão Ocupadas")) {
+                                            System.out.println("Todas as mesas estão Ocupadas");
+                                            break;
+                                        }
+
+                                        System.out.println("Digite o codigo da mesa: ");
+                                        int mesa = var.nextInt();
+                                        var.nextLine();
+
+                                        System.out.println("Digite o nome da Reserva: ");
+                                        String nomeReserva = var.nextLine();
+
+                                        System.out.println("Digite a Data da Reserva: ");
+                                        String dataRecebida = var.nextLine();
+                                        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                                        Date dt = df.parse(dataRecebida);
+
+                                        System.out.println("Digite Situação da Reserva: ");
+                                        String situacaoReserva = var.nextLine();
+
+                                        System.out.println("Digite a quantidade de Lugares: ");
+                                        int QtdLugar = var.nextInt();
+                                        var.nextLine();
+
+                                        ReservaBean reservaBean;
+                                        reservaBean = new ReservaBean(empregado, mesa, nomeReserva, dt, situacaoReserva, QtdLugar);
+                                        reservaBean.CadastroReserva();
+                                        boolean x = true;
+                                        mesaBean.AtualizarMesa(x, mesa);
+
                                     } catch (Exception e) {
                                         System.out.println("Ocoreu um erro digite Novamente! ");
                                         flag = false;
@@ -493,8 +595,33 @@ public class main {
 
                                 break;
 
+                            case 11:
+                                System.out.println("------------------Cadastrar Pagamento------------------");
+                                System.out.println("------------------Listando Clientes------------------");
+                                ClienteBean clienteBean = new ClienteBean();
+                                PagamentoBean pagamentoBean = new PagamentoBean();
+                                clienteBean.ListarClientePagar();
+
+                                System.out.println("Digite o codigo do cliente: ");
+                                int cliente = var.nextInt();
+                                var.nextLine();
+
+                                Date dt = new Date(System.currentTimeMillis());
+
+                                double valorTotal = pagamentoBean.ValorTotalPagar(cliente);
+                                boolean pago = true;
+                                pagamentoBean = new PagamentoBean(cliente, dt, valorTotal, pago);
+                                pagamentoBean.CadastroPagamento();
+
+                                int aux = pagamentoBean.MostrarMesa(cliente);
+
+                                PedidoBean pedidoBean = new PedidoBean();
+                                pedidoBean.AtualizarPago(pago, aux);
+
+                                break;
+
                         }
-                    } while (optNumberSubMenu != 13);
+                    } while (optNumberSubMenu != 12);
 
                 case 2:
 

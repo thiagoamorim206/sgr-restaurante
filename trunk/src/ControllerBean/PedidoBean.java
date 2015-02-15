@@ -2,6 +2,7 @@ package ControllerBean;
 
 import ControllerDAO.PedidoDAO;
 import Model.TbPedido;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PedidoBean {
@@ -14,7 +15,10 @@ public class PedidoBean {
         pedido.setDtPedido(DtPedido);
         pedido.setVlTotalConsumo(VlTotalConsumo);
         pedido.setDsPago(DsPago);
-       
+
+    }
+
+    public PedidoBean() {
     }
 
     public TbPedido getPedido() {
@@ -30,4 +34,22 @@ public class PedidoBean {
         return "Sucesso"; // Caso de Sucesso
     }
 
+    public int listaUltimo() {
+        ArrayList<TbPedido> lista = pedidoDAO.listarUltimoPedido();
+
+        for (TbPedido o : lista) {
+            return o.getIdPedido();
+        }
+        return 0;
+
+    }
+
+    public String AtualizarPago(boolean x, int idMesa) {
+
+        this.getPedido().setDsPago(x);
+        this.getPedido().setIdMesa(idMesa);
+
+        pedidoDAO.AtualizarPago(this.getPedido());
+        return "Sucesso";
+    }
 }

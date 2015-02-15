@@ -37,5 +37,10 @@ public class EmpregadoBean {
         empregadoDAO.listarEmpregado();
         return "Sucesso";
     }
+    
+    public String ListarEmpregadoFuncao() {
+        empregadoDAO.listarEmpregadoFuncao();
+        return "Sucesso";
+    }
 
 }

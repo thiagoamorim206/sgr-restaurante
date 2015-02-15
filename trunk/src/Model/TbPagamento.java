@@ -42,28 +42,41 @@ public class TbPagamento implements Serializable {
     @Basic(optional = false)
     @Column(name = "vl_total_pago")
     private double vlTotalPago;
+    @Basic(optional = false)
+    @Column(name = "ds_pago")
+    private boolean dsPago;
     @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
     @ManyToOne(optional = false)
     private int idCliente;
-    @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
-    @ManyToOne(optional = false)
-    private int idPedido;
 
     public TbPagamento() {
+    }
+
+    public TbPagamento(double vlTotalPago) {
+        this.vlTotalPago = vlTotalPago;
     }
 
     public TbPagamento(Integer idPagamento) {
         this.idPagamento = idPagamento;
     }
 
-    public TbPagamento(Integer idPagamento, Date dtPagamento, float vlTotalPago) {
+    public TbPagamento(Integer idPagamento, Date dtPagamento, double vlTotalPago, boolean dapago) {
         this.idPagamento = idPagamento;
         this.dtPagamento = dtPagamento;
         this.vlTotalPago = vlTotalPago;
+        this.dsPago = dapago;
     }
 
     public Integer getIdPagamento() {
         return idPagamento;
+    }
+
+    public boolean isDsPago() {
+        return dsPago;
+    }
+
+    public void setDsPago(boolean dsPago) {
+        this.dsPago = dsPago;
     }
 
     public void setIdPagamento(Integer idPagamento) {
@@ -92,14 +105,6 @@ public class TbPagamento implements Serializable {
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public int getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
     }
 
     @Override

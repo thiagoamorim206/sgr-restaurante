@@ -1,12 +1,14 @@
 package ControllerBean;
 
 import ControllerDAO.MesaDAO;
+import Model.TbCliente;
 import Model.TbMesa;
 import java.util.ArrayList;
 
 public class MesaBean {
 
     private TbMesa mesa = new TbMesa();
+    private TbCliente cliente = new TbCliente();
     private final MesaDAO mesaDAO = new MesaDAO();
 
     public MesaBean(int nrLugares, boolean Ocupada, String Obs, String nmMesa) {
@@ -14,7 +16,6 @@ public class MesaBean {
         mesa.setFlOcupada(Ocupada);
         mesa.setDsObs(Obs);
         mesa.setNmMesa(nmMesa);
-               
 
     }
 
@@ -39,11 +40,24 @@ public class MesaBean {
     public String ListarMesa() {
 
         ArrayList<TbMesa> lista = mesaDAO.listarMesa();
+        if (lista.size() != 0) {
+            for (TbMesa o : lista) {
+                System.out.println("Codigo: " + o.getIdMesa() + " Nome: " + o.getNmMesa()
+                        + " QTDLugares: " + o.getNrLugares() + " Obs: " + o.getDsObs());
+            }
+            return "Sucesso";
+        } else {
+            return "Todas as mesas estão Ocupadas";
 
-        for (TbMesa o : lista) {
-            System.out.println("Codigo: " + o.getIdMesa() + " Nome: " + o.getNmMesa()
-                    + " QTDLugares: " + o.getNrLugares()+  " Obs: " + o.getDsObs());
         }
+    }
+
+    public String AtualizarMesa(boolean x, int idMesa) {
+        this.getMesa().setFlOcupada(x);
+        this.getMesa().setIdMesa(idMesa);
+        mesaDAO.AtualizarMesa(this.getMesa());
         return "Sucesso";
     }
+
+  
 }

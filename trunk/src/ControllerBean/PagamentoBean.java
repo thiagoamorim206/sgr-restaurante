@@ -9,11 +9,14 @@ public class PagamentoBean {
     private TbPagamento pagamento = new TbPagamento();
     private final PagamentoDAO pagamentoDAO = new PagamentoDAO();
 
-    public PagamentoBean(int IdCliente, int IdPedido, Date DtPagamento, double VlTotalPago) {
+    public PagamentoBean(int IdCliente, Date DtPagamento, double VlTotalPago, boolean dspago) {
         pagamento.setIdCliente(IdCliente);
-        pagamento.setIdPedido(IdPedido);
         pagamento.setDtPagamento(DtPagamento);
         pagamento.setVlTotalPago(VlTotalPago);
+        pagamento.setDsPago(dspago);
+    }
+
+    public PagamentoBean() {
     }
 
     public TbPagamento getPagamento() {
@@ -29,6 +32,16 @@ public class PagamentoBean {
         pagamento = pagamentoDAO.inserirPagamento(pagamento);//salva
         return "Sucesso"; // Caso de Sucesso
 
+    }
+
+    public double ValorTotalPagar(int idcliente) {
+        this.getPagamento().setIdCliente(idcliente);
+        return pagamentoDAO.valorTotalPagar(this.getPagamento());
+    }
+
+     public int MostrarMesa(int idcliente) {
+        this.getPagamento().setIdCliente(idcliente);
+        return pagamentoDAO.mostarMesa(this.getPagamento());
     }
 
 }

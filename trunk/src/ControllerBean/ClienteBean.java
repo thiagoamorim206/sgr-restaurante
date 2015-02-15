@@ -17,6 +17,9 @@ public class ClienteBean {
         return cliente;
     }
 
+    public ClienteBean() {
+    }
+
     public void setCliente(TbCliente cliente) {
         this.cliente = cliente;
     }
@@ -27,4 +30,13 @@ public class ClienteBean {
         return "Sucesso"; // Caso de Sucesso
 
     }
+    
+    
+    public String ListarClientePagar() {
+        
+        clienteDAO.listaCliente();
+        return "Sucesso";
+    }
+    
+    
 }
