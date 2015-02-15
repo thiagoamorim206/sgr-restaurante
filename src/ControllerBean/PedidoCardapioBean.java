@@ -2,6 +2,7 @@ package ControllerBean;
 
 import ControllerDAO.PedidoCardapioDAO;
 import Model.TbPedidoCardapio;
+import java.util.ArrayList;
 
 public class PedidoCardapioBean {
 
@@ -25,6 +26,16 @@ public class PedidoCardapioBean {
 
         pedidoCardapio = pedidocardapioDao.inserirPedidoCardapio(pedidoCardapio);//salva
         return "Sucesso"; // Caso de Sucesso
+
+    }
+
+    public int listaUltimo() {
+        ArrayList<TbPedidoCardapio> lista = pedidocardapioDao.listarUltimoPedidoCardapio();
+
+        for (TbPedidoCardapio o : lista) {
+            return o.getIdPedidoCardapio();
+        }
+        return 0;
 
     }
 

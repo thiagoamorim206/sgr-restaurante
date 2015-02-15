@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class PedidoDAO {
 
@@ -68,5 +69,60 @@ public class PedidoDAO {
         }
         return null;
     }
+    
+     public ArrayList listarUltimoPedido() {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select id_pedido from tb_pedido where id_pedido = (SELECT MAX(id_pedido) FROM tb_pedido)";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+     
+            ResultSet rs = ps.executeQuery();
+            ArrayList<TbPedido> lista = new ArrayList<>();
+            while (rs.next()) {
+               TbPedido pedido = new TbPedido(rs.getInt("id_pedido"));
+               lista.add(pedido);
+            }
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+            return lista;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
+    
+      public void AtualizarPago(TbPedido t) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "update tb_pedido set ds_pago = " + t.getDsPago() + " where id_mesa=" + t.getIdMesa()+ "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+
+    }
+    
 
 }
