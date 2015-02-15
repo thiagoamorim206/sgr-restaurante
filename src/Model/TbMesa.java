@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "tb_mesa")
 @XmlRootElement
 public class TbMesa implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,10 +60,17 @@ public class TbMesa implements Serializable {
         this.idMesa = idMesa;
     }
 
-    public TbMesa(Integer idMesa, int nrLugares, boolean flOcupada, String dsObs,String nmMesa) {
+    public TbMesa(Integer idMesa, int nrLugares, boolean flOcupada, String dsObs, String nmMesa) {
         this.idMesa = idMesa;
         this.nrLugares = nrLugares;
         this.flOcupada = flOcupada;
+        this.dsObs = dsObs;
+        this.nmMesa = nmMesa;
+    }
+
+    public TbMesa(Integer idMesa, int nrLugares, String dsObs, String nmMesa) {
+        this.idMesa = idMesa;
+        this.nrLugares = nrLugares;
         this.dsObs = dsObs;
         this.nmMesa = nmMesa;
     }
@@ -78,7 +86,6 @@ public class TbMesa implements Serializable {
     public void setNmMesa(String nmMesa) {
         this.nmMesa = nmMesa;
     }
-    
 
     public void setIdMesa(Integer idMesa) {
         this.idMesa = idMesa;
@@ -159,5 +166,5 @@ public class TbMesa implements Serializable {
     public String toString() {
         return "Model.TbMesa[ idMesa=" + idMesa + " ]";
     }
-    
+
 }

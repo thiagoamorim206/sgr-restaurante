@@ -40,7 +40,7 @@ public class MesaDAO {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "select *from tb_mesa";
+            String SQL = "select *from tb_mesa where fl_ocupada = 'false'";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
 
@@ -49,7 +49,7 @@ public class MesaDAO {
             ArrayList<TbMesa> lista = new ArrayList<>();
             
             while (rs.next()) {
-                TbMesa mesa = new TbMesa(rs.getInt(1), rs.getInt(2), rs.getBoolean(3), rs.getString(4), rs.getString(5));                  
+                TbMesa mesa = new TbMesa(rs.getInt(1), rs.getInt(2), rs.getString(4), rs.getString(5));                  
                 lista.add(mesa);
             }
            
