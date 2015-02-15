@@ -14,6 +14,7 @@ public class PedidoBean {
         pedido.setDtPedido(DtPedido);
         pedido.setVlTotalConsumo(VlTotalConsumo);
         pedido.setDsPago(DsPago);
+       
     }
 
     public TbPedido getPedido() {

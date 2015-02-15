@@ -2,6 +2,7 @@ package ControllerBean;
 
 import ControllerDAO.TipoCardapioDAO;
 import Model.TbTipoCardapio;
+import java.util.ArrayList;
 
 public class TipoCardapioBean {
 
@@ -25,5 +26,15 @@ public class TipoCardapioBean {
         tipoCardapio = tipoCardapioDao.inserirTipoCardapio(tipoCardapio);//salva
         return "Sucesso"; // Caso de Sucesso
 
+    }
+    
+     public String ListarTipoRestaurante() {
+       
+        ArrayList<TbTipoCardapio> lista = tipoCardapioDao.listarTipoCardapio();
+       
+        for (TbTipoCardapio o : lista) {
+            System.out.println("Codigo: " + o.getIdTipoCardapio()+ " Nome: " + o.getNmTipo());
+        }
+        return "Sucesso";
     }
 }

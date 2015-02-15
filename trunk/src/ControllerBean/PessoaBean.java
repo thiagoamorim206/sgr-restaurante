@@ -8,7 +8,7 @@ public class PessoaBean {
     private TbPessoa pessoa = new TbPessoa();
     private final PessoaDAO pessoaDAO = new PessoaDAO();
 
-    public PessoaBean(String NmNome, String NrTelefone, String NrCelular, char NmSexo, String NmEmail) {
+    public PessoaBean(String NmNome, String NrTelefone, String NrCelular, String NmSexo, String NmEmail) {
         pessoa.setNmNome(NmNome);
         pessoa.setNrTelefone(NrTelefone);
         pessoa.setNrCelular(NrCelular);

@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "tb_pedido")
 @XmlRootElement
 public class TbPedido implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,9 +43,13 @@ public class TbPedido implements Serializable {
     @Column(name = "dt_pedido")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dtPedido;
+
     @Basic(optional = false)
     @Column(name = "vl_total_consumo")
     private double vlTotalConsumo;
+
+    
+
     @Basic(optional = false)
     @Column(name = "ds_pago")
     private boolean dsPago;
@@ -63,11 +68,12 @@ public class TbPedido implements Serializable {
         this.idPedido = idPedido;
     }
 
-    public TbPedido(Integer idPedido, Date dtPedido, float vlTotalConsumo, boolean dsPago) {
-        this.idPedido = idPedido;
+    public TbPedido(Date dtPedido, double vlTotalConsumo, String nmMesa, boolean dsPago ) {
         this.dtPedido = dtPedido;
         this.vlTotalConsumo = vlTotalConsumo;
+   
         this.dsPago = dsPago;
+        this.idMesa = idMesa;
     }
 
     public Integer getIdPedido() {
@@ -78,6 +84,7 @@ public class TbPedido implements Serializable {
         this.idPedido = idPedido;
     }
 
+ 
     public Date getDtPedido() {
         return dtPedido;
     }
@@ -93,8 +100,6 @@ public class TbPedido implements Serializable {
     public void setVlTotalConsumo(double vlTotalConsumo) {
         this.vlTotalConsumo = vlTotalConsumo;
     }
-
- 
 
     public boolean getDsPago() {
         return dsPago;
@@ -130,8 +135,6 @@ public class TbPedido implements Serializable {
         this.idMesa = idMesa;
     }
 
-
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -156,5 +159,5 @@ public class TbPedido implements Serializable {
     public String toString() {
         return "Model.TbPedido[ idPedido=" + idPedido + " ]";
     }
-    
+
 }

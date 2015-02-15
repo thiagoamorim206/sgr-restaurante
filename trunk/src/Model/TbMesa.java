@@ -42,6 +42,9 @@ public class TbMesa implements Serializable {
     @Basic(optional = false)
     @Column(name = "ds_obs")
     private String dsObs;
+    @Basic(optional = false)
+    @Column(name = "nm_mesa")
+    private String nmMesa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMesa")
     private Collection<TbReserva> tbReservaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMesa")
@@ -56,16 +59,26 @@ public class TbMesa implements Serializable {
         this.idMesa = idMesa;
     }
 
-    public TbMesa(Integer idMesa, int nrLugares, boolean flOcupada, String dsObs) {
+    public TbMesa(Integer idMesa, int nrLugares, boolean flOcupada, String dsObs,String nmMesa) {
         this.idMesa = idMesa;
         this.nrLugares = nrLugares;
         this.flOcupada = flOcupada;
         this.dsObs = dsObs;
+        this.nmMesa = nmMesa;
     }
 
     public Integer getIdMesa() {
         return idMesa;
     }
+
+    public String getNmMesa() {
+        return nmMesa;
+    }
+
+    public void setNmMesa(String nmMesa) {
+        this.nmMesa = nmMesa;
+    }
+    
 
     public void setIdMesa(Integer idMesa) {
         this.idMesa = idMesa;
