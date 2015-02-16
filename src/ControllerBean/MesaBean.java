@@ -37,10 +37,10 @@ public class MesaBean {
 
     }
 
-    public boolean ListarMesa() {
+    public String ListarMesa() {
 
-        boolean teste = mesaDAO.listarMesa();
-        return teste;
+        mesaDAO.listarMesa();
+        return "Sucesso";
 
     }
 
@@ -51,14 +51,14 @@ public class MesaBean {
         return "Sucesso";
     }
 
-    public boolean ListarTodasMesa() {
-        boolean teste = mesaDAO.listarTodasMesa();
-        return teste;
+    public String ListarTodasMesa() {
+        mesaDAO.listarTodasMesa();
+        return "Sucesso";
     }
 
-    public boolean ListarTodasMesaClientes() {
-        boolean teste = mesaDAO.listarTodasMesaCliente();
-        return teste;
+    public String ListarTodasMesaClientes() {
+        mesaDAO.listarTodasMesaCliente();
+        return "Sucesso";
     }
 
     public String DeletarMesa(int idMesa) {

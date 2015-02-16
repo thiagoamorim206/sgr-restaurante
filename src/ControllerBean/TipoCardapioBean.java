@@ -31,10 +31,10 @@ public class TipoCardapioBean {
 
     }
 
-    public boolean ListarTipoCardapio() {
+    public String ListarTipoCardapio() {
 
-        boolean teste = tipoCardapioDao.listarTipoCardapio();
-        return teste;
+        tipoCardapioDao.listarTipoCardapio();
+        return "Sucesso";
     }
 
     public String DeletarTipoCardapio(int IdTipoCardapio) {

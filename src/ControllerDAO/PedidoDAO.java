@@ -57,7 +57,6 @@ public class PedidoDAO {
                         + " - Valor_Total: " + rs.getDouble(4)
                         + " - Pago: " + rs.getBoolean(5)
                 );
-                return true;
             }
 
             ConnectionFactory.desconecta(cn);

@@ -35,10 +35,9 @@ public class CardapioBean {
 
     }
 
-    public boolean ListarCardapio() {
-
-        boolean teste = cardapioDao.listarCardapio();
-        return teste;
+    public String ListarCardapio() {
+        cardapioDao.listarCardapio();
+        return "Sucesso";
     }
 
     public String DeletarCardapio(int idCardapio) {

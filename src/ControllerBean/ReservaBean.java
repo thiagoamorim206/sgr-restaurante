@@ -36,10 +36,10 @@ public class ReservaBean {
 
     }
 
-    public boolean ListarReservas() {
+    public String ListarReservas() {
 
-        boolean teste = reservaDAO.listarReservas();//salva
-        return teste; // Caso de Sucesso
+        reservaDAO.listarReservas();//salva
+        return "Sucesso";
 
     }
 

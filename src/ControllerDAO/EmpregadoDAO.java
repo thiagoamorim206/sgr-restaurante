@@ -50,7 +50,7 @@ public class EmpregadoDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
-                return true;
+               
             }
 
             ConnectionFactory.desconecta(cn);
@@ -81,7 +81,7 @@ public class EmpregadoDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2) + " - Função: " + rs.getString(3));
-                return true;
+               
             }
 
             ConnectionFactory.desconecta(cn);

@@ -15,6 +15,7 @@ import ControllerBean.PessoaBean;
 import ControllerBean.ReservaBean;
 import ControllerBean.TipoCardapioBean;
 import ControllerBean.TipoRestauranteBean;
+import Model.TbPessoa;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -112,7 +113,7 @@ public class main {
     private static int SubmenuDeletar() {
         Scanner scan = new Scanner(System.in);
         boolean flag = false;
-        int optNumberSubMenu = 0;
+        int optNumberSubMenuDeletar = 0;
         /**
          * Menu Principal do sistema
          */
@@ -134,7 +135,7 @@ public class main {
             System.out.print("Digite uma opção: ");
 
             try {
-                optNumberSubMenu = scan.nextInt();
+                optNumberSubMenuDeletar = scan.nextInt();
                 System.out.println("----------------------------------------------------------");
                 flag = true;
 
@@ -148,34 +149,31 @@ public class main {
                 scan.nextLine();
             }
 
-        } while ((optNumberSubMenu < 1 || optNumberSubMenu > 12) || !flag);
-        return optNumberSubMenu;
+        } while ((optNumberSubMenuDeletar < 1 || optNumberSubMenuDeletar > 12) || !flag);
+        return optNumberSubMenuDeletar;
     }
 
     private static int SubmenuEditar() {
         Scanner scan = new Scanner(System.in);
         boolean flag = false;
-        int optNumberSubMenu = 0;
-      
+        int optNumberSubMenuEditar = 0;
+
         do {
 
             System.out.println("-----------Menu de Editar Cadastro-----------");
-            System.out.println("1 - Deletar Pessoa.");
-            System.out.println("2 - Deletar Fornecedor.");
-            System.out.println("3 - Deletar Produto.");
-            System.out.println("4 - Deletar Compra Produto.");
-            System.out.println("5 - Deletar Tipo Cardapio.");
-            System.out.println("6 - Deletar Tipo Restaurante.");
-            System.out.println("7 - Deletar Cardapio.");
-            System.out.println("8 - Deletar Mesa.");
-            System.out.println("9 - Deletar Pedido.");
-            System.out.println("10- Deletar Reserva.");
-            System.out.println("11- Deletar Pagamento.");
-            System.out.println("12- Sair.");
+            System.out.println("1 - Editar Pessoa.");
+            System.out.println("2 - Editar Fornecedor.");
+            System.out.println("3 - Editar Produto.");
+            System.out.println("4 - Editar Compra Produto.");
+            System.out.println("5 - Editar Tipo Cardapio.");
+            System.out.println("6 - Editar Tipo Restaurante.");
+            System.out.println("7 - Editar Cardapio.");
+            System.out.println("8 - Editar Mesa.");
+            System.out.println("9- Sair.");
             System.out.print("Digite uma opção: ");
 
             try {
-                optNumberSubMenu = scan.nextInt();
+                optNumberSubMenuEditar = scan.nextInt();
                 System.out.println("----------------------------------------------------------");
                 flag = true;
 
@@ -189,13 +187,13 @@ public class main {
                 scan.nextLine();
             }
 
-        } while ((optNumberSubMenu < 1 || optNumberSubMenu > 12) || !flag);
-        return optNumberSubMenu;
+        } while ((optNumberSubMenuEditar < 1 || optNumberSubMenuEditar > 9) || !flag);
+        return optNumberSubMenuEditar;
     }
 
     @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
-        boolean teste;
+
         int opMenuPrincipal;
         int optNumberSubMenu;
         Scanner var = new Scanner(System.in);
@@ -204,12 +202,15 @@ public class main {
         int op = 0, tipo = 0;
         boolean situacao;
         int optNumberSubMenuDeletar;
+        int optNumberSubMenuEditar;
 
         do {
             opMenuPrincipal = menuInicial();
 
             switch (opMenuPrincipal) {
+
                 case 1:
+
                     int pessoa = 0;
                     do {
                         optNumberSubMenu = Submenu();
@@ -254,13 +255,7 @@ public class main {
 
                                         if (pessoa == 1) {
                                             MesaBean mesaBean = new MesaBean();
-                                            teste = mesaBean.ListarMesa();
-
-                                            if (teste == false) {
-                                                System.out.println("Nao tem mesa livre");
-                                                break;
-
-                                            }
+                                            mesaBean.ListarMesa();
 
                                             System.out.println("Digite o codigo da mesa: ");
                                             int mesa = var.nextInt();
@@ -360,11 +355,7 @@ public class main {
                                     try {
                                         System.out.println("------------------Listando Empregados------------------");
                                         EmpregadoBean empregadoBean = new EmpregadoBean();
-                                        teste = empregadoBean.ListarEmpregado();
-                                        if (teste == false) {
-                                            System.out.println("Nao tem Empregados");
-                                            break;
-                                        }
+                                        empregadoBean.ListarEmpregado();
 
                                         System.out.println("Digite o codigo do empregado: ");
                                         int empregado = var.nextInt();
@@ -372,12 +363,7 @@ public class main {
 
                                         System.out.println("------------------Listando Fornecedores------------------");
                                         FornecedorBean fornecedorBean = new FornecedorBean();
-                                        teste = fornecedorBean.ListarFornecedor();
-                                        if (teste == false) {
-                                            System.out.println("Nao tem fornecedor");
-                                            break;
-
-                                        }
+                                        fornecedorBean.ListarFornecedor();
 
                                         System.out.println("Digite o codigo do fornecedor: ");
                                         int fornecedor = var.nextInt();
@@ -472,11 +458,7 @@ public class main {
                                 System.out.println("------------------Listando Tipos Restaurantes------------------");
 
                                 TipoRestauranteBean tipoRestauranteBean = new TipoRestauranteBean();
-                                teste = tipoRestauranteBean.ListarTipoRestaurante();
-                                if (teste == false) {
-                                    System.out.println("Nao tem tipo de restaurante cadastrado");
-                                    break;
-                                }
+                                tipoRestauranteBean.ListarTipoRestaurante();
 
                                 System.out.println("Digite o codigo do Restaurante: ");
                                 int restaurante = var.nextInt();
@@ -484,11 +466,8 @@ public class main {
 
                                 System.out.println("------------------Listando Tipo Cardapio------------------");
                                 TipoCardapioBean tipoCardapioBean = new TipoCardapioBean();
-                                teste = tipoCardapioBean.ListarTipoCardapio();
-                                if (teste == false) {
-                                    System.out.println("Nao tem Tipo Cardapio cadastrado");
-                                    break;
-                                }
+                                tipoCardapioBean.ListarTipoCardapio();
+
                                 System.out.println("Digite o codigo do Tipo Cardapio: ");
                                 int tipo_cardapio = var.nextInt();
                                 var.nextLine();
@@ -566,12 +545,7 @@ public class main {
                                     try {
                                         System.out.println("------------------Listando Mesas------------------");
                                         MesaBean mesaBean = new MesaBean();
-                                        teste = mesaBean.ListarTodasMesaClientes();
-
-                                        if (teste == false) {
-                                            System.out.println("Nao tem mesa cadastrada ");
-                                            break;
-                                        }
+                                        mesaBean.ListarTodasMesaClientes();
 
                                         System.out.println("Digite o codigo da mesa: ");
                                         int mesa = var.nextInt();
@@ -587,12 +561,7 @@ public class main {
 
                                         System.out.println("------------------Listando Empregados------------------");
                                         EmpregadoBean empregadoBean = new EmpregadoBean();
-                                        teste = empregadoBean.ListarEmpregadoFuncao();
-
-                                        if (teste == false) {
-                                            System.out.println("Nao tem Empregados");
-                                            break;
-                                        }
+                                        empregadoBean.ListarEmpregadoFuncao();
 
                                         System.out.println("Digite o codigo do empregado: ");
                                         int empregado = var.nextInt();
@@ -600,11 +569,7 @@ public class main {
 
                                         System.out.println("------------------Listando o Cardapio------------------");
                                         cardapioBean = new CardapioBean();
-                                        teste = cardapioBean.ListarCardapio();
-                                        if (teste == false) {
-                                            System.out.println("Não tem nenhum cardapio");
-                                            break;
-                                        }
+                                        cardapioBean.ListarCardapio();
 
                                         System.out.println("Digite a quantidade de Itens: ");
                                         int itens = var.nextInt();
@@ -645,24 +610,15 @@ public class main {
                                         System.out.println("------------------Listando Empregados------------------");
                                         EmpregadoBean empregadoBean = new EmpregadoBean();
 
-                                        teste = empregadoBean.ListarEmpregadoFuncao();
+                                        empregadoBean.ListarEmpregadoFuncao();
 
-                                        if (teste == false) {
-                                            System.out.println("Nao tem Empregados");
-                                            break;
-                                        }
                                         System.out.println("Digite o codigo do empregado: ");
                                         int empregado = var.nextInt();
                                         var.nextLine();
 
                                         System.out.println("------------------Listando Mesas------------------");
                                         MesaBean mesaBean = new MesaBean();
-                                        teste = mesaBean.ListarTodasMesaClientes();
-
-                                        if (teste == false) {
-                                            System.out.println("Nao tem mesa cadastrada");
-                                            break;
-                                        }
+                                        mesaBean.ListarTodasMesaClientes();
 
                                         System.out.println("Digite o codigo da mesa: ");
                                         int mesa = var.nextInt();
@@ -708,11 +664,7 @@ public class main {
                                         System.out.println("------------------Listando Clientes------------------");
                                         ClienteBean clienteBean = new ClienteBean();
                                         PagamentoBean pagamentoBean = new PagamentoBean();
-                                        teste = clienteBean.ListarClientePagar();
-                                        if (teste == false) {
-                                            System.out.println("Nao tem clientes");
-                                            break;
-                                        }
+                                        clienteBean.ListarClientePagar();
 
                                         System.out.println("Digite o codigo do cliente: ");
                                         int cliente = var.nextInt();
@@ -742,7 +694,9 @@ public class main {
                         }
                     } while (optNumberSubMenu != 12);
 
+                    break;
                 case 2:
+
                     do {
                         optNumberSubMenuDeletar = SubmenuDeletar();
 
@@ -775,11 +729,8 @@ public class main {
                                             System.out.println("------------------Deletar Clientes------------------");
                                             System.out.println("------------------Listando Clientes------------------");
                                             ClienteBean clienteBean = new ClienteBean();
-                                            teste = clienteBean.ListarTodosClientes();
-                                            if (teste == false) {
-                                                System.out.println("Nao tem Clientes");
-                                                break;
-                                            }
+                                            clienteBean.ListarTodosClientes();
+
                                             System.out.println("Digite o codigo do cliente: ");
                                             int cliente = var.nextInt();
                                             var.nextLine();
@@ -790,12 +741,7 @@ public class main {
                                             System.out.println("------------------Listando Empregados------------------");
                                             EmpregadoBean empregadoBean = new EmpregadoBean();
 
-                                            teste = empregadoBean.ListarEmpregadoFuncao();
-
-                                            if (teste == false) {
-                                                System.out.println("Nao tem Empregados");
-                                                break;
-                                            }
+                                            empregadoBean.ListarEmpregadoFuncao();
 
                                             System.out.println("Digite o codigo do empregado: ");
                                             int empregado = var.nextInt();
@@ -818,12 +764,7 @@ public class main {
                                 System.out.println("------------------Deletar Fornecedor------------------");
                                 System.out.println("------------------Listando Fornecedores------------------");
                                 FornecedorBean fornecedorBean = new FornecedorBean();
-                                teste = fornecedorBean.ListarFornecedor();
-                                if (teste == false) {
-                                    System.out.println("Nao tem fornecedor");
-                                    break;
-
-                                }
+                                fornecedorBean.ListarFornecedor();
 
                                 do {
                                     flag = true;
@@ -849,12 +790,8 @@ public class main {
                                 System.out.println("------------------Deletar Produto------------------");
                                 System.out.println("------------------Listando Produtos------------------");
                                 MateriaPrimaBean materiaPrimaBean = new MateriaPrimaBean();
-                                teste = materiaPrimaBean.ListarProduto();
-                                if (teste == false) {
-                                    System.out.println("Nao tem Produtos");
-                                    break;
+                                materiaPrimaBean.ListarProduto();
 
-                                }
                                 do {
                                     flag = true;
                                     try {
@@ -880,11 +817,7 @@ public class main {
                                 System.out.println("------------------Listando Compras de Produtos------------------");
 
                                 CompraProdutoBean compraProdutoBean = new CompraProdutoBean();
-                                teste = compraProdutoBean.ListarCompraProduto();
-                                if (teste == false) {
-                                    System.out.println("Nao tem compras de Produtos");
-                                    break;
-                                }
+                                compraProdutoBean.ListarCompraProduto();
 
                                 do {
                                     flag = true;
@@ -910,11 +843,9 @@ public class main {
                                 System.out.println("------------------Deletar Tipo Cardapio------------------");
                                 System.out.println("------------------Listando Tipos Cardapio------------------");
                                 TipoCardapioBean tipoCardapioBean = new TipoCardapioBean();
-                                teste = tipoCardapioBean.ListarTipoCardapio();
-                                if (teste == false) {
-                                    System.out.println("Nao tem Tipo Cardapio cadastrado");
-                                    break;
-                                }
+
+                                tipoCardapioBean.ListarTipoCardapio();
+
                                 do {
                                     flag = true;
                                     try {
@@ -940,11 +871,7 @@ public class main {
                                 System.out.println("------------------Listando Tipos Restaurantes------------------");
 
                                 TipoRestauranteBean tipoRestauranteBean = new TipoRestauranteBean();
-                                teste = tipoRestauranteBean.ListarTipoRestaurante();
-                                if (teste == false) {
-                                    System.out.println("Nao tem tipo de restaurante cadastrado");
-                                    break;
-                                }
+                                tipoRestauranteBean.ListarTipoRestaurante();
 
                                 do {
                                     flag = true;
@@ -969,11 +896,8 @@ public class main {
                                 System.out.println("------------------Deletar Cardapio------------------");
                                 System.out.println("------------------Listando o Cardapio------------------");
                                 CardapioBean cardapioBean = new CardapioBean();
-                                teste = cardapioBean.ListarCardapio();
-                                if (teste == false) {
-                                    System.out.println("Não tem nenhum cardapio");
-                                    break;
-                                }
+                                cardapioBean.ListarCardapio();
+
                                 do {
                                     flag = true;
                                     try {
@@ -997,11 +921,8 @@ public class main {
                                 System.out.println("------------------Deletar Mesa------------------");
                                 System.out.println("------------------Listando Mesas------------------");
                                 MesaBean mesaBean = new MesaBean();
-                                teste = mesaBean.ListarTodasMesaClientes();
-                                if (teste == false) {
-                                    System.out.println("Nao tem Mesas");
-                                    break;
-                                }
+                                mesaBean.ListarTodasMesaClientes();
+
                                 do {
                                     flag = true;
                                     try {
@@ -1025,11 +946,8 @@ public class main {
                                 System.out.println("------------------Deletar Pedido------------------");
                                 System.out.println("------------------Listando Pedidos------------------");
                                 PedidoBean pedidoBean = new PedidoBean();
-                                teste = pedidoBean.ListarPedidos();
-                                if (teste == false) {
-                                    System.out.println("Nao tem Pedidos");
-                                    break;
-                                }
+                                pedidoBean.ListarPedidos();
+
                                 do {
                                     flag = true;
                                     try {
@@ -1052,12 +970,8 @@ public class main {
                                 System.out.println("------------------Deletar Reserva------------------");
                                 System.out.println("------------------Listando Reserva------------------");
                                 ReservaBean reservaBean = new ReservaBean();
-                                teste = reservaBean.ListarReservas();
-                                if (teste == false) {
-                                    System.out.println("Nao tem reservas cadastradas");
-                                    break;
+                                reservaBean.ListarReservas();
 
-                                }
                                 do {
                                     flag = true;
                                     try {
@@ -1081,11 +995,8 @@ public class main {
                                 System.out.println("------------------Deletar Pagamento------------------");
                                 System.out.println("------------------Listando Pagamentos------------------");
                                 PagamentoBean pagamentoBean = new PagamentoBean();
-                                teste = pagamentoBean.ListarPagamentos();
-                                if (teste == false) {
-                                    System.out.println("Nao tem pagamento Registrados");
-                                    break;
-                                }
+                                pagamentoBean.ListarPagamentos();
+
                                 do {
                                     flag = true;
                                     try {
@@ -1111,7 +1022,106 @@ public class main {
 
                     break;
                 case 3:
-                    System.out.println("thiago");
+
+                    do {
+                        optNumberSubMenuEditar = SubmenuEditar();
+
+                        switch (optNumberSubMenuEditar) {
+
+                            case 1:
+                                System.out.println("------------------Editar Pessoa------------------");
+
+                                do {
+                                    flag = true;
+                                    try {
+                                        System.out.println("1-Cliente\n2-Empregado");
+                                        op = var.nextInt();
+
+                                    } catch (InputMismatchException entreComInt) {
+                                        System.out.println("ERRO! Entre com um número inteiro.");
+                                        flag = false;
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                    } finally {
+                                        var.nextLine();
+                                    }
+                                } while (op < 1 || op > 2 || !flag);
+
+                                do {
+                                    flag = true;
+                                    try {
+                                        if (op == 1) {
+                                            System.out.println("------------------Editar Cliente------------------");
+                                            System.out.println("------------------Listando Clientes------------------");
+                                            ClienteBean clienteBean = new ClienteBean();
+                                            clienteBean.ListarTudoCliente();
+
+                                            System.out.println("Digite o codigo do cliente: ");
+                                            int cliente = var.nextInt();
+                                            var.nextLine();
+
+                                            System.out.println("Digite o Nome: ");
+                                            nome = var.nextLine();
+                                            System.out.println("Digite o Sexo(M ou F): ");
+                                            sexo = var.nextLine();
+                                            System.out.println("Digite o Telefone: ");
+                                            telefone = var.nextLine();
+                                            System.out.println("Digite o Celular: ");
+                                            celular = var.nextLine();
+                                            System.out.println("Digite o Email: ");
+                                            email = var.nextLine();
+
+                                            TbPessoa tbPessoa = new TbPessoa(nome, telefone, celular, sexo, email);
+                                            clienteBean.AtualizarPessoa(tbPessoa, cliente);
+
+                                        } else if (op == 2) {
+                                            System.out.println("------------------Editar Cliente------------------");
+                                            System.out.println("------------------Listando Empregados------------------");
+                                            EmpregadoBean empregadoBean = new EmpregadoBean();
+                                            empregadoBean.ListarEmpregadoFuncao();
+
+                                            System.out.println("Digite o codigo do empregado: ");
+                                            int empregado = var.nextInt();
+                                            var.nextLine();
+
+                                        }
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 2:
+
+                                break;
+                            case 3:
+
+                                break;
+                            case 4:
+
+                                break;
+                            case 5:
+
+                                break;
+                            case 6:
+
+                                break;
+                            case 7:
+
+                                break;
+                            case 8:
+
+                                break;
+
+                        }
+
+                    } while (optNumberSubMenuEditar != 9);
                     break;
 
             }

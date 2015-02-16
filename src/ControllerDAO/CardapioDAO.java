@@ -57,7 +57,7 @@ public class CardapioDAO {
                             + " - Tipo_Item: " + rs.getString(3)
                             + " - Tipo_Restaurante: " + rs.getString(4)
                     );
-                    return true;
+                   
                 }
             
 

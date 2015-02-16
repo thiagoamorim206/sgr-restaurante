@@ -26,21 +26,19 @@ public class EmpregadoBean {
     }
 
     public String CadastroEmpregado() {
-
         empregado = empregadoDAO.inserirEmpregado(empregado);//salva
         return "Sucesso"; // Caso de Sucesso
-
     }
 
-    public boolean ListarEmpregado() {
+    public String ListarEmpregado() {
 
-        boolean teste = empregadoDAO.listarEmpregado();
-        return teste;
+        empregadoDAO.listarEmpregado();
+        return "Sucesso";
     }
 
-    public boolean ListarEmpregadoFuncao() {
-        boolean teste = empregadoDAO.listarEmpregadoFuncao();
-        return teste;
+    public String ListarEmpregadoFuncao() {
+        empregadoDAO.listarEmpregadoFuncao();
+        return "Sucesso";
     }
 
     public String DeletarEmpregado(int idEmpregado) {

@@ -2,6 +2,7 @@ package ControllerBean;
 
 import ControllerDAO.ClienteDAO;
 import Model.TbCliente;
+import Model.TbPessoa;
 
 public class ClienteBean {
 
@@ -31,16 +32,33 @@ public class ClienteBean {
 
     }
 
-    public boolean ListarClientePagar() {
+    public String ListarClientePagar() {
 
-        boolean teste = clienteDAO.listaCliente();
-        return teste;
+        clienteDAO.listaCliente();
+        return "Sucesso";
     }
 
-    public boolean ListarTodosClientes() {
+    public String ListarTodosClientes() {
 
-        boolean teste = clienteDAO.listaTodosClientes();
-        return teste;
+        clienteDAO.listaTodosClientes();
+        return "Sucesso";
+    }
+
+    public String ListarTudoCliente() {
+
+        clienteDAO.listaTudoCliente();
+        return "Sucesso";
+    }
+
+    public String AtualizarPessoa(TbPessoa p, int x) {
+        p.setNmNome(p.getNmNome());
+        p.setNrTelefone(p.getNrTelefone());
+        p.setNrCelular(p.getNrCelular());
+        p.setNmEmail(p.getNmSexo());
+        p.setNmNome(p.getNmEmail());
+
+        clienteDAO.AtualizarPessoa(p, x);
+        return "Sucesso";
     }
 
     public String DeletarCliente(int idCliente) {
