@@ -22,6 +22,9 @@ public class CompraProdutoBean {
         return compraProduto;
     }
 
+    public CompraProdutoBean() {
+    }
+
     public void setCompraProduto(TbCompraProduto compraProduto) {
         this.compraProduto = compraProduto;
     }
@@ -31,6 +34,17 @@ public class CompraProdutoBean {
         compraProduto = compraProdutoDAO.inserirCompraProduto(compraProduto);//salva
         return "Sucesso"; // Caso de Sucesso
 
+    }
+
+    public String ListarCompraProduto() {
+
+        compraProdutoDAO.listarCompraProdutos();
+        return "Sucesso";
+    }
+    
+      public String DeletarProduto(int idProduto) {
+        compraProdutoDAO.deletarCompraProduto(idProduto);
+        return "Sucesso";
     }
 
 }

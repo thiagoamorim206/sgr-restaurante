@@ -30,13 +30,22 @@ public class ClienteBean {
         return "Sucesso"; // Caso de Sucesso
 
     }
-    
-    
+
     public String ListarClientePagar() {
-        
+
         clienteDAO.listaCliente();
         return "Sucesso";
     }
-    
-    
+
+    public String ListarTodosClientes() {
+
+        clienteDAO.listaTodosClientes();
+        return "Sucesso";
+    }
+
+    public String DeletarCliente(int idCliente) {
+        clienteDAO.deletarCliente(idCliente);
+        return "Sucesso";
+    }
+
 }

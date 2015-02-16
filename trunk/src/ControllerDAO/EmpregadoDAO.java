@@ -63,8 +63,8 @@ public class EmpregadoDAO {
         }
         return null;
     }
-    
-     public TbEmpregado listarEmpregadoFuncao() {
+
+    public TbEmpregado listarEmpregadoFuncao() {
         Connection cn = null;
 
         try {
@@ -80,7 +80,7 @@ public class EmpregadoDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2)+ " - Função: " + rs.getString(3));
+                System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2) + " - Função: " + rs.getString(3));
             }
 
             ConnectionFactory.desconecta(cn);
@@ -94,4 +94,27 @@ public class EmpregadoDAO {
         return null;
     }
 
+    public TbEmpregado deletarEmpregado(int id_empregado) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_empregado \n"
+                    + "where id_empregado = " + id_empregado + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
 }

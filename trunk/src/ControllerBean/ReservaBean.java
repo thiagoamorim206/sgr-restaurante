@@ -18,6 +18,9 @@ public class ReservaBean {
         reserva.setNrLugarReserva(NrLugarReserva);
     }
 
+    public ReservaBean() {
+    }
+
     public TbReserva getReserva() {
         return reserva;
     }
@@ -31,6 +34,17 @@ public class ReservaBean {
         reserva = reservaDAO.inserirReserva(reserva);//salva
         return "Sucesso"; // Caso de Sucesso
 
+    }
+    public String ListarReservas() {
+
+        reservaDAO.listarReservas();//salva
+        return "Sucesso"; // Caso de Sucesso
+
+    }
+    
+    public String DeletarReserva(int idReserva) {
+        reservaDAO.deletarReserva(idReserva);
+        return "Sucesso";
     }
 
 }

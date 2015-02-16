@@ -122,4 +122,27 @@ public class MateriaPrimaDAO {
         return -1;
     }
 
+    public TbMateriaPrima deletarProduto(int id_produto) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_materia_prima \n"
+                    + "where id_materia_prima = " + id_produto + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
 }

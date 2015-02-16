@@ -45,4 +45,9 @@ public class FornecedorBean {
         return "Sucesso";
     }
 
+    public String DeletarFornecedor(int IdFornecedor) {
+        fornecedorDAO.deletarFornecedor(IdFornecedor);
+        return "Sucesso";
+    }
+
 }

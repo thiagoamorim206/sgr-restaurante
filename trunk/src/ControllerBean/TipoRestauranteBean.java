@@ -32,12 +32,17 @@ public class TipoRestauranteBean {
     }
 
     public String ListarTipoRestaurante() {
-       
+
         ArrayList<TbTipoRestaurante> lista = tipoRestauranteDao.listarTipoRestaurante();
-       
+
         for (TbTipoRestaurante o : lista) {
             System.out.println("Codigo: " + o.getIdTipoRestaurante() + " Nome: " + o.getNmTipo());
         }
+        return "Sucesso";
+    }
+
+    public String DeletarTipoRestaurante(int IdTipoRestaurante) {
+        tipoRestauranteDao.deletarTipoRestaurante(IdTipoRestaurante);
         return "Sucesso";
     }
 

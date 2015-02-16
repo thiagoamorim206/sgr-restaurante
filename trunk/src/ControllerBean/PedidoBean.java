@@ -44,12 +44,23 @@ public class PedidoBean {
 
     }
 
+    public String ListarPedidos() {
+        pedidoDAO.listarPedidos();
+        return "Sucesso";
+
+    }
+
     public String AtualizarPago(boolean x, int idMesa) {
 
         this.getPedido().setDsPago(x);
         this.getPedido().setIdMesa(idMesa);
 
         pedidoDAO.AtualizarPago(this.getPedido());
+        return "Sucesso";
+    }
+
+    public String DeletarPedido(int idPedido) {
+        pedidoDAO.deletarPedido(idPedido);
         return "Sucesso";
     }
 }

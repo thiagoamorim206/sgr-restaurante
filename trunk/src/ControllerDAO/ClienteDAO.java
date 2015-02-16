@@ -56,7 +56,63 @@ public class ClienteDAO {
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
             }
-           
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
+
+    public TbCliente listaTodosClientes() {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select c.id_cliente, p.nm_nome\n"
+                    + "from tb_cliente c, tb_pessoa p\n"
+                    + "where c.id_pessoa = p.id_pessoa\n"
+                    + "group by c.id_cliente,p.nm_nome\n"
+                    + "order by c.id_cliente,p.nm_nome\n"
+                    + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
+
+    public TbCliente deletarCliente(int id_cliente) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_cliente \n"
+                    + "where id_cliente = " + id_cliente + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();

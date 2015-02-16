@@ -2,7 +2,6 @@ package ControllerBean;
 
 import ControllerDAO.EmpregadoDAO;
 import Model.TbEmpregado;
-import java.util.ArrayList;
 
 public class EmpregadoBean {
 
@@ -37,9 +36,14 @@ public class EmpregadoBean {
         empregadoDAO.listarEmpregado();
         return "Sucesso";
     }
-    
+
     public String ListarEmpregadoFuncao() {
         empregadoDAO.listarEmpregadoFuncao();
+        return "Sucesso";
+    }
+
+    public String DeletarEmpregado(int idEmpregado) {
+        empregadoDAO.deletarEmpregado(idEmpregado);
         return "Sucesso";
     }
 

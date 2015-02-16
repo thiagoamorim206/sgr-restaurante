@@ -35,7 +35,7 @@ public class FornecedorDAO {
         }
         return null;
     }
-    
+
     public ArrayList listarFornecedor() {
         Connection cn = null;
 
@@ -50,17 +50,40 @@ public class FornecedorDAO {
             ResultSet rs = ps.executeQuery();
 
             ArrayList<TbFornecedor> lista = new ArrayList<>();
-            
+
             while (rs.next()) {
-                TbFornecedor tbFornecedor = new TbFornecedor(rs.getInt(1), rs.getString(2));                  
+                TbFornecedor tbFornecedor = new TbFornecedor(rs.getInt(1), rs.getString(2));
                 lista.add(tbFornecedor);
             }
-           
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
             return lista;
-            
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
+
+    public TbFornecedor deletarFornecedor(int id_fornecedor) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_fornecedor \n"
+                    + "where id_fornecedor = " + id_fornecedor + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

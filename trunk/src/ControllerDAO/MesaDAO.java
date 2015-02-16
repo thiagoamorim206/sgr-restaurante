@@ -1,6 +1,5 @@
 package ControllerDAO;
 
-import Model.TbCliente;
 import Model.TbMesa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,6 +88,61 @@ public class MesaDAO {
             ConnectionFactory.desconecta(cn);
         }
 
+    }
+    public ArrayList listarTodasMesa() {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select *from tb_mesa";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            ArrayList<TbMesa> lista = new ArrayList<>();
+
+            while (rs.next()) {
+                TbMesa mesa = new TbMesa(rs.getInt(1), rs.getInt(2), rs.getString(4), rs.getString(5));
+                lista.add(mesa);
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+            return lista;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
+    
+    public TbMesa deletarMesa(int id_mesa) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_mesa \n"
+                    + "where id_mesa = " + id_mesa + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
     }
 
    

@@ -67,5 +67,29 @@ public class TipoCardapioDAO {
         }
         return null;
     }
+    
+    public TbTipoCardapio deletarTipoCardapio(int id_tipo_cardapio) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_tipo_cardapio \n"
+                    + "where id_tipo_cardapio = " + id_tipo_cardapio + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
 
 }
