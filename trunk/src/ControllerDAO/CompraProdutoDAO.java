@@ -60,7 +60,7 @@ public class CompraProdutoDAO {
                             + " - Fornecedor: " + rs.getString(4)
                             + " - Num. Estoque: " + rs.getInt(5)
                     );
-                    return true;
+                    
                 }
            
 

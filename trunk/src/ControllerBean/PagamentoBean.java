@@ -44,10 +44,10 @@ public class PagamentoBean {
         return pagamentoDAO.mostarMesa(this.getPagamento());
     }
 
-    public boolean ListarPagamentos() {
+    public String ListarPagamentos() {
 
-        boolean teste = pagamentoDAO.listarPagamentos();
-        return teste;
+        pagamentoDAO.listarPagamentos();
+        return "Sucesso";
     }
 
     public String DeletarPagamento(int idPagamentos) {

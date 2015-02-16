@@ -129,7 +129,7 @@ public class PagamentoDAO {
                         + " - Data: " + rs.getDate(3)
                         + " - Total Pago: " + rs.getDouble(4)
                 );
-                return true;
+             
             }
 
             ConnectionFactory.desconecta(cn);

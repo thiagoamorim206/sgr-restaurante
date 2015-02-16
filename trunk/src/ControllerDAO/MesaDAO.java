@@ -58,7 +58,7 @@ public class MesaDAO {
                         + " - Ocupada: " + rs.getBoolean(5)
                         + " - Obs: " + rs.getString(6)
                 );
-                return true;
+              
             }
 
             ConnectionFactory.desconecta(cn);
@@ -115,7 +115,7 @@ public class MesaDAO {
                         + " - Ocupada: " + rs.getBoolean(3)
                         + " - Obs: " + rs.getString(4)
                 );
-                return true;
+               
             }
 
             ConnectionFactory.desconecta(cn);
@@ -176,7 +176,7 @@ public class MesaDAO {
                         + " - Ocupada: " + rs.getBoolean(5)
                         + " - Obs: " + rs.getString(6)
                 );
-                return true;
+                
             }
 
             ConnectionFactory.desconecta(cn);

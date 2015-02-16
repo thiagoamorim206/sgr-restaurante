@@ -34,10 +34,10 @@ public class MateriaPrimaBean {
 
     }
 
-    public boolean ListarProduto() {
+    public String ListarProduto() {
 
-        boolean teste = materiaPrimaDAO.listarProdutos();
-        return teste;
+        materiaPrimaDAO.listarProdutos();
+        return "Sucesso";
     }
 
     public String AtualizarEstoque(int x, int idProduto) {

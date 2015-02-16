@@ -35,10 +35,10 @@ public class FornecedorBean {
 
     }
 
-    public boolean ListarFornecedor() {
+    public String ListarFornecedor() {
 
-        boolean teste = fornecedorDAO.listarFornecedor();
-        return teste;
+        fornecedorDAO.listarFornecedor();
+        return "Sucesso";
     }
 
     public String DeletarFornecedor(int IdFornecedor) {

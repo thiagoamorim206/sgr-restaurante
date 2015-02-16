@@ -58,7 +58,7 @@ public class ReservaDAO {
                             + " - Mesa: " + rs.getString(3)
                             + " - Nome Reserva: " + rs.getString(4)
                     );
-                    return true;
+                   
                 }
           
 

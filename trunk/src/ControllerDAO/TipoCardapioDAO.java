@@ -49,7 +49,7 @@ public class TipoCardapioDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Tipo Cardapio: " + rs.getString(2));
-                return true;
+                
             }
 
             ConnectionFactory.desconecta(cn);

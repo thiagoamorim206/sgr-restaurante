@@ -31,10 +31,10 @@ public class TipoRestauranteBean {
 
     }
 
-    public boolean ListarTipoRestaurante() {
+    public String ListarTipoRestaurante() {
 
-        boolean teste = tipoRestauranteDao.listarTipoRestaurante();
-        return teste;
+        tipoRestauranteDao.listarTipoRestaurante();
+        return "Sucesso";
     }
 
     public String DeletarTipoRestaurante(int IdTipoRestaurante) {

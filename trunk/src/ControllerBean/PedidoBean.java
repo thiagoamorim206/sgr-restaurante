@@ -44,9 +44,9 @@ public class PedidoBean {
 
     }
 
-    public boolean ListarPedidos() {
-        boolean teste = pedidoDAO.listarPedidos();
-        return teste;
+    public String ListarPedidos() {
+        pedidoDAO.listarPedidos();
+        return "Sucesso";
 
     }
 

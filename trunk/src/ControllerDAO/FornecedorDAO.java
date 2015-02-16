@@ -50,7 +50,7 @@ public class FornecedorDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
-                return true;
+                
             }
 
             ConnectionFactory.desconecta(cn);
