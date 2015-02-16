@@ -56,6 +56,10 @@ public class TbEmpregado implements Serializable {
         this.idEmpregado = idEmpregado;
     }
 
+    public TbEmpregado(String dsFuncaoRestaurante) {
+        this.dsFuncaoRestaurante = dsFuncaoRestaurante;
+    }
+
     public TbEmpregado(Integer idEmpregado, String dsFuncaoRestaurante) {
         this.idEmpregado = idEmpregado;
         this.dsFuncaoRestaurante = dsFuncaoRestaurante;

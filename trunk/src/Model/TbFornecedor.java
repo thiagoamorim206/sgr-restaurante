@@ -73,6 +73,15 @@ public class TbFornecedor implements Serializable {
         this.dsObs = dsObs;
     }
 
+    public TbFornecedor(String nmFornecedor, String nrCelular, String nrTelefone, String nmEmail, String dsObs) {
+
+        this.nmFornecedor = nmFornecedor;
+        this.nrCelular = nrCelular;
+        this.nrTelefone = nrTelefone;
+        this.nmEmail = nmEmail;
+        this.dsObs = dsObs;
+    }
+
     public Integer getIdFornecedor() {
         return idFornecedor;
     }
