@@ -35,7 +35,7 @@ public class MateriaPrimaDAO {
         return null;
     }
 
-    public ArrayList listarProdutos() {
+    public boolean listarProdutos() {
         Connection cn = null;
 
         try {
@@ -48,23 +48,20 @@ public class MateriaPrimaDAO {
 
             ResultSet rs = ps.executeQuery();
 
-            ArrayList<TbMateriaPrima> lista = new ArrayList<>();
-
             while (rs.next()) {
-                TbMateriaPrima tbMateriaPrima = new TbMateriaPrima(rs.getInt(1), rs.getString(2));
-                lista.add(tbMateriaPrima);
+                System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
+                return true;
             }
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
-            return lista;
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
 
     public void AtualizarEstoque(TbMateriaPrima t) {
@@ -106,6 +103,7 @@ public class MateriaPrimaDAO {
             PreparedStatement ps = cn.prepareStatement(SQL);
             int x = 0;
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 x = rs.getInt(1);
             }

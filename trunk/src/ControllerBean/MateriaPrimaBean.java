@@ -34,14 +34,10 @@ public class MateriaPrimaBean {
 
     }
 
-    public String ListarProduto() {
+    public boolean ListarProduto() {
 
-        ArrayList<TbMateriaPrima> lista = materiaPrimaDAO.listarProdutos();
-
-        for (TbMateriaPrima o : lista) {
-            System.out.println("Codigo: " + o.getIdMateriaPrima() + " Nome: " + o.getNmProduto());
-        }
-        return "Sucesso";
+        boolean teste = materiaPrimaDAO.listarProdutos();
+        return teste;
     }
 
     public String AtualizarEstoque(int x, int idProduto) {

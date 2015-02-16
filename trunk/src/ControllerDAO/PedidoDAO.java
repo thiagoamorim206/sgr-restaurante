@@ -35,7 +35,7 @@ public class PedidoDAO {
         return null;
     }
 
-    public TbPedido listarPedidos() {
+    public boolean listarPedidos() {
         Connection cn = null;
 
         try {
@@ -57,6 +57,7 @@ public class PedidoDAO {
                         + " - Valor_Total: " + rs.getDouble(4)
                         + " - Pago: " + rs.getBoolean(5)
                 );
+                return true;
             }
 
             ConnectionFactory.desconecta(cn);
@@ -67,10 +68,10 @@ public class PedidoDAO {
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
-    
-     public ArrayList listarUltimoPedido() {
+
+    public ArrayList listarUltimoPedido() {
         Connection cn = null;
 
         try {
@@ -80,12 +81,12 @@ public class PedidoDAO {
             String SQL = "select id_pedido from tb_pedido where id_pedido = (SELECT MAX(id_pedido) FROM tb_pedido)";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
-     
+
             ResultSet rs = ps.executeQuery();
             ArrayList<TbPedido> lista = new ArrayList<>();
             while (rs.next()) {
-               TbPedido pedido = new TbPedido(rs.getInt("id_pedido"));
-               lista.add(pedido);
+                TbPedido pedido = new TbPedido(rs.getInt("id_pedido"));
+                lista.add(pedido);
             }
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
@@ -99,15 +100,15 @@ public class PedidoDAO {
         }
         return null;
     }
-    
-      public void AtualizarPago(TbPedido t) {
+
+    public void AtualizarPago(TbPedido t) {
         Connection cn = null;
 
         try {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "update tb_pedido set ds_pago = " + t.getDsPago() + " where id_mesa=" + t.getIdMesa()+ "";
+            String SQL = "update tb_pedido set ds_pago = " + t.getDsPago() + " where id_mesa=" + t.getIdMesa() + "";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
 
@@ -123,7 +124,8 @@ public class PedidoDAO {
         }
 
     }
-      public TbPedido deletarPedido(int id_Pedido) {
+
+    public TbPedido deletarPedido(int id_Pedido) {
         Connection cn = null;
 
         try {
@@ -146,6 +148,5 @@ public class PedidoDAO {
         }
         return null;
     }
-    
 
 }

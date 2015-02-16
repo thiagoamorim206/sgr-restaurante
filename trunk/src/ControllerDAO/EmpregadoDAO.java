@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class EmpregadoDAO {
 
@@ -34,7 +33,7 @@ public class EmpregadoDAO {
         return null;
     }
 
-    public TbEmpregado listarEmpregado() {
+    public boolean listarEmpregado() {
         Connection cn = null;
 
         try {
@@ -51,6 +50,7 @@ public class EmpregadoDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
+                return true;
             }
 
             ConnectionFactory.desconecta(cn);
@@ -61,10 +61,10 @@ public class EmpregadoDAO {
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
 
-    public TbEmpregado listarEmpregadoFuncao() {
+    public boolean listarEmpregadoFuncao() {
         Connection cn = null;
 
         try {
@@ -81,6 +81,7 @@ public class EmpregadoDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2) + " - Função: " + rs.getString(3));
+                return true;
             }
 
             ConnectionFactory.desconecta(cn);
@@ -91,7 +92,7 @@ public class EmpregadoDAO {
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
 
     public TbEmpregado deletarEmpregado(int id_empregado) {
@@ -101,11 +102,19 @@ public class EmpregadoDAO {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "delete from tb_empregado \n"
-                    + "where id_empregado = " + id_empregado + "";
+            String SQL = "DELETE FROM  tb_pessoa p\n"
+                    + "     USING tb_empregado c\n"
+                    + "     where c.id_pessoa = p.id_pessoa\n"
+                    + "	and c.id_empregado =" + id_empregado + "";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
             ps.execute();
+
+            String SQL1 = "delete from tb_empregado \n"
+                    + "where id_empregado = " + id_empregado + "";
+
+            PreparedStatement ps1 = cn.prepareStatement(SQL1);
+            ps1.execute();
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
@@ -117,4 +126,5 @@ public class EmpregadoDAO {
         }
         return null;
     }
+
 }

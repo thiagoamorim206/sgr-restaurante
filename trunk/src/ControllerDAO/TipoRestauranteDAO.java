@@ -34,7 +34,7 @@ public class TipoRestauranteDAO {
         return null;
     }
 
-    public ArrayList listarTipoRestaurante() {
+    public boolean listarTipoRestaurante() {
         Connection cn = null;
 
         try {
@@ -47,23 +47,20 @@ public class TipoRestauranteDAO {
 
             ResultSet rs = ps.executeQuery();
 
-            ArrayList<TbTipoRestaurante> lista = new ArrayList<>();
-
             while (rs.next()) {
-                TbTipoRestaurante tbTipoRestaurante = new TbTipoRestaurante(rs.getInt("id_tipo_restaurante"), rs.getString("nm_tipo"));
-                lista.add(tbTipoRestaurante);
+                System.out.println("Codigo: " + rs.getInt(1) + " - Tipo Restaurante: " + rs.getString(2));
+                return true;
             }
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
-            return lista;
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
 
     public TbTipoRestaurante deletarTipoRestaurante(int id_tipo_restaurante) {

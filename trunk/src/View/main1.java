@@ -15,6 +15,8 @@ import ControllerBean.PessoaBean;
 import ControllerBean.ReservaBean;
 import ControllerBean.TipoCardapioBean;
 import ControllerBean.TipoRestauranteBean;
+import Model.TbCardapio;
+import Model.TbFilaPedido;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -449,12 +451,7 @@ public class main1 {
                                     try {
                                         System.out.println("------------------Listando Mesas Livres------------------");
                                         MesaBean mesaBean = new MesaBean();
-                                        String teste = mesaBean.ListarMesa();
-
-                                        if (teste.equals("Todas as mesas estão Ocupadas")) {
-                                            System.out.println("Todas as mesas estão Ocupadas");
-                                            break;
-                                        }
+                                        mesaBean.ListarMesa();
 
                                         System.out.println("Digite o codigo da mesa: ");
                                         int mesa = var.nextInt();
@@ -550,12 +547,7 @@ public class main1 {
 
                                         System.out.println("------------------Listando Mesas Livres------------------");
                                         MesaBean mesaBean = new MesaBean();
-                                        String teste = mesaBean.ListarMesa();
-
-                                        if (teste.equals("Todas as mesas estão Ocupadas")) {
-                                            System.out.println("Todas as mesas estão Ocupadas");
-                                            break;
-                                        }
+                                        mesaBean.ListarMesa();
 
                                         System.out.println("Digite o codigo da mesa: ");
                                         int mesa = var.nextInt();
@@ -632,3 +624,5 @@ public class main1 {
 
     }
 }
+
+

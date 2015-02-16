@@ -31,19 +31,20 @@ public class ClienteBean {
 
     }
 
-    public String ListarClientePagar() {
+    public boolean ListarClientePagar() {
 
-        clienteDAO.listaCliente();
-        return "Sucesso";
+        boolean teste = clienteDAO.listaCliente();
+        return teste;
     }
 
-    public String ListarTodosClientes() {
+    public boolean ListarTodosClientes() {
 
-        clienteDAO.listaTodosClientes();
-        return "Sucesso";
+        boolean teste = clienteDAO.listaTodosClientes();
+        return teste;
     }
 
     public String DeletarCliente(int idCliente) {
+        clienteDAO.deletarPessoa(idCliente);
         clienteDAO.deletarCliente(idCliente);
         return "Sucesso";
     }
