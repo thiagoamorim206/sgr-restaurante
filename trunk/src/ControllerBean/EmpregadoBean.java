@@ -2,6 +2,7 @@ package ControllerBean;
 
 import ControllerDAO.EmpregadoDAO;
 import Model.TbEmpregado;
+import Model.TbPessoa;
 
 public class EmpregadoBean {
 
@@ -43,6 +44,11 @@ public class EmpregadoBean {
 
     public String DeletarEmpregado(int idEmpregado) {
         empregadoDAO.deletarEmpregado(idEmpregado);
+        return "Sucesso";
+    }
+    
+     public String AtualizarPessoa(TbPessoa p, TbEmpregado e, int x) {
+        empregadoDAO.AtualizarPessoa(p,e, x);
         return "Sucesso";
     }
 

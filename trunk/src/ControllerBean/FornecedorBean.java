@@ -40,9 +40,18 @@ public class FornecedorBean {
         fornecedorDAO.listarFornecedor();
         return "Sucesso";
     }
+    public String ListarTodosFornecedor() {
+
+        fornecedorDAO.listarTodosFornecedor();
+        return "Sucesso";
+    }
 
     public String DeletarFornecedor(int IdFornecedor) {
         fornecedorDAO.deletarFornecedor(IdFornecedor);
+        return "Sucesso";
+    }
+    public String AtualizarFornecedor(TbFornecedor f, int x) {
+        fornecedorDAO.AtualizarFornecedor(f, x);
         return "Sucesso";
     }
 
