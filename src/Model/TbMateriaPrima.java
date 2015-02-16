@@ -68,6 +68,13 @@ public class TbMateriaPrima implements Serializable {
         this.vlProduto = vlProduto;
         this.dsObs = dsObs;
     }
+    public TbMateriaPrima( String nmProduto, int nrQtdEstoque, double vlProduto, String dsObs) {
+       
+        this.nmProduto = nmProduto;
+        this.nrQtdEstoque = nrQtdEstoque;
+        this.vlProduto = vlProduto;
+        this.dsObs = dsObs;
+    }
 
     public Integer getIdMateriaPrima() {
         return idMateriaPrima;
