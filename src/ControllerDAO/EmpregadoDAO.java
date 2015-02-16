@@ -1,6 +1,7 @@
 package ControllerDAO;
 
 import Model.TbEmpregado;
+import Model.TbPessoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,7 +51,7 @@ public class EmpregadoDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
-               
+
             }
 
             ConnectionFactory.desconecta(cn);
@@ -81,7 +82,7 @@ public class EmpregadoDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2) + " - Função: " + rs.getString(3));
-               
+
             }
 
             ConnectionFactory.desconecta(cn);
@@ -125,6 +126,44 @@ public class EmpregadoDAO {
             ConnectionFactory.desconecta(cn);
         }
         return null;
+    }
+
+    public void AtualizarPessoa(TbPessoa t, TbEmpregado em, int x) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "UPDATE tb_pessoa p\n"
+                    + " SET  nm_nome=  '" + t.getNmNome() + "' , nr_telefone = '" + t.getNrTelefone() + "' , nr_celular='" + t.getNrCelular() + "', nm_sexo='" + t.getNmSexo() + "', nm_email= '" + t.getNmEmail() + "'\n"
+                    + " from tb_empregado c  \n"
+                    + " WHERE c.id_pessoa = p.id_pessoa\n"
+                    + " and c.id_empregado = " + x + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ps.execute();
+
+            String SQL1 = "UPDATE tb_empregado e\n"
+                    + "  SET  ds_funcao_restaurante= '" + em.getDsFuncaoRestaurante() + "'\n"
+                    + "             from tb_empregado c\n"
+                    + "                WHERE c.id_pessoa = e.id_pessoa\n"
+                    + "                  and c.id_empregado = " + x + "";
+
+            PreparedStatement ps1 = cn.prepareStatement(SQL1);
+
+            ps1.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+
     }
 
 }

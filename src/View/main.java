@@ -15,6 +15,10 @@ import ControllerBean.PessoaBean;
 import ControllerBean.ReservaBean;
 import ControllerBean.TipoCardapioBean;
 import ControllerBean.TipoRestauranteBean;
+import Model.TbCompraProduto;
+import Model.TbEmpregado;
+import Model.TbFornecedor;
+import Model.TbMateriaPrima;
 import Model.TbPessoa;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -567,13 +571,13 @@ public class main {
                                         int empregado = var.nextInt();
                                         var.nextLine();
 
-                                        System.out.println("------------------Listando o Cardapio------------------");
-                                        cardapioBean = new CardapioBean();
-                                        cardapioBean.ListarCardapio();
-
                                         System.out.println("Digite a quantidade de Itens: ");
                                         int itens = var.nextInt();
                                         var.nextLine();
+
+                                        System.out.println("------------------Listando o Cardapio------------------");
+                                        cardapioBean = new CardapioBean();
+                                        cardapioBean.ListarCardapio();
 
                                         for (int i = 0; i < itens; i++) {
                                             System.out.println("Digite o codigo do cardapio: ");
@@ -1085,6 +1089,25 @@ public class main {
                                             int empregado = var.nextInt();
                                             var.nextLine();
 
+                                            System.out.println("Digite o Nome: ");
+                                            nome = var.nextLine();
+                                            System.out.println("Digite o Sexo(M ou F): ");
+                                            sexo = var.nextLine();
+                                            System.out.println("Digite o Telefone: ");
+                                            telefone = var.nextLine();
+                                            System.out.println("Digite o Celular: ");
+                                            celular = var.nextLine();
+                                            System.out.println("Digite o Email: ");
+                                            email = var.nextLine();
+                                            System.out.println("Digite a função: ");
+                                            String funcao = var.nextLine();
+
+                                            TbPessoa tbPessoa = new TbPessoa(nome, telefone, celular, sexo, email);
+
+                                            TbEmpregado tbEmpregado = new TbEmpregado(funcao);
+
+                                            empregadoBean.AtualizarPessoa(tbPessoa, tbEmpregado, empregado);
+
                                         }
 
                                     } catch (Exception e) {
@@ -1098,13 +1121,86 @@ public class main {
 
                                 break;
                             case 2:
+                                System.out.println("------------------Editar Fornecedor------------------");
+
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("------------------Listando Fonecedores------------------");
+                                        FornecedorBean fornecedorBean = new FornecedorBean();
+                                        fornecedorBean.ListarTodosFornecedor();
+
+                                        System.out.println("Digite o codigo do fornecedor: ");
+                                        int fornecedor = var.nextInt();
+                                        var.nextLine();
+
+                                        System.out.println("Digite o Nome: ");
+                                        nome = var.nextLine();
+                                        System.out.println("Digite o Telefone: ");
+                                        telefone = var.nextLine();
+                                        System.out.println("Digite o Celular: ");
+                                        celular = var.nextLine();
+                                        System.out.println("Digite o Email: ");
+                                        email = var.nextLine();
+                                        System.out.println("Digite um Observação: ");
+                                        String obs = var.nextLine();
+
+                                        TbFornecedor tbFornecedor = new TbFornecedor(fornecedor, nome, celular, telefone, email, obs);
+                                        fornecedorBean.AtualizarFornecedor(tbFornecedor, fornecedor);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
 
                                 break;
                             case 3:
+                                System.out.println("------------------Editar Produto------------------");
+
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("------------------Listando Produtos------------------");
+                                        MateriaPrimaBean materiaPrimaBean = new MateriaPrimaBean();
+                                        materiaPrimaBean.ListarTodosProduto();
+
+                                        System.out.println("Digite o codigo do produto: ");
+                                        int produto = var.nextInt();
+                                        var.nextLine();
+                                        System.out.println("Digite o Nome: ");
+                                        nome = var.nextLine();
+                                        System.out.println("Digite a Quantidade Estoque: ");
+                                        int estoque = var.nextInt();
+                                        var.nextLine();
+                                        System.out.println("Digite o valor Produto: ");
+                                        double valor = var.nextDouble();
+                                        var.nextLine();
+                                        System.out.println("Digite um Observação: ");
+                                        String obs = var.nextLine();
+
+                                        TbMateriaPrima tbProduto = new TbMateriaPrima(nome, estoque, valor, obs);
+                                        materiaPrimaBean.AtualizarPessoa(tbProduto, produto);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
 
                                 break;
                             case 4:
 
+                                
+                                
                                 break;
                             case 5:
 
