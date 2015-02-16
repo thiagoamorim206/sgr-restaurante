@@ -33,9 +33,8 @@ public class TipoCardapioDAO {
         }
         return null;
     }
-    
-    
-    public ArrayList listarTipoCardapio() {
+
+    public boolean listarTipoCardapio() {
         Connection cn = null;
 
         try {
@@ -48,26 +47,22 @@ public class TipoCardapioDAO {
 
             ResultSet rs = ps.executeQuery();
 
-            ArrayList<TbTipoCardapio> lista = new ArrayList<>();
-            
             while (rs.next()) {
-                TbTipoCardapio tbTipoCardapio = new TbTipoCardapio(rs.getInt("id_tipo_cardapio"), rs.getString("nm_tipo"));                  
-                lista.add(tbTipoCardapio);
+                System.out.println("Codigo: " + rs.getInt(1) + " - Tipo Cardapio: " + rs.getString(2));
+                return true;
             }
-           
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
-            return lista;
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
-    
+
     public TbTipoCardapio deletarTipoCardapio(int id_tipo_cardapio) {
         Connection cn = null;
 

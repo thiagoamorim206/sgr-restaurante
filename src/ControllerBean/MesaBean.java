@@ -37,19 +37,11 @@ public class MesaBean {
 
     }
 
-    public String ListarMesa() {
+    public boolean ListarMesa() {
 
-        ArrayList<TbMesa> lista = mesaDAO.listarMesa();
-        if (lista.size() != 0) {
-            for (TbMesa o : lista) {
-                System.out.println("Codigo: " + o.getIdMesa() + " Nome: " + o.getNmMesa()
-                        + " QTDLugares: " + o.getNrLugares() + " Obs: " + o.getDsObs());
-            }
-            return "Sucesso";
-        } else {
-            return "Todas as mesas estão Ocupadas";
+        boolean teste = mesaDAO.listarMesa();
+        return teste;
 
-        }
     }
 
     public String AtualizarMesa(boolean x, int idMesa) {
@@ -59,16 +51,14 @@ public class MesaBean {
         return "Sucesso";
     }
 
-    public String ListarTodasMesa() {
+    public boolean ListarTodasMesa() {
+        boolean teste = mesaDAO.listarTodasMesa();
+        return teste;
+    }
 
-        ArrayList<TbMesa> lista = mesaDAO.listarMesa();
-
-        for (TbMesa o : lista) {
-            System.out.println("Codigo: " + o.getIdMesa() + " Nome: " + o.getNmMesa()
-                    + " QTDLugares: " + o.getNrLugares() + " Obs: " + o.getDsObs());
-        }
-        return "Sucesso";
-
+    public boolean ListarTodasMesaClientes() {
+        boolean teste = mesaDAO.listarTodasMesaCliente();
+        return teste;
     }
 
     public String DeletarMesa(int idMesa) {

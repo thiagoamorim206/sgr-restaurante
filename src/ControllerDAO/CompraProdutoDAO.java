@@ -35,7 +35,7 @@ public class CompraProdutoDAO {
         return null;
     }
 
-    public TbCompraProduto listarCompraProdutos() {
+    public boolean listarCompraProdutos() {
         Connection cn = null;
 
         try {
@@ -53,14 +53,16 @@ public class CompraProdutoDAO {
             PreparedStatement ps = cn.prepareStatement(SQL);
 
             ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                System.out.println("Codigo: " + rs.getInt(1) + " - Empregado: " + rs.getString(2)
-                        + " - Produto: " + rs.getString(3)
-                        + " - Fornecedor: " + rs.getString(4)
-                        + " - Num. Estoque: " + rs.getInt(5)
-                );
-            }
+           
+                while (rs.next()) {
+                    System.out.println("Codigo: " + rs.getInt(1) + " - Empregado: " + rs.getString(2)
+                            + " - Produto: " + rs.getString(3)
+                            + " - Fornecedor: " + rs.getString(4)
+                            + " - Num. Estoque: " + rs.getInt(5)
+                    );
+                    return true;
+                }
+           
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
@@ -70,7 +72,7 @@ public class CompraProdutoDAO {
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
 
     public TbCompraProduto deletarCompraProduto(int id_compra_produto) {

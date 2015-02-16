@@ -26,19 +26,15 @@ public class TipoCardapioBean {
 
     public String CadastroTipoCardapio() {
 
-        tipoCardapio = tipoCardapioDao.inserirTipoCardapio(tipoCardapio);//salva
+        tipoCardapioDao.inserirTipoCardapio(tipoCardapio);//salva
         return "Sucesso"; // Caso de Sucesso
 
     }
 
-    public String ListarTipoCardapio() {
+    public boolean ListarTipoCardapio() {
 
-        ArrayList<TbTipoCardapio> lista = tipoCardapioDao.listarTipoCardapio();
-
-        for (TbTipoCardapio o : lista) {
-            System.out.println("Codigo: " + o.getIdTipoCardapio() + " Nome: " + o.getNmTipo());
-        }
-        return "Sucesso";
+        boolean teste = tipoCardapioDao.listarTipoCardapio();
+        return teste;
     }
 
     public String DeletarTipoCardapio(int IdTipoCardapio) {

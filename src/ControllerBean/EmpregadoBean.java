@@ -32,14 +32,15 @@ public class EmpregadoBean {
 
     }
 
-    public String ListarEmpregado() {
-        empregadoDAO.listarEmpregado();
-        return "Sucesso";
+    public boolean ListarEmpregado() {
+
+        boolean teste = empregadoDAO.listarEmpregado();
+        return teste;
     }
 
-    public String ListarEmpregadoFuncao() {
-        empregadoDAO.listarEmpregadoFuncao();
-        return "Sucesso";
+    public boolean ListarEmpregadoFuncao() {
+        boolean teste = empregadoDAO.listarEmpregadoFuncao();
+        return teste;
     }
 
     public String DeletarEmpregado(int idEmpregado) {

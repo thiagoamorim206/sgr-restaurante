@@ -36,13 +36,13 @@ public class CompraProdutoBean {
 
     }
 
-    public String ListarCompraProduto() {
+    public boolean ListarCompraProduto() {
 
-        compraProdutoDAO.listarCompraProdutos();
-        return "Sucesso";
+        boolean teste = compraProdutoDAO.listarCompraProdutos();
+        return teste;
     }
-    
-      public String DeletarProduto(int idProduto) {
+
+    public String DeletarProduto(int idProduto) {
         compraProdutoDAO.deletarCompraProduto(idProduto);
         return "Sucesso";
     }

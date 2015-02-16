@@ -35,13 +35,14 @@ public class ReservaBean {
         return "Sucesso"; // Caso de Sucesso
 
     }
-    public String ListarReservas() {
 
-        reservaDAO.listarReservas();//salva
-        return "Sucesso"; // Caso de Sucesso
+    public boolean ListarReservas() {
+
+        boolean teste = reservaDAO.listarReservas();//salva
+        return teste; // Caso de Sucesso
 
     }
-    
+
     public String DeletarReserva(int idReserva) {
         reservaDAO.deletarReserva(idReserva);
         return "Sucesso";

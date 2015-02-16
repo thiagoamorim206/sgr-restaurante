@@ -34,36 +34,42 @@ public class MesaDAO {
         return null;
     }
 
-    public ArrayList listarMesa() {
+    public boolean listarMesa() {
         Connection cn = null;
 
         try {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "select *from tb_mesa where fl_ocupada = 'false'";
+            String SQL = "select m.id_mesa, m.nm_nome mesa, p.nm_nome cliente, m.nr_lugares, m.fl_ocupada, m.ds_obs\n"
+                    + "from tb_mesa m, tb_cliente c, tb_pessoa p\n"
+                    + "where fl_ocupada = 'false'\n"
+                    + "and c.id_pessoa = p.id_pessoa\n"
+                    + "and c.id_mesa = m.id_mesa";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
 
             ResultSet rs = ps.executeQuery();
 
-            ArrayList<TbMesa> lista = new ArrayList<>();
-
             while (rs.next()) {
-                TbMesa mesa = new TbMesa(rs.getInt(1), rs.getInt(2), rs.getString(4), rs.getString(5));
-                lista.add(mesa);
+                System.out.println("Codigo: " + rs.getInt(1) + " - Mesa: " + rs.getString(2)
+                        + " - Cliente: " + rs.getString(3)
+                        + " - Lugares: " + rs.getInt(4)
+                        + " - Ocupada: " + rs.getBoolean(5)
+                        + " - Obs: " + rs.getString(6)
+                );
+                return true;
             }
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
-            return lista;
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
 
     public void AtualizarMesa(TbMesa t) {
@@ -89,7 +95,8 @@ public class MesaDAO {
         }
 
     }
-    public ArrayList listarTodasMesa() {
+
+    public boolean listarTodasMesa() {
         Connection cn = null;
 
         try {
@@ -102,25 +109,26 @@ public class MesaDAO {
 
             ResultSet rs = ps.executeQuery();
 
-            ArrayList<TbMesa> lista = new ArrayList<>();
-
             while (rs.next()) {
-                TbMesa mesa = new TbMesa(rs.getInt(1), rs.getInt(2), rs.getString(4), rs.getString(5));
-                lista.add(mesa);
+                System.out.println("Codigo: " + rs.getInt(1) + " - Mesa: " + rs.getString(5)
+                        + " - Lugares: " + rs.getInt(2)
+                        + " - Ocupada: " + rs.getBoolean(3)
+                        + " - Obs: " + rs.getString(4)
+                );
+                return true;
             }
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
-            return lista;
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
-    
+
     public TbMesa deletarMesa(int id_mesa) {
         Connection cn = null;
 
@@ -145,6 +153,41 @@ public class MesaDAO {
         return null;
     }
 
-   
+    public boolean listarTodasMesaCliente() {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select m.id_mesa, m.nm_nome mesa, p.nm_nome cliente, m.nr_lugares, m.fl_ocupada, m.ds_obs\n"
+                    + "from tb_mesa m, tb_cliente c, tb_pessoa p\n"
+                    + "and c.id_pessoa = p.id_pessoa\n"
+                    + "and c.id_mesa = m.id_mesa";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("Codigo: " + rs.getInt(1) + " - Mesa: " + rs.getString(2)
+                        + " - Cliente: " + rs.getString(3)
+                        + " - Lugares: " + rs.getInt(4)
+                        + " - Ocupada: " + rs.getBoolean(5)
+                        + " - Obs: " + rs.getString(6)
+                );
+                return true;
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return false;
+    }
 
 }

@@ -36,7 +36,7 @@ public class ReservaDAO {
         return null;
     }
 
-    public TbReserva listarReservas() {
+    public boolean listarReservas() {
         Connection cn = null;
 
         try {
@@ -52,13 +52,15 @@ public class ReservaDAO {
                     + "	and r.id_empregado = e.id_empregado";
 
             ResultSet rs = st.executeQuery(SQL);
-
-            while (rs.next()) {
-                System.out.println("Codigo: " + rs.getInt(1) + " - Empregado: " + rs.getString(2)
-                        + " - Mesa: " + rs.getString(3)
-                        + " - Nome Reserva: " + rs.getString(4)
-                );
-            }
+           
+                while (rs.next()) {
+                    System.out.println("Codigo: " + rs.getInt(1) + " - Empregado: " + rs.getString(2)
+                            + " - Mesa: " + rs.getString(3)
+                            + " - Nome Reserva: " + rs.getString(4)
+                    );
+                    return true;
+                }
+          
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
@@ -68,9 +70,10 @@ public class ReservaDAO {
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
-     public TbReserva deletarReserva(int Reserva) {
+
+    public TbReserva deletarReserva(int Reserva) {
         Connection cn = null;
 
         try {
@@ -93,6 +96,5 @@ public class ReservaDAO {
         }
         return null;
     }
-
 
 }

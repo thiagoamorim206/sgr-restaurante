@@ -35,14 +35,10 @@ public class FornecedorBean {
 
     }
 
-    public String ListarFornecedor() {
+    public boolean ListarFornecedor() {
 
-        ArrayList<TbFornecedor> lista = fornecedorDAO.listarFornecedor();
-
-        for (TbFornecedor o : lista) {
-            System.out.println("Codigo: " + o.getIdFornecedor() + " Nome: " + o.getNmFornecedor());
-        }
-        return "Sucesso";
+        boolean teste = fornecedorDAO.listarFornecedor();
+        return teste;
     }
 
     public String DeletarFornecedor(int IdFornecedor) {

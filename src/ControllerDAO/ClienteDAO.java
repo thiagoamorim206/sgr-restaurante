@@ -33,7 +33,7 @@ public class ClienteDAO {
         return null;
     }
 
-    public TbCliente listaCliente() {
+    public boolean listaCliente() {
         Connection cn = null;
 
         try {
@@ -55,6 +55,7 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
+                return true;
             }
 
             ConnectionFactory.desconecta(cn);
@@ -65,10 +66,10 @@ public class ClienteDAO {
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
 
-    public TbCliente listaTodosClientes() {
+    public boolean listaTodosClientes() {
         Connection cn = null;
 
         try {
@@ -88,7 +89,32 @@ public class ClienteDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
+                return true;
             }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return false;
+    }
+
+    public TbCliente deletarCliente(int id_cliente) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_cliente \n"
+                    + "where id_cliente = " + id_cliente + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
@@ -101,15 +127,17 @@ public class ClienteDAO {
         return null;
     }
 
-    public TbCliente deletarCliente(int id_cliente) {
+    public TbCliente deletarPessoa(int id_cliente) {
         Connection cn = null;
 
         try {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "delete from tb_cliente \n"
-                    + "where id_cliente = " + id_cliente + "";
+            String SQL = " DELETE FROM  tb_pessoa p\n"
+                    + "     USING tb_cliente c\n"
+                    + "     where c.id_pessoa = p.id_pessoa\n"
+                    + "	    and c.id_cliente = " + id_cliente + "";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
             ps.execute();

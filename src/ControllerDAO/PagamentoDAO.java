@@ -108,7 +108,7 @@ public class PagamentoDAO {
         return -1;
     }
 
-    public TbPagamento listarPagamentos() {
+    public boolean listarPagamentos() {
         Connection cn = null;
 
         try {
@@ -129,6 +129,7 @@ public class PagamentoDAO {
                         + " - Data: " + rs.getDate(3)
                         + " - Total Pago: " + rs.getDouble(4)
                 );
+                return true;
             }
 
             ConnectionFactory.desconecta(cn);
@@ -139,7 +140,7 @@ public class PagamentoDAO {
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return null;
+        return false;
     }
 
     public TbPagamento deletarPagamento(int id_pagamento) {
