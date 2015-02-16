@@ -123,6 +123,29 @@ public class PedidoDAO {
         }
 
     }
+      public TbPedido deletarPedido(int id_Pedido) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_pedido \n"
+                    + "where id_pedido = " + id_Pedido + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
     
 
 }

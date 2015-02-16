@@ -41,4 +41,9 @@ public class CardapioBean {
         return "Sucesso";
     }
 
+    public String DeletarCardapio(int idCardapio) {
+        cardapioDao.deletarCardapio(idCardapio);
+        return "Sucesso";
+    }
+
 }

@@ -15,8 +15,6 @@ import ControllerBean.PessoaBean;
 import ControllerBean.ReservaBean;
 import ControllerBean.TipoCardapioBean;
 import ControllerBean.TipoRestauranteBean;
-import Model.TbCliente;
-import Model.TbPedido;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -108,6 +106,49 @@ public class main {
         return optNumberSubMenu;
     }
 
+    private static int SubmenuDeletar() {
+        Scanner scan = new Scanner(System.in);
+        boolean flag = false;
+        int optNumberSubMenu = 0;
+        /**
+         * Menu Principal do sistema
+         */
+        do {
+
+            System.out.println("-----------Menu de Deletar Cadastro-----------");
+            System.out.println("1 - Deletar Pessoa.");
+            System.out.println("2 - Deletar Fornecedor.");
+            System.out.println("3 - Deletar Produto.");
+            System.out.println("4 - Deletar Compra Produto.");
+            System.out.println("5 - Deletar Tipo Cardapio.");
+            System.out.println("6 - Deletar Tipo Restaurante.");
+            System.out.println("7 - Deletar Cardapio.");
+            System.out.println("8 - Deletar Mesa.");
+            System.out.println("9 - Deletar Pedido.");
+            System.out.println("10- Deletar Reserva.");
+            System.out.println("11- Deletar Pagamento.");
+            System.out.println("12- Sair.");
+            System.out.print("Digite uma opção: ");
+
+            try {
+                optNumberSubMenu = scan.nextInt();
+                System.out.println("----------------------------------------------------------");
+                flag = true;
+
+            } catch (InputMismatchException entreComInt) {
+                System.out.println("ERRO! Entre com um número inteiro.");
+
+            } catch (Exception e) {
+                System.out.println("Ocoreu um erro: " + e.getMessage());
+
+            } finally {
+                scan.nextLine();
+            }
+
+        } while ((optNumberSubMenu < 1 || optNumberSubMenu > 12) || !flag);
+        return optNumberSubMenu;
+    }
+
     @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
         int opMenuPrincipal;
@@ -117,6 +158,7 @@ public class main {
         boolean flag;
         int op = 0, tipo = 0;
         boolean situacao;
+        int optNumberSubMenuDeletar;
 
         do {
             opMenuPrincipal = menuInicial();
@@ -464,28 +506,7 @@ public class main {
 
                                         Date dt = new Date(System.currentTimeMillis());
 
-                                        do {
-                                            flag = true;
-                                            try {
-                                                System.out.println("1-Pago\n2-Não pago");
-                                                op = var.nextInt();
-
-                                            } catch (InputMismatchException entreComInt) {
-                                                System.out.println("ERRO! Entre com um número inteiro.");
-                                                flag = false;
-                                            } catch (Exception e) {
-                                                System.out.println("Ocoreu um erro digite Novamente! ");
-                                                flag = false;
-                                            } finally {
-                                                var.nextLine();
-                                            }
-                                        } while (op < 1 || op > 2 || !flag);
-
-                                        if (op == 1) {
-                                            situacao = true;
-                                        } else {
-                                            situacao = false;
-                                        }
+                                        situacao = false;
 
                                         PedidoBean pedidoBean;
                                         pedidoBean = new PedidoBean(mesa, dt, 0, situacao);
@@ -597,34 +618,363 @@ public class main {
 
                             case 11:
                                 System.out.println("------------------Cadastrar Pagamento------------------");
-                                System.out.println("------------------Listando Clientes------------------");
-                                ClienteBean clienteBean = new ClienteBean();
-                                PagamentoBean pagamentoBean = new PagamentoBean();
-                                clienteBean.ListarClientePagar();
+                                do {
+                                    flag = true;
+                                    try {
+                                        System.out.println("------------------Listando Clientes------------------");
+                                        ClienteBean clienteBean = new ClienteBean();
+                                        PagamentoBean pagamentoBean = new PagamentoBean();
+                                        clienteBean.ListarClientePagar();
 
-                                System.out.println("Digite o codigo do cliente: ");
-                                int cliente = var.nextInt();
-                                var.nextLine();
+                                        System.out.println("Digite o codigo do cliente: ");
+                                        int cliente = var.nextInt();
+                                        var.nextLine();
 
-                                Date dt = new Date(System.currentTimeMillis());
+                                        Date dt = new Date(System.currentTimeMillis());
 
-                                double valorTotal = pagamentoBean.ValorTotalPagar(cliente);
-                                boolean pago = true;
-                                pagamentoBean = new PagamentoBean(cliente, dt, valorTotal, pago);
-                                pagamentoBean.CadastroPagamento();
+                                        double valorTotal = pagamentoBean.ValorTotalPagar(cliente);
+                                        boolean pago = true;
+                                        pagamentoBean = new PagamentoBean(cliente, dt, valorTotal, pago);
+                                        pagamentoBean.CadastroPagamento();
 
-                                int aux = pagamentoBean.MostrarMesa(cliente);
+                                        int aux = pagamentoBean.MostrarMesa(cliente);
 
-                                PedidoBean pedidoBean = new PedidoBean();
-                                pedidoBean.AtualizarPago(pago, aux);
+                                        PedidoBean pedidoBean = new PedidoBean();
+                                        pedidoBean.AtualizarPago(pago, aux);
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
 
+                                    }
+                                } while (!flag);
                                 break;
 
                         }
                     } while (optNumberSubMenu != 12);
 
                 case 2:
+                    do {
+                        optNumberSubMenuDeletar = SubmenuDeletar();
 
+                        switch (optNumberSubMenuDeletar) {
+
+                            case 1:
+                                System.out.println("------------------Deletar Pessoa------------------");
+
+                                do {
+                                    flag = true;
+                                    try {
+                                        System.out.println("1-Cliente\n2-Empregado");
+                                        op = var.nextInt();
+
+                                    } catch (InputMismatchException entreComInt) {
+                                        System.out.println("ERRO! Entre com um número inteiro.");
+                                        flag = false;
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                    } finally {
+                                        var.nextLine();
+                                    }
+                                } while (op < 1 || op > 2 || !flag);
+
+                                do {
+                                    flag = true;
+                                    try {
+                                        if (op == 1) {
+                                            System.out.println("------------------Deletar Clientes------------------");
+                                            System.out.println("------------------Listando Clientes------------------");
+                                            ClienteBean clienteBean = new ClienteBean();
+                                            clienteBean.ListarTodosClientes();
+
+                                            System.out.println("Digite o codigo do cliente: ");
+                                            int cliente = var.nextInt();
+                                            var.nextLine();
+
+                                            clienteBean.DeletarCliente(cliente);
+                                        } else if (op == 2) {
+                                            System.out.println("------------------Deletar Empregados------------------");
+                                            System.out.println("------------------Listando Empregados------------------");
+                                            EmpregadoBean empregadoBean = new EmpregadoBean();
+                                            empregadoBean.ListarEmpregadoFuncao();
+
+                                            System.out.println("Digite o codigo do empregado: ");
+                                            int empregado = var.nextInt();
+                                            var.nextLine();
+                                            empregadoBean.DeletarEmpregado(empregado);
+
+                                        }
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 2:
+                                System.out.println("------------------Deletar Fornecedor------------------");
+                                System.out.println("------------------Listando Fornecedores------------------");
+                                FornecedorBean fornecedorBean = new FornecedorBean();
+                                fornecedorBean.ListarFornecedor();
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo do fornecedor: ");
+                                        int fornecedor = var.nextInt();
+                                        var.nextLine();
+
+                                        fornecedorBean.DeletarFornecedor(fornecedor);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 3:
+                                System.out.println("------------------Deletar Produto------------------");
+                                System.out.println("------------------Listando Produtos------------------");
+                                MateriaPrimaBean materiaPrimaBean = new MateriaPrimaBean();
+                                materiaPrimaBean.ListarProduto();
+
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo do produto: ");
+                                        int produto = var.nextInt();
+                                        var.nextLine();
+
+                                        materiaPrimaBean.DeletarProduto(produto);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+                                break;
+                            case 4:
+
+                                System.out.println("------------------Deletar Compra Produto------------------");
+                                System.out.println("------------------Listando Compras de Produtos------------------");
+
+                                CompraProdutoBean compraProdutoBean = new CompraProdutoBean();
+                                compraProdutoBean.ListarCompraProduto();
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo da Compra Produto: ");
+                                        int Compra = var.nextInt();
+                                        var.nextLine();
+
+                                        compraProdutoBean.DeletarProduto(Compra);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 5:
+                                System.out.println("------------------Deletar Tipo Cardapio------------------");
+                                System.out.println("------------------Listando Tipos Cardapio------------------");
+                                TipoCardapioBean tipoCardapioBean = new TipoCardapioBean();
+                                tipoCardapioBean.ListarTipoCardapio();
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo do Tipo Cardapio: ");
+                                        int tipo_cardapio = var.nextInt();
+                                        var.nextLine();
+
+                                        tipoCardapioBean.DeletarTipoCardapio(tipo_cardapio);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 6:
+                                System.out.println("------------------Deletar Tipo de Restaurante------------------");
+                                System.out.println("------------------Listando Tipos Restaurantes------------------");
+
+                                TipoRestauranteBean tipoRestauranteBean = new TipoRestauranteBean();
+                                tipoRestauranteBean.ListarTipoRestaurante();
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo do Restaurante: ");
+                                        int restaurante = var.nextInt();
+                                        var.nextLine();
+
+                                        tipoRestauranteBean.DeletarTipoRestaurante(restaurante);
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+                                break;
+
+                            case 7:
+                                System.out.println("------------------Deletar Cardapio------------------");
+                                System.out.println("------------------Listando o Cardapio------------------");
+                                CardapioBean cardapioBean = new CardapioBean();
+                                cardapioBean.ListarCardapio();
+
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo do cardapio: ");
+                                        int cardapio = var.nextInt();
+                                        var.nextLine();
+
+                                        cardapioBean.DeletarCardapio(cardapio);
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 8:
+                                System.out.println("------------------Deletar Mesa------------------");
+                                System.out.println("------------------Listando Mesas------------------");
+                                MesaBean mesaBean = new MesaBean();
+                                mesaBean.ListarTodasMesa();
+
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo da mesa: ");
+                                        int mesa = var.nextInt();
+                                        var.nextLine();
+
+                                        mesaBean.DeletarMesa(mesa);
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 9:
+                                System.out.println("------------------Deletar Pedido------------------");
+                                System.out.println("------------------Listando Pedidos------------------");
+                                PedidoBean pedidoBean = new PedidoBean();
+                                pedidoBean.ListarPedidos();
+
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo do Pedido: ");
+                                        int pedido = var.nextInt();
+                                        var.nextLine();
+                                        pedidoBean.DeletarPedido(pedido);
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 10:
+                                System.out.println("------------------Deletar Reserva------------------");
+                                System.out.println("------------------Listando Reserva------------------");
+                                ReservaBean reservaBean = new ReservaBean();
+                                reservaBean.ListarReservas();
+
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo do Pedido: ");
+                                        int reserva = var.nextInt();
+                                        var.nextLine();
+                                        reservaBean.DeletarReserva(reserva);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+                            case 11:
+                                System.out.println("------------------Deletar Pagamento------------------");
+                                System.out.println("------------------Listando Pagamentos------------------");
+                                PagamentoBean pagamentoBean = new PagamentoBean();
+                                pagamentoBean.ListarPagamentos();
+
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("Digite o codigo do Pedido: ");
+                                        int reserva = var.nextInt();
+                                        var.nextLine();
+                                        pagamentoBean.DeletarPagamento(reserva);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
+                                break;
+
+                        }
+                    } while (optNumberSubMenuDeletar != 12);
+
+                    break;
+                case 3:
+                    System.out.println("thiago");
                     break;
 
             }

@@ -39,9 +39,19 @@ public class PagamentoBean {
         return pagamentoDAO.valorTotalPagar(this.getPagamento());
     }
 
-     public int MostrarMesa(int idcliente) {
+    public int MostrarMesa(int idcliente) {
         this.getPagamento().setIdCliente(idcliente);
         return pagamentoDAO.mostarMesa(this.getPagamento());
     }
 
+    public String ListarPagamentos() {
+
+        pagamentoDAO.listarPagamentos();
+        return "Sucesso";
+    }
+
+    public String DeletarPagamento(int idPagamentos) {
+        pagamentoDAO.deletarPagamento(idPagamentos);
+        return "Sucesso";
+    }
 }

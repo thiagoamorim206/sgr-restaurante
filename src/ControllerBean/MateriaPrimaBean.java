@@ -53,6 +53,9 @@ public class MateriaPrimaBean {
         return "Sucesso";
     }
 
- 
+    public String DeletarProduto(int idProduto) {
+        materiaPrimaDAO.deletarProduto(idProduto);
+        return "Sucesso";
+    }
 
 }

@@ -1,14 +1,11 @@
 package ControllerDAO;
 
 import Model.TbCardapio;
-import Model.TbTipoCardapio;
-import Model.TbTipoRestaurante;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 public class CardapioDAO {
 
@@ -61,6 +58,29 @@ public class CardapioDAO {
                         + " - Tipo_Restaurante: " + rs.getString(4)
                 );
             }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
+     public TbCardapio deletarCardapio(int id_cardapio) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_cardapio \n"
+                    + "where id_cardapio = " + id_cardapio + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();

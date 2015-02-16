@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class PagamentoDAO {
 
@@ -105,6 +106,64 @@ public class PagamentoDAO {
             ConnectionFactory.desconecta(cn);
         }
         return -1;
+    }
+
+    public TbPagamento listarPagamentos() {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            Statement st = cn.createStatement();
+
+            String SQL = "select pa.id_pagamento, p.nm_nome, pa.dt_pagamento, pa.vl_total_pago\n"
+                    + "from tb_pagamento pa, tb_cliente c, tb_pessoa p\n"
+                    + "where pa.id_cliente = c.id_cliente\n"
+                    + "	and c.id_pessoa = p.id_pessoa";
+
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                System.out.println("Codigo: " + rs.getInt(1) + " - Cliente: " + rs.getString(2)
+                        + " - Data: " + rs.getDate(3)
+                        + " - Total Pago: " + rs.getDouble(4)
+                );
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
+    }
+
+    public TbPagamento deletarPagamento(int id_pagamento) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "delete from tb_pagamento \n"
+                    + "where id_pagamento = " + id_pagamento + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return null;
     }
 
 }

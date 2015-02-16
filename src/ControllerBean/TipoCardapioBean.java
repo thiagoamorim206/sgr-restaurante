@@ -30,14 +30,19 @@ public class TipoCardapioBean {
         return "Sucesso"; // Caso de Sucesso
 
     }
-    
-     public String ListarTipoCardapio() {
-       
+
+    public String ListarTipoCardapio() {
+
         ArrayList<TbTipoCardapio> lista = tipoCardapioDao.listarTipoCardapio();
-       
+
         for (TbTipoCardapio o : lista) {
-            System.out.println("Codigo: " + o.getIdTipoCardapio()+ " Nome: " + o.getNmTipo());
+            System.out.println("Codigo: " + o.getIdTipoCardapio() + " Nome: " + o.getNmTipo());
         }
+        return "Sucesso";
+    }
+
+    public String DeletarTipoCardapio(int IdTipoCardapio) {
+        tipoCardapioDao.deletarTipoCardapio(IdTipoCardapio);
         return "Sucesso";
     }
 }

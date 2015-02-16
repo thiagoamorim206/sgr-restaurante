@@ -59,5 +59,21 @@ public class MesaBean {
         return "Sucesso";
     }
 
-  
+    public String ListarTodasMesa() {
+
+        ArrayList<TbMesa> lista = mesaDAO.listarMesa();
+
+        for (TbMesa o : lista) {
+            System.out.println("Codigo: " + o.getIdMesa() + " Nome: " + o.getNmMesa()
+                    + " QTDLugares: " + o.getNrLugares() + " Obs: " + o.getDsObs());
+        }
+        return "Sucesso";
+
+    }
+
+    public String DeletarMesa(int idMesa) {
+        mesaDAO.deletarMesa(idMesa);
+        return "Sucesso";
+    }
+
 }
