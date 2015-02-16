@@ -40,6 +40,12 @@ public class MateriaPrimaBean {
         return "Sucesso";
     }
 
+    public String ListarTodosProduto() {
+
+        materiaPrimaDAO.listarTodosProdutos();
+        return "Sucesso";
+    }
+
     public String AtualizarEstoque(int x, int idProduto) {
         int v = materiaPrimaDAO.listarQtdEstoque();
         this.getMateriaPrima().setNrQtdEstoque(v + x);
@@ -51,6 +57,11 @@ public class MateriaPrimaBean {
 
     public String DeletarProduto(int idProduto) {
         materiaPrimaDAO.deletarProduto(idProduto);
+        return "Sucesso";
+    }
+    
+    public String AtualizarPessoa(TbMateriaPrima mp, int x) {
+        materiaPrimaDAO.AtualizarProduto(mp, x);
         return "Sucesso";
     }
 

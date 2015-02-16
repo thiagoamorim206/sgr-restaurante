@@ -51,12 +51,6 @@ public class ClienteBean {
     }
 
     public String AtualizarPessoa(TbPessoa p, int x) {
-        p.setNmNome(p.getNmNome());
-        p.setNrTelefone(p.getNrTelefone());
-        p.setNrCelular(p.getNrCelular());
-        p.setNmEmail(p.getNmSexo());
-        p.setNmNome(p.getNmEmail());
-
         clienteDAO.AtualizarPessoa(p, x);
         return "Sucesso";
     }
