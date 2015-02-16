@@ -50,7 +50,40 @@ public class MateriaPrimaDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
-             
+
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return false;
+    }
+
+    public boolean listarTodosProdutos() {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select * from tb_materia_prima";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2)
+                        + " - Qtd. Estoque: " + rs.getInt(3)
+                        + " - Preço: " + rs.getDouble(4)
+                        + " - Obs: " + rs.getString(5)
+                );
+
             }
 
             ConnectionFactory.desconecta(cn);
@@ -142,5 +175,32 @@ public class MateriaPrimaDAO {
             ConnectionFactory.desconecta(cn);
         }
         return null;
+    }
+
+    public void AtualizarProduto(TbMateriaPrima t, int x) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "UPDATE tb_materia_prima\n"
+                    + "   SET nm_produto='" + t.getNmProduto() + "', nr_qtd_estoque='" + t.getNrQtdEstoque() + "', vl_produto='" + t.getVlProduto() + "', \n"
+                    + "       ds_obs='" + t.getDsObs() + "'\n"
+                    + " WHERE id_materia_prima = " + x + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+
     }
 }

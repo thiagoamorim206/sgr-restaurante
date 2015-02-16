@@ -50,7 +50,41 @@ public class FornecedorDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2));
-                
+
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+        return false;
+    }
+
+    public boolean listarTodosFornecedor() {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select * from tb_fornecedor";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("Codigo: " + rs.getInt(1) + " - Nome: " + rs.getString(2)
+                        + " Celular: " + rs.getString(3)
+                        + " Telefone: " + rs.getString(4)
+                        + " Email: " + rs.getString(5)
+                        + " Obs: " + rs.getString(6)
+                );
+
             }
 
             ConnectionFactory.desconecta(cn);
@@ -86,6 +120,33 @@ public class FornecedorDAO {
             ConnectionFactory.desconecta(cn);
         }
         return null;
+    }
+
+    public void AtualizarFornecedor(TbFornecedor f, int x) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "UPDATE tb_fornecedor\n"
+                    + "   SET nm_fornecedor='" + f.getNmFornecedor() + "', nr_celular='" + f.getNrCelular() + "', nr_telefone='" + f.getNrTelefone() + "', \n"
+                    + "       nm_email='" + f.getNmEmail() + "', ds_obs='" + f.getDsObs() + "'\n"
+                    + " WHERE id_fornecedor = " + x + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+
     }
 
 }
