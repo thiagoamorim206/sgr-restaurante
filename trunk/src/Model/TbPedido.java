@@ -48,8 +48,6 @@ public class TbPedido implements Serializable {
     @Column(name = "vl_total_consumo")
     private double vlTotalConsumo;
 
-    
-
     @Basic(optional = false)
     @Column(name = "ds_pago")
     private boolean dsPago;
@@ -62,7 +60,7 @@ public class TbPedido implements Serializable {
     private int idMesa;
 
     public TbPedido() {
-    vlTotalConsumo = 0;
+        vlTotalConsumo = 0;
     }
 
     public TbPedido(Integer idPedido) {
@@ -70,12 +68,11 @@ public class TbPedido implements Serializable {
         vlTotalConsumo = 0;
     }
 
-    public TbPedido(Date dtPedido, double vlTotalConsumo, String nmMesa, boolean dsPago ) {
+    public TbPedido(Date dtPedido, double vlTotalConsumo, String nmMesa, boolean dsPago) {
         this.dtPedido = dtPedido;
         this.vlTotalConsumo = vlTotalConsumo;
-   
         this.dsPago = dsPago;
-        this.idMesa = idMesa;
+
     }
 
     public Integer getIdPedido() {
@@ -86,7 +83,6 @@ public class TbPedido implements Serializable {
         this.idPedido = idPedido;
     }
 
- 
     public Date getDtPedido() {
         return dtPedido;
     }
@@ -110,12 +106,10 @@ public class TbPedido implements Serializable {
     public void setDsPago(boolean dsPago) {
         this.dsPago = dsPago;
     }
-    
-    ////////ACRESCENTADO POR ADRIANO
-    public double coust(){
+
+    public double coust() {
         return 0;
     }
-    
 
     @XmlTransient
     public Collection<TbPedidoCardapio> getTbPedidoCardapioCollection() {
