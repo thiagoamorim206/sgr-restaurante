@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class TipoCardapioDAO {
 
@@ -49,7 +48,7 @@ public class TipoCardapioDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Tipo Cardapio: " + rs.getString(2));
-                
+
             }
 
             ConnectionFactory.desconecta(cn);
@@ -85,6 +84,32 @@ public class TipoCardapioDAO {
             ConnectionFactory.desconecta(cn);
         }
         return null;
+    }
+
+    public void AtualizarTipoCardapio(TbTipoCardapio t, int x) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "UPDATE tb_tipo_cardapio\n"
+                    + "   SET  nm_tipo='" + t.getNmTipo() + "'\n"
+                    + " WHERE id_tipo_cardapio = " + x + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+
     }
 
 }

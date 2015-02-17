@@ -42,4 +42,9 @@ public class TipoRestauranteBean {
         return "Sucesso";
     }
 
+    public String AtualizarTipoRestaurante(TbTipoRestaurante tr, int x) {
+        tipoRestauranteDao.AtualizarTipoRestaurante(tr, x);
+        return "Sucesso";
+    }
+
 }

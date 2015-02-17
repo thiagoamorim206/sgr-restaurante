@@ -190,4 +190,30 @@ public class MesaDAO {
         return false;
     }
 
+    public void AtualizarMesa(TbMesa t, int x) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "UPDATE tb_mesa\n"
+                    + "   SET  nr_lugares='" + t.getNrLugares() + "', fl_ocupada='" + t.getFlOcupada() + "', ds_obs='" + t.getDsObs() + "', nm_nome='" + t.getNmMesa() + "'\n"
+                    + " WHERE id_mesa =" + x + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+
+    }
+
 }
