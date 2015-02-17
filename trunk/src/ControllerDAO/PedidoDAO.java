@@ -44,18 +44,21 @@ public class PedidoDAO {
 
             Statement st = cn.createStatement();
 
-            String SQL = "select p.id_pedido, m.nm_nome, p.dt_pedido, p.vl_total_consumo, p.ds_pago\n"
-                    + "from tb_mesa m, tb_pedido p\n"
+            String SQL = "select p.id_pedido, m.nm_nome, pe.nm_nome ,p.dt_pedido, p.vl_total_consumo, p.ds_pago\n"
+                    + "from tb_mesa m, tb_pedido p, tb_cliente c, tb_pessoa pe\n"
                     + "where m.id_mesa = p.id_mesa\n"
+                    + "and pe.id_pessoa = c.id_pessoa\n"
+                    + "and m.id_mesa = c.id_mesa\n"
                     + "order by p.dt_pedido";
 
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Mesa: " + rs.getString(2)
-                        + " - Data: " + rs.getDate(3)
-                        + " - Valor_Total: " + rs.getDouble(4)
-                        + " - Pago: " + rs.getBoolean(5)
+                        + " - Cliente: " + rs.getString(3)
+                        + " - Data: " + rs.getDate(4)
+                        + " - Valor_Total: " + rs.getDouble(5)
+                        + " - Pago: " + rs.getBoolean(6)
                 );
             }
 
