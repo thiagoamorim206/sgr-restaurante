@@ -15,6 +15,9 @@ public class FilaPedidoBean {
 
     }
 
+    public FilaPedidoBean() {
+    }
+
     public TbFilaPedido getFilaPedido() {
         return filaPedido;
     }
@@ -25,9 +28,15 @@ public class FilaPedidoBean {
 
     public String CadastroFilaPedido() {
 
-        filaPedido = filaPedidoDAO.inserirFilaPedido(filaPedido);//salva
+        filaPedidoDAO.inserirFilaPedido(filaPedido);//salva
         return "Sucesso"; // Caso de Sucesso
 
+    }
+    
+      public String ListarFIlaPedidos() {
+
+        filaPedidoDAO.listarFilaPedido();
+        return "Sucesso";
     }
 
 }
