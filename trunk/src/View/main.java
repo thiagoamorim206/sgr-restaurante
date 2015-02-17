@@ -2,10 +2,14 @@ package View;
 
 import Controller.Buffer;
 import Controller.Consumidor;
+import Controller.CreateTipoCardapio;
+import Controller.CreateTipoRestaurante;
 import Controller.Item;
 import Controller.Produto;
 import Controller.Produtor;
 import Controller.Sincronizador;
+import Controller.TipoCardapio;
+import Controller.TipoRestaurante;
 import ControllerBean.CardapioBean;
 import ControllerBean.ClienteBean;
 import ControllerBean.CompraProdutoBean;
@@ -56,8 +60,10 @@ public class main {
             System.out.println("3 - Editar Dados.");
             System.out.println("4 - Listar Dados.");
             System.out.println("5 - Produzir os pedidos");
+            System.out.println("6 - Mostrar itens com estoque baixo");
+            System.out.println("7 - Atualizar Estoque (fazer baixa)");
 
-            System.out.println("6 - Verificar Reserva.");
+            System.out.println("8 - Verificar Reserva.");
             System.out.println("14- Fechar Mesa.");
             System.out.println("15- Mostrar Mesas Reservadas.");
             System.out.println("16- Mostrar Cardapio.");
@@ -68,6 +74,7 @@ public class main {
 
             try {
                 optNumberMenuPrincipal = scan.nextInt();
+
                 System.out.println("----------------------------------------------------------");
                 flag = true;
 
@@ -472,11 +479,10 @@ public class main {
                                 do {
                                     flag = true;
                                     try {
-                                        System.out.println("Digite o Tipo Cardapio: ");
-                                        nome = var.nextLine();
-
+                                        TipoCardapio cardapio = CreateTipoCardapio.novoTipoCardapio();
+                                        String n = cardapio.getDescricao();
                                         TipoCardapioBean tipoCardapioBean;
-                                        tipoCardapioBean = new TipoCardapioBean(nome);
+                                        tipoCardapioBean = new TipoCardapioBean(n);
                                         tipoCardapioBean.CadastroTipoCardapio();
 
                                     } catch (Exception e) {
@@ -496,11 +502,10 @@ public class main {
                                 do {
                                     flag = true;
                                     try {
-                                        System.out.println("Digite o Tipo Restaurante: ");
-                                        nome = var.nextLine();
-
+                                        TipoRestaurante restaurante = CreateTipoRestaurante.novoRestaurante();
+                                        String n = restaurante.getDescricao();
                                         TipoRestauranteBean tipoRestauranteBean;
-                                        tipoRestauranteBean = new TipoRestauranteBean(nome);
+                                        tipoRestauranteBean = new TipoRestauranteBean(n);
                                         tipoRestauranteBean.CadastroTipoRestaurante();
 
                                     } catch (Exception e) {
@@ -620,11 +625,11 @@ public class main {
                                         PedidoBean pedidoBean;
                                         pedidoBean = new PedidoBean(mesa, dt, 0, situacao);
 
-                                        System.out.println("------------------Listando Empregados------------------");
+                                        System.out.println("------------------Listando Garçons------------------");
                                         EmpregadoBean empregadoBean = new EmpregadoBean();
-                                        empregadoBean.ListarEmpregadoFuncao();
+                                        empregadoBean.verGarcons();
 
-                                        System.out.println("Digite o codigo do empregado: ");
+                                        System.out.println("Digite o codigo do garçom: ");
                                         int empregado = var.nextInt();
                                         var.nextLine();
 
@@ -1589,8 +1594,56 @@ public class main {
 
                     break;
 
-            }
+                case 6:
+                    do {
+                        flag = true;
+                        try {
+                            System.out.println("Digite a quantidade mínina em estoque");
+                            int quantidade = var.nextInt();
+                            var.nextLine();
+                            MateriaPrimaBean materia = new MateriaPrimaBean();
+                            materia.mostrarEstoquebaixo(quantidade);
+                        } catch (Exception e) {
+                            System.out.println("Ocoreu um erro digite Novamente! ");
+                            flag = false;
+                            var.nextLine();
+                        } finally {
 
+                        }
+                    } while (!flag);
+                    break;
+
+                case 7:
+                    System.out.println("Itens do Estoque:");
+                    MateriaPrimaBean materia = new MateriaPrimaBean();
+                    materia.ListarTodosProduto();
+                    do {
+                        flag = true;
+                        try {
+                            System.out.println("Digite a quantidade de itens que deseja atualizar:");
+                            int quantidade = var.nextInt();
+                            var.nextLine();
+                            for (int i = 0; i < quantidade; i++) {
+                                System.out.println("Digite o codigo do item:");
+                                int codigo = var.nextInt();
+                                var.nextLine();
+                                System.out.println("Digite a quantidade que deseja abater:");
+                                int abater = var.nextInt();
+                                var.nextLine();
+                                materia.abaterestoque(codigo, abater);
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Ocoreu um erro digite Novamente! ");
+                            flag = false;
+                            var.nextLine();
+                        } finally {
+
+                        }
+
+                    } while (!flag);
+                    break;
+
+            }
         } while (opMenuPrincipal
                 != 19);
 

@@ -232,4 +232,36 @@ public class EmpregadoDAO {
         }
     }
 
+    public void mostrarGarcons() {
+        Connection cn = null;
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select e.id_empregado, p.nm_nome,e.ds_funcao_restaurante\n"
+                    + " from tb_empregado e inner join tb_pessoa p on(e.id_pessoa = p.id_pessoa)\n"
+                    + "where e.ds_funcao_restaurante like 'Garcom'";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int x= rs.getInt(1);
+                String nome = rs.getString(2);
+                String funcao = rs.getString(3);
+                System.err.printf("Cod. %d , Nome: %s, Função: %s\n",x,nome,funcao);
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+
+    }
+
 }

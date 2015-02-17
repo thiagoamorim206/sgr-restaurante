@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 
 public class MateriaPrimaDAO {
 
@@ -203,4 +203,84 @@ public class MateriaPrimaDAO {
         }
 
     }
+
+    public void itensEstoqueBaixo(int q) {
+        Connection cn = null;
+
+        try {
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select mp.nm_produto,mp.nr_qtd_estoque \n"
+                    + "from tb_materia_prima mp\n"
+                    + "where mp.nr_qtd_estoque <" + q;
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            int x = 0;
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String nome = rs.getString(1);
+                int quantidade = rs.getInt(2);
+                System.out.printf("Nome: %s - Quantidade: %d\n", nome, quantidade);
+            }
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+    }
+
+    ///ALTERADO POR ADRIANO
+    public void abater(int id, int quant) {
+        Connection cn = null;
+        try {
+            cn = ConnectionFactory.getConnection();
+
+            Statement st = cn.createStatement();
+            String SQL = "UPDATE tb_materia_prima SET nr_qtd_estoque="+ quant+ "WHERE id_materia_prima =" +id;
+
+            st.execute(SQL);
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+    }
+    
+    //ALTERADO POR ADRIANO
+    public int verquantidade(int id) {
+        Connection cn = null;
+        int quantidade = 0;
+        try {
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select mp.nr_qtd_estoque \n"
+                    + "from tb_materia_prima mp\n"
+                    + "where mp.id_materia_prima=" + id;
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                quantidade = rs.getInt(1);
+            }
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+            return quantidade;
+        }
+
+    }
+
 }
