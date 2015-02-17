@@ -204,7 +204,7 @@ public class main {
 
         do {
 
-            System.out.println("-----------Menu de Editar Cadastro-----------");
+            System.out.println("-----------Menu de Listar-----------");
             System.out.println("1 - Listar Cliente.");
             System.out.println("2 - Listar Empregado.");
             System.out.println("3 - Listar Fornecedor.");
@@ -1430,6 +1430,94 @@ public class main {
                         optNumberSubMenuListar = SubmenuListar();
 
                         switch (optNumberSubMenuListar) {
+                            case 1:
+
+                                System.out.println("------------------Listando Clientes------------------");
+                                ClienteBean clienteBean = new ClienteBean();
+                                clienteBean.ListarTudoCliente();
+
+                                break;
+                            case 2:
+                                System.out.println("------------------Listando Empregados------------------");
+                                EmpregadoBean empregadoBean = new EmpregadoBean();
+                                empregadoBean.ListarTudoEmpregado();
+
+                                break;
+                            case 3:
+                                System.out.println("------------------Listando Fornecedores------------------");
+                                FornecedorBean fornecedorBean = new FornecedorBean();
+                                fornecedorBean.ListarTodosFornecedor();
+
+                                break;
+                            case 4:
+
+                                System.out.println("------------------Listando Produtos------------------");
+                                MateriaPrimaBean materiaPrimaBean = new MateriaPrimaBean();
+                                materiaPrimaBean.ListarTodosProduto();
+
+                                break;
+                            case 5:
+
+                                System.out.println("------------------Listando Compras de Produtos------------------");
+                                CompraProdutoBean compraProdutoBean = new CompraProdutoBean();
+                                compraProdutoBean.ListarCompraProduto();
+
+                                break;
+                            case 6:
+
+                                System.out.println("------------------Listando Tipos Cardapio------------------");
+                                TipoCardapioBean tipoCardapioBean = new TipoCardapioBean();
+                                tipoCardapioBean.ListarTipoCardapio();
+
+                                break;
+                            case 7:
+
+                                System.out.println("------------------Listando Tipos Restaurantes------------------");
+                                TipoRestauranteBean tipoRestauranteBean = new TipoRestauranteBean();
+                                tipoRestauranteBean.ListarTipoRestaurante();
+
+                                break;
+                            case 8:
+
+                                System.out.println("------------------Listando o Cardapio------------------");
+                                CardapioBean cardapioBean = new CardapioBean();
+                                cardapioBean.ListarCardapio();
+
+                                break;
+                            case 9:
+                                System.out.println("------------------Listando Mesas------------------");
+                                MesaBean mesaBean = new MesaBean();
+                                mesaBean.ListarTodasMesa();
+
+                                break;
+                            case 10:
+
+                                System.out.println("------------------Listando Pagamentos------------------");
+                                PagamentoBean pagamentoBean = new PagamentoBean();
+                                pagamentoBean.ListarPagamentos();
+
+                                break;
+                            case 11:
+
+                                System.out.println("------------------Listando Reserva------------------");
+                                ReservaBean reservaBean = new ReservaBean();
+                                reservaBean.ListarReservas();
+
+                                break;
+                            case 12:
+
+                                System.out.println("------------------Listando Pedidos------------------");
+                                PedidoBean pedidoBean = new PedidoBean();
+                                pedidoBean.ListarPedidos();
+
+                                break;
+                            case 13:
+                                
+                                System.out.println("------------------Listando Fila Pedidos------------------");
+                                FilaPedidoBean filaPedidoBean = new FilaPedidoBean();
+                                filaPedidoBean.ListarFIlaPedidos();
+
+                                break;
                         }
 
                     } while (optNumberSubMenuListar != 14);

@@ -42,13 +42,18 @@ public class EmpregadoBean {
         return "Sucesso";
     }
 
+    public String ListarTudoEmpregado() {
+        empregadoDAO.listarTudoEmpregado();
+        return "Sucesso";
+    }
+
     public String DeletarEmpregado(int idEmpregado) {
         empregadoDAO.deletarEmpregado(idEmpregado);
         return "Sucesso";
     }
-    
-     public String AtualizarPessoa(TbPessoa p, TbEmpregado e, int x) {
-        empregadoDAO.AtualizarPessoa(p,e, x);
+
+    public String AtualizarPessoa(TbPessoa p, TbEmpregado e, int x) {
+        empregadoDAO.AtualizarPessoa(p, e, x);
         return "Sucesso";
     }
 

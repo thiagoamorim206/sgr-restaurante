@@ -45,7 +45,7 @@ public class ReservaDAO {
 
             Statement st = cn.createStatement();
 
-            String SQL = "select r.id_reserva, p.nm_nome, m.nm_nome, r.nm_reserva\n"
+            String SQL = "select r.id_reserva, p.nm_nome, m.nm_nome, r.nm_reserva, r.dt_reserva\n"
                     + "from tb_reserva r, tb_empregado e, tb_pessoa p, tb_mesa m \n"
                     + "where r.id_mesa = m.id_mesa\n"
                     + "	and e.id_pessoa = p.id_pessoa\n"
@@ -57,6 +57,7 @@ public class ReservaDAO {
                     System.out.println("Codigo: " + rs.getInt(1) + " - Empregado: " + rs.getString(2)
                             + " - Mesa: " + rs.getString(3)
                             + " - Nome Reserva: " + rs.getString(4)
+                            + " - Data Reserva: " + rs.getDate(5)
                     );
                    
                 }
