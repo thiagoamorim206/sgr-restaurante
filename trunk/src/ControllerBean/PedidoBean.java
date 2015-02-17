@@ -63,4 +63,8 @@ public class PedidoBean {
         pedidoDAO.deletarPedido(idPedido);
         return "Sucesso";
     }
+
+    public double totaldaMesa(int id) {
+        return pedidoDAO.totalMesa(id);
+    }
 }

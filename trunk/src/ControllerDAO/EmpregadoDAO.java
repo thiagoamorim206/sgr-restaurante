@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EmpregadoDAO {
 
@@ -197,6 +198,38 @@ public class EmpregadoDAO {
             ConnectionFactory.desconecta(cn);
         }
 
+    }
+
+    ///ALTERADO POR ADRIANO 
+    public ArrayList idsCozinheiros() {
+        Connection cn = null;
+        ArrayList<Integer> array = new ArrayList<Integer>();
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select e.id_empregado\n"
+                    + "from tb_empregado e, tb_pessoa p\n"
+                    + "where e.id_pessoa = p.id_pessoa and e.ds_funcao_restaurante like 'Cozinheiro'";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Integer x = new Integer(rs.getInt(1));
+                array.add(x);
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+            return array;
+        }
     }
 
 }

@@ -1,5 +1,11 @@
 package View;
 
+import Controller.Buffer;
+import Controller.Consumidor;
+import Controller.Item;
+import Controller.Produto;
+import Controller.Produtor;
+import Controller.Sincronizador;
 import ControllerBean.CardapioBean;
 import ControllerBean.ClienteBean;
 import ControllerBean.CompraProdutoBean;
@@ -20,14 +26,18 @@ import Model.TbEmpregado;
 import Model.TbFornecedor;
 import Model.TbMateriaPrima;
 import Model.TbMesa;
+import Model.TbPedido;
 import Model.TbPessoa;
 import Model.TbTipoCardapio;
 import Model.TbTipoRestaurante;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class main {
 
@@ -45,8 +55,9 @@ public class main {
             System.out.println("2 - Deletar Dados.");
             System.out.println("3 - Editar Dados.");
             System.out.println("4 - Listar Dados.");
+            System.out.println("5 - Produzir os pedidos");
 
-            System.out.println("3 - Verificar Reserva.");
+            System.out.println("6 - Verificar Reserva.");
             System.out.println("14- Fechar Mesa.");
             System.out.println("15- Mostrar Mesas Reservadas.");
             System.out.println("16- Mostrar Cardapio.");
@@ -589,7 +600,8 @@ public class main {
 
                             case 9:
                                 System.out.println("------------------Cadastrar Pedido------------------");
-
+                                double v = 0.0;
+                                ArrayList<Integer> array_id_itens = new ArrayList<Integer>();
                                 do {
                                     flag = true;
                                     try {
@@ -607,7 +619,6 @@ public class main {
 
                                         PedidoBean pedidoBean;
                                         pedidoBean = new PedidoBean(mesa, dt, 0, situacao);
-                                        pedidoBean.CadastroPedido();
 
                                         System.out.println("------------------Listando Empregados------------------");
                                         EmpregadoBean empregadoBean = new EmpregadoBean();
@@ -630,15 +641,27 @@ public class main {
                                             int cardapio = var.nextInt();
                                             var.nextLine();
 
-                                            PedidoCardapioBean pedidoCardapioBean = new PedidoCardapioBean(cardapio, pedidoBean.listaUltimo());
-                                            pedidoCardapioBean.CadastroPedidoCardapio();
+                                            //ALTERADO PELO ADRIANO DECORATOR
+                                            Integer a = new Integer(cardapio);
+                                            array_id_itens.add(a); //salvando os itens escolhidos
+                                            v = cardapioBean.verValor(cardapio);
+                                            TbPedido pedido = pedidoBean.getPedido();
+                                            pedido = new Item(pedidoBean.getPedido(), v);
+                                            pedidoBean.setPedido(pedido);
 
                                             System.out.println("Digite uma obs para o Pedido: ");
                                             String obs = var.nextLine();
-
-                                            FilaPedidoBean filaPedidoBean = new FilaPedidoBean(pedidoCardapioBean.listaUltimo(), empregado, obs);
+                                        }
+                                        ///////////ALTERADO POR ADRIANO CALCULANDO O CUSTO DO PEDIDO E SALVANDO NO BANCO
+                                        v = pedidoBean.getPedido().coust();
+                                        pedidoBean.getPedido().setVlTotalConsumo(v);
+                                        pedidoBean.CadastroPedido();// salva o pedido no banco
+                                        //ALTERADO PELO ADRIANO  SALVANDO OS ITENS DO PEDIDO NO BANCO
+                                        for (int i = 0; i < array_id_itens.size(); i++) {
+                                            PedidoCardapioBean pedidoCardapioBean = new PedidoCardapioBean(array_id_itens.get(i), pedidoBean.listaUltimo());
+                                            pedidoCardapioBean.CadastroPedidoCardapio();
+                                            FilaPedidoBean filaPedidoBean = new FilaPedidoBean(pedidoCardapioBean.listaUltimo(), empregado, "FAZER");
                                             filaPedidoBean.CadastroFilaPedido();
-
                                         }
 
                                     } catch (Exception e) {
@@ -1512,7 +1535,7 @@ public class main {
 
                                 break;
                             case 13:
-                                
+
                                 System.out.println("------------------Listando Fila Pedidos------------------");
                                 FilaPedidoBean filaPedidoBean = new FilaPedidoBean();
                                 filaPedidoBean.ListarFIlaPedidos();
@@ -1521,6 +1544,49 @@ public class main {
                         }
 
                     } while (optNumberSubMenuListar != 14);
+                    break;
+
+                case 5:
+                    ClienteBean clientebean = new ClienteBean();
+                    ArrayList<Integer> array_clientes = clientebean.verclientesAtender();
+                    EmpregadoBean empregadobean = new EmpregadoBean();
+                    ArrayList<Integer> array_cozinheiros = empregadobean.vercozinheiros();
+
+                    if (array_clientes.isEmpty() || array_cozinheiros.isEmpty()) {
+                        System.out.println("Não ha cozinheiros ou itens para fazer.");
+                    } else {
+                        int total = array_clientes.size() + array_cozinheiros.size();
+                        ExecutorService executor = Executors.newFixedThreadPool(total);
+                        Buffer buffer = new Sincronizador();
+
+                        System.out.printf("Inicializando as threads\n");
+                        FilaPedidoBean fila = new FilaPedidoBean();
+                        ArrayList<Produto> produtos = new ArrayList<Produto>();
+                        produtos = fila.PedidosaAtender();
+                        for (int i = 0; i < produtos.size(); i++) {
+                            System.out.println(produtos.get(i).getId_pedido());
+                            fila.atualizaStatus(produtos.get(i).getId_pedido()); //mudando o status no banco
+                        }
+                        try {
+                            for (int i = 0; i < array_cozinheiros.size(); i++) {
+                                executor.execute(new Produtor(buffer, array_cozinheiros.get(i)));
+
+                            }
+                            for (int i = 0; i < array_clientes.size(); i++) {
+                                executor.execute(new Consumidor(buffer, array_clientes.get(i)));
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+                        } finally {
+
+                            executor.shutdown();
+                            var.nextLine();
+                        }
+
+                    }
+
                     break;
 
             }

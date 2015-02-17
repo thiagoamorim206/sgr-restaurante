@@ -47,4 +47,8 @@ public class CardapioBean {
         cardapioDao.AtualizarCardapio(c, x);
         return "Sucesso";
     }
+
+    public double verValor(int id) {
+        return cardapioDao.verValorItem(id);
+    }
 }
