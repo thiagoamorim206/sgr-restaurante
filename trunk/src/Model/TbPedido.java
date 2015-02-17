@@ -62,10 +62,12 @@ public class TbPedido implements Serializable {
     private int idMesa;
 
     public TbPedido() {
+    vlTotalConsumo = 0;
     }
 
     public TbPedido(Integer idPedido) {
         this.idPedido = idPedido;
+        vlTotalConsumo = 0;
     }
 
     public TbPedido(Date dtPedido, double vlTotalConsumo, String nmMesa, boolean dsPago ) {
@@ -108,6 +110,12 @@ public class TbPedido implements Serializable {
     public void setDsPago(boolean dsPago) {
         this.dsPago = dsPago;
     }
+    
+    ////////ACRESCENTADO POR ADRIANO
+    public double coust(){
+        return 0;
+    }
+    
 
     @XmlTransient
     public Collection<TbPedidoCardapio> getTbPedidoCardapioCollection() {
