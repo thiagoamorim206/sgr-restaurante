@@ -50,16 +50,15 @@ public class CardapioDAO {
                     + "	order by c.nm_tipo,r.nm_tipo";
 
             ResultSet rs = st.executeQuery(SQL);
-           
-                while (rs.next()) {
-                    System.out.println("Codigo: " + rs.getInt(1) + " - Item: " + rs.getString(2)
-                            + " - Valor_Item: " + rs.getDouble(5)
-                            + " - Tipo_Item: " + rs.getString(3)
-                            + " - Tipo_Restaurante: " + rs.getString(4)
-                    );
-                   
-                }
-            
+
+            while (rs.next()) {
+                System.out.println("Codigo: " + rs.getInt(1) + " - Item: " + rs.getString(2)
+                        + " - Valor_Item: " + rs.getDouble(5)
+                        + " - Tipo_Item: " + rs.getString(3)
+                        + " - Tipo_Restaurante: " + rs.getString(4)
+                );
+
+            }
 
             ConnectionFactory.desconecta(cn);
             cn = ConnectionFactory.getConnection();
@@ -94,6 +93,33 @@ public class CardapioDAO {
             ConnectionFactory.desconecta(cn);
         }
         return null;
+    }
+
+    public void AtualizarCardapio(TbCardapio t, int x) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "UPDATE tb_cardapio\n"
+                    + "   SET id_tipo_restaurante='" + t.getIdTipoRestaurante() + "', id_tipo_cardapio='" + t.getIdTipoCardapio() + "', nm_item_cardapio='" + t.getNmItemCardapio() + "', \n"
+                    + "   vl_item='" + t.getVlItem() + "'\n"
+                    + " WHERE id_cardapio = " + x + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+
     }
 
 }

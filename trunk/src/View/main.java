@@ -15,11 +15,14 @@ import ControllerBean.PessoaBean;
 import ControllerBean.ReservaBean;
 import ControllerBean.TipoCardapioBean;
 import ControllerBean.TipoRestauranteBean;
-import Model.TbCompraProduto;
+import Model.TbCardapio;
 import Model.TbEmpregado;
 import Model.TbFornecedor;
 import Model.TbMateriaPrima;
+import Model.TbMesa;
 import Model.TbPessoa;
+import Model.TbTipoCardapio;
+import Model.TbTipoRestaurante;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -168,12 +171,11 @@ public class main {
             System.out.println("1 - Editar Pessoa.");
             System.out.println("2 - Editar Fornecedor.");
             System.out.println("3 - Editar Produto.");
-            System.out.println("4 - Editar Compra Produto.");
-            System.out.println("5 - Editar Tipo Cardapio.");
-            System.out.println("6 - Editar Tipo Restaurante.");
-            System.out.println("7 - Editar Cardapio.");
-            System.out.println("8 - Editar Mesa.");
-            System.out.println("9- Sair.");
+            System.out.println("4 - Editar Tipo Cardapio.");
+            System.out.println("5 - Editar Tipo Restaurante.");
+            System.out.println("6 - Editar Cardapio.");
+            System.out.println("7 - Editar Mesa.");
+            System.out.println("8- Sair.");
             System.out.print("Digite uma opção: ");
 
             try {
@@ -191,8 +193,51 @@ public class main {
                 scan.nextLine();
             }
 
-        } while ((optNumberSubMenuEditar < 1 || optNumberSubMenuEditar > 9) || !flag);
+        } while ((optNumberSubMenuEditar < 1 || optNumberSubMenuEditar > 8) || !flag);
         return optNumberSubMenuEditar;
+    }
+
+    private static int SubmenuListar() {
+        Scanner scan = new Scanner(System.in);
+        boolean flag = false;
+        int optNumberSubMenuListar = 0;
+
+        do {
+
+            System.out.println("-----------Menu de Editar Cadastro-----------");
+            System.out.println("1 - Listar Cliente.");
+            System.out.println("2 - Listar Empregado.");
+            System.out.println("3 - Listar Fornecedor.");
+            System.out.println("4 - Listar Produto.");
+            System.out.println("5 - Listar Compra Produto.");
+            System.out.println("6 - Listar Tipo Cardapio.");
+            System.out.println("7 - Listar Tipo Restaurante.");
+            System.out.println("8 - Listar Cardapio.");
+            System.out.println("9 - Listar Mesa.");
+            System.out.println("10- Listar Pagamento.");
+            System.out.println("11- Listar Reserva.");
+            System.out.println("12- Listar Pedido.");
+            System.out.println("13- Listar Fila Pedido.");
+            System.out.println("14- Sair.");
+            System.out.print("Digite uma opção: ");
+
+            try {
+                optNumberSubMenuListar = scan.nextInt();
+                System.out.println("----------------------------------------------------------");
+                flag = true;
+
+            } catch (InputMismatchException entreComInt) {
+                System.out.println("ERRO! Entre com um número inteiro.");
+
+            } catch (Exception e) {
+                System.out.println("Ocoreu um erro: " + e.getMessage());
+
+            } finally {
+                scan.nextLine();
+            }
+
+        } while ((optNumberSubMenuListar < 1 || optNumberSubMenuListar > 14) || !flag);
+        return optNumberSubMenuListar;
     }
 
     @SuppressWarnings("empty-statement")
@@ -207,6 +252,7 @@ public class main {
         boolean situacao;
         int optNumberSubMenuDeletar;
         int optNumberSubMenuEditar;
+        int optNumberSubMenuListar;
 
         do {
             opMenuPrincipal = menuInicial();
@@ -1185,7 +1231,7 @@ public class main {
                                         String obs = var.nextLine();
 
                                         TbMateriaPrima tbProduto = new TbMateriaPrima(nome, estoque, valor, obs);
-                                        materiaPrimaBean.AtualizarPessoa(tbProduto, produto);
+                                        materiaPrimaBean.AtualizarMateriaPrima(tbProduto, produto);
 
                                     } catch (Exception e) {
                                         System.out.println("Ocoreu um erro digite Novamente! ");
@@ -1198,26 +1244,195 @@ public class main {
 
                                 break;
                             case 4:
+                                System.out.println("------------------Editar Tipo Cardapio------------------");
 
-                                
-                                
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("------------------Listando Tipo Cardapio------------------");
+                                        TipoCardapioBean tipoCardapioBean = new TipoCardapioBean();
+                                        tipoCardapioBean.ListarTipoCardapio();
+
+                                        System.out.println("Digite o codigo do Tipo Cardapio: ");
+                                        int tipo_cardapio = var.nextInt();
+                                        var.nextLine();
+
+                                        System.out.println("Digite o Tipo Cardapio: ");
+                                        nome = var.nextLine();
+
+                                        TbTipoCardapio cardapio = new TbTipoCardapio(nome);
+                                        tipoCardapioBean.AtualizarTipoCardapio(cardapio, tipo_cardapio);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
+
                                 break;
                             case 5:
+                                System.out.println("------------------Editar Tipo Restaurante------------------");
 
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("------------------Listando Tipos Restaurantes------------------");
+                                        TipoRestauranteBean tipoRestauranteBean = new TipoRestauranteBean();
+                                        tipoRestauranteBean.ListarTipoRestaurante();
+
+                                        System.out.println("Digite o codigo do Restaurante: ");
+                                        int restaurante = var.nextInt();
+                                        var.nextLine();
+
+                                        System.out.println("Digite o Tipo Restaurante: ");
+                                        nome = var.nextLine();
+
+                                        TbTipoRestaurante tbTipoRestaurante = new TbTipoRestaurante(nome);
+                                        tipoRestauranteBean.AtualizarTipoRestaurante(tbTipoRestaurante, restaurante);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
                                 break;
                             case 6:
+                                System.out.println("------------------Editar Cardapio------------------");
+
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("------------------Listando o Cardapio------------------");
+                                        CardapioBean cardapioBean = new CardapioBean();
+                                        cardapioBean.ListarCardapio();
+
+                                        System.out.println("Digite o codigo do cardapio: ");
+                                        int cardapio = var.nextInt();
+                                        var.nextLine();
+
+                                        System.out.println("Digite o nome Item: ");
+                                        nome = var.nextLine();
+
+                                        System.out.println("Digite o valor Item: ");
+                                        double valor = var.nextDouble();
+                                        var.nextLine();
+
+                                        System.out.println("------------------Listando Tipos Restaurantes------------------");
+
+                                        TipoRestauranteBean tipoRestauranteBean = new TipoRestauranteBean();
+                                        tipoRestauranteBean.ListarTipoRestaurante();
+
+                                        System.out.println("Digite o codigo do Restaurante: ");
+                                        int restaurante = var.nextInt();
+                                        var.nextLine();
+
+                                        System.out.println("------------------Listando Tipo Cardapio------------------");
+                                        TipoCardapioBean tipoCardapioBean = new TipoCardapioBean();
+                                        tipoCardapioBean.ListarTipoCardapio();
+
+                                        System.out.println("Digite o codigo do Tipo Cardapio: ");
+                                        int tipo_cardapio = var.nextInt();
+                                        var.nextLine();
+
+                                        TbCardapio tbCardapio = new TbCardapio(nome, valor, tipo_cardapio, restaurante);
+
+                                        cardapioBean.AtualizarCardapio(tbCardapio, cardapio);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
 
                                 break;
                             case 7:
+                                System.out.println("------------------Editar Mesa------------------");
 
-                                break;
-                            case 8:
+                                do {
+                                    flag = true;
+                                    try {
+
+                                        System.out.println("------------------Listando Mesas------------------");
+                                        MesaBean mesaBean = new MesaBean();
+                                        mesaBean.ListarTodasMesaClientes();
+
+                                        System.out.println("Digite o codigo da mesa: ");
+                                        int mesa = var.nextInt();
+                                        var.nextLine();
+
+                                        System.out.println("Digite o nome Mesa: ");
+                                        nome = var.nextLine();
+
+                                        System.out.println("Digite a Quantidade de Lugares: ");
+                                        int qtd = var.nextInt();
+                                        var.nextLine();
+
+                                        do {
+                                            flag = true;
+                                            try {
+                                                System.out.println("1-Livre\n2-Ocupada");
+                                                op = var.nextInt();
+
+                                            } catch (InputMismatchException entreComInt) {
+                                                System.out.println("ERRO! Entre com um número inteiro.");
+                                                flag = false;
+                                            } catch (Exception e) {
+                                                System.out.println("Ocoreu um erro digite Novamente! ");
+                                                flag = false;
+                                            } finally {
+                                                var.nextLine();
+                                            }
+                                        } while (op < 1 || op > 2 || !flag);
+
+                                        if (op == 1) {
+                                            situacao = false;
+                                        } else {
+                                            situacao = true;
+                                        }
+
+                                        System.out.println("Digite um Observação: ");
+                                        String obs = var.nextLine();
+
+                                        TbMesa tTbMesa = new TbMesa(qtd, situacao, obs, nome);
+
+                                        mesaBean.AtualizarMesa(tTbMesa, mesa);
+
+                                    } catch (Exception e) {
+                                        System.out.println("Ocoreu um erro digite Novamente! ");
+                                        flag = false;
+                                        var.nextLine();
+                                    } finally {
+
+                                    }
+                                } while (!flag);
 
                                 break;
 
                         }
 
-                    } while (optNumberSubMenuEditar != 9);
+                    } while (optNumberSubMenuEditar != 8);
+                    break;
+
+                case 4:
+                    do {
+                        optNumberSubMenuListar = SubmenuListar();
+
+                        switch (optNumberSubMenuListar) {
+                        }
+
+                    } while (optNumberSubMenuListar != 14);
                     break;
 
             }

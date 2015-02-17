@@ -57,12 +57,17 @@ public class MesaBean {
     }
 
     public String ListarTodasMesaClientes() {
-        mesaDAO.listarTodasMesaCliente();
+        mesaDAO.listarTodasMesa();
         return "Sucesso";
     }
 
     public String DeletarMesa(int idMesa) {
         mesaDAO.deletarMesa(idMesa);
+        return "Sucesso";
+    }
+
+    public String AtualizarMesa(TbMesa m, int x) {
+        mesaDAO.AtualizarMesa(m, x);
         return "Sucesso";
     }
 

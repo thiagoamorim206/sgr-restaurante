@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "tb_cardapio")
 @XmlRootElement
 public class TbCardapio implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,6 +56,13 @@ public class TbCardapio implements Serializable {
         this.idCardapio = idCardapio;
         this.nmItemCardapio = nmItemCardapio;
         this.vlItem = vlItem;
+    }
+
+    public TbCardapio(String nmItemCardapio, double vlItem, int idTipoCardapio, int idTipoRestaurante) {
+        this.nmItemCardapio = nmItemCardapio;
+        this.vlItem = vlItem;
+        this.idTipoCardapio = idTipoCardapio;
+        this.idTipoRestaurante = idTipoRestaurante;
     }
 
     public Integer getIdCardapio() {
@@ -112,7 +120,6 @@ public class TbCardapio implements Serializable {
 //    public void setIdTipoRestaurante(TbTipoRestaurante idTipoRestaurante) {
 //        this.idTipoRestaurante = idTipoRestaurante;
 //    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -137,5 +144,5 @@ public class TbCardapio implements Serializable {
     public String toString() {
         return "Model.TbCardapio[ idCardapio=" + idCardapio + " ]";
     }
-    
+
 }

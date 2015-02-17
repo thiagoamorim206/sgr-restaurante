@@ -60,7 +60,7 @@ public class MateriaPrimaBean {
         return "Sucesso";
     }
     
-    public String AtualizarPessoa(TbMateriaPrima mp, int x) {
+    public String AtualizarMateriaPrima(TbMateriaPrima mp, int x) {
         materiaPrimaDAO.AtualizarProduto(mp, x);
         return "Sucesso";
     }

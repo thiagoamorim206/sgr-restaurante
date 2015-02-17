@@ -2,8 +2,6 @@ package ControllerBean;
 
 import ControllerDAO.CardapioDAO;
 import Model.TbCardapio;
-import Model.TbTipoRestaurante;
-import java.util.ArrayList;
 
 public class CardapioBean {
 
@@ -45,4 +43,8 @@ public class CardapioBean {
         return "Sucesso";
     }
 
+    public String AtualizarCardapio(TbCardapio c, int x) {
+        cardapioDao.AtualizarCardapio(c, x);
+        return "Sucesso";
+    }
 }

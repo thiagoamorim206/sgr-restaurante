@@ -68,6 +68,13 @@ public class TbMesa implements Serializable {
         this.nmMesa = nmMesa;
     }
 
+    public TbMesa(int nrLugares, boolean flOcupada, String dsObs, String nmMesa) {
+        this.nrLugares = nrLugares;
+        this.flOcupada = flOcupada;
+        this.dsObs = dsObs;
+        this.nmMesa = nmMesa;
+    }
+
     public TbMesa(Integer idMesa, int nrLugares, String dsObs, String nmMesa) {
         this.idMesa = idMesa;
         this.nrLugares = nrLugares;

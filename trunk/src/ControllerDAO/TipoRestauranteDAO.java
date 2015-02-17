@@ -86,5 +86,30 @@ public class TipoRestauranteDAO {
         }
         return null;
     }
+     public void AtualizarTipoRestaurante(TbTipoRestaurante t, int x) {
+        Connection cn = null;
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "UPDATE tb_tipo_restaurante\n"
+                    + "   SET  nm_tipo='" + t.getNmTipo() + "'\n"
+                    + " WHERE id_tipo_restaurante = " + x + "";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ps.execute();
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
+
+    }
 
 }

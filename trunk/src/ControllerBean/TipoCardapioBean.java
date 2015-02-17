@@ -2,7 +2,6 @@ package ControllerBean;
 
 import ControllerDAO.TipoCardapioDAO;
 import Model.TbTipoCardapio;
-import java.util.ArrayList;
 
 public class TipoCardapioBean {
 
@@ -41,4 +40,10 @@ public class TipoCardapioBean {
         tipoCardapioDao.deletarTipoCardapio(IdTipoCardapio);
         return "Sucesso";
     }
+    
+     public String AtualizarTipoCardapio(TbTipoCardapio tc, int x) {
+        tipoCardapioDao.AtualizarTipoCardapio(tc, x);
+        return "Sucesso";
+    }
+
 }
