@@ -2,6 +2,7 @@ package ControllerBean;
 
 import ControllerDAO.PagamentoDAO;
 import Model.TbPagamento;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PagamentoBean {
@@ -53,5 +54,10 @@ public class PagamentoBean {
     public String DeletarPagamento(int idPagamentos) {
         pagamentoDAO.deletarPagamento(idPagamentos);
         return "Sucesso";
+    }
+
+    public ArrayList fechar(String i, String f) {
+        return pagamentoDAO.fecharCaixa(i,f);
+
     }
 }
