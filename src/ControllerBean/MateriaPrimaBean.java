@@ -64,5 +64,16 @@ public class MateriaPrimaBean {
         materiaPrimaDAO.AtualizarProduto(mp, x);
         return "Sucesso";
     }
+    
+    ///ALTERADO POR ADRIANO
+    public void mostrarEstoquebaixo(int q){
+        materiaPrimaDAO.itensEstoqueBaixo(q);
+    }
+    
+    public void abaterestoque(int id , int quant){
+        int x = materiaPrimaDAO.verquantidade(id);
+        x = x- quant;
+         materiaPrimaDAO.abater(id,x);
+    }
 
 }

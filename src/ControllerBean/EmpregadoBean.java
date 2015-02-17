@@ -63,4 +63,11 @@ public class EmpregadoBean {
     public ArrayList vercozinheiros() {
         return empregadoDAO.idsCozinheiros();
     }
+    
+    
+    ///// ALTERADO POR ADRIANO
+    
+    public void verGarcons(){
+        empregadoDAO.mostrarGarcons();
+    }
 }
