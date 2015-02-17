@@ -151,4 +151,32 @@ public class PedidoDAO {
         return null;
     }
 
+    ///// ALTERADO POR ADRIANO
+    public double totalMesa(int id) {
+        Connection cn = null;
+        double total = 0;
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL = "select vl_total_consumo from tb_pedido where ds_pago = false and id_mesa=" + id;
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                total += rs.getDouble(1);
+            }
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+            return total;
+        }
+
+    }
+
 }

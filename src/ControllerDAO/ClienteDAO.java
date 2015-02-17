@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class ClienteDAO {
 
@@ -216,6 +218,72 @@ public class ClienteDAO {
             ConnectionFactory.desconecta(cn);
         }
 
+    }
+    
+     ////////ALTERADO POR ADRIANO 
+    public int verMesa(int id) {
+        Connection cn = null;
+        int m = 0;
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            Statement st = cn.createStatement();
+
+            String SQL = "select m.id_mesa\n"
+                    + "from tb_cliente cl INNER JOIN tb_mesa m on(cl.id_mesa = m.id_mesa)\n" + "where cl.id_cliente =" + id;
+
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                m = rs.getInt(1);
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+            return m;
+        }
+    }
+
+    
+    ////ALTERADO POR ADRIANO
+    public ArrayList clientesemAtedimento() {
+        Connection cn = null;
+        ArrayList<Integer> array = new ArrayList<Integer>();
+
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            String SQL =  "select distinct cl.id_cliente\n"
+                    +"from tb_pedido_cardapio pc inner join tb_fila_pedido fp on(pc.id_pedido_cardapio = fp.id_pedido_cardapio)\n"
+                    +"inner join tb_pedido p on(p.id_pedido = pc.id_pedido)\n"  
+		    +"inner join tb_cliente cl on(cl.id_mesa = p.id_mesa)\n"
+                    +"where fp.ds_status like'FAZER' and p.ds_pago= FALSE";
+
+            PreparedStatement ps = cn.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Integer x = new Integer(rs.getInt(1));
+                array.add(x);
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+            return array;
+        }
     }
 
 }

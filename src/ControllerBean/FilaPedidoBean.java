@@ -2,6 +2,7 @@ package ControllerBean;
 
 import ControllerDAO.FilaPedidoDAO;
 import Model.TbFilaPedido;
+import java.util.ArrayList;
 
 public class FilaPedidoBean {
 
@@ -32,11 +33,21 @@ public class FilaPedidoBean {
         return "Sucesso"; // Caso de Sucesso
 
     }
-    
-      public String ListarFIlaPedidos() {
+
+    public String ListarFIlaPedidos() {
 
         filaPedidoDAO.listarFilaPedido();
         return "Sucesso";
+    }
+
+    ///////ALTERADO PELO ADRIANO
+    public ArrayList PedidosaAtender() {
+        return filaPedidoDAO.PedidosAtender();
+    }
+
+    ///////ALTERADO PELO ADRIANO
+    public void atualizaStatus(int id) {
+        filaPedidoDAO.atualizarStatus(id);
     }
 
 }

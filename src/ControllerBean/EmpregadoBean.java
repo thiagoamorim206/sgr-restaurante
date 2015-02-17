@@ -3,6 +3,7 @@ package ControllerBean;
 import ControllerDAO.EmpregadoDAO;
 import Model.TbEmpregado;
 import Model.TbPessoa;
+import java.util.ArrayList;
 
 public class EmpregadoBean {
 
@@ -57,4 +58,9 @@ public class EmpregadoBean {
         return "Sucesso";
     }
 
+    /////ALTERADO POR ADRIANO
+
+    public ArrayList vercozinheiros() {
+        return empregadoDAO.idsCozinheiros();
+    }
 }

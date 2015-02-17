@@ -3,6 +3,7 @@ package ControllerBean;
 import ControllerDAO.ClienteDAO;
 import Model.TbCliente;
 import Model.TbPessoa;
+import java.util.ArrayList;
 
 public class ClienteBean {
 
@@ -59,6 +60,16 @@ public class ClienteBean {
         clienteDAO.deletarPessoa(idCliente);
         clienteDAO.deletarCliente(idCliente);
         return "Sucesso";
+    }
+
+    ///////ALTERADO POR ADRIANO
+    public int mesadoCliente(int id) {
+        return clienteDAO.verMesa(id);
+    }
+
+    ////ALTERADO POR ADRIANO
+    public ArrayList verclientesAtender() {
+        return clienteDAO.clientesemAtedimento();
     }
 
 }

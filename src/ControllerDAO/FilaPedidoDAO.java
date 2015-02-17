@@ -1,10 +1,13 @@
 package ControllerDAO;
 
+import Controller.Produto;
 import Model.TbFilaPedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class FilaPedidoDAO {
 
@@ -74,6 +77,63 @@ public class FilaPedidoDAO {
             ConnectionFactory.desconecta(cn);
         }
         return false;
+    }
+    
+     ///////ALTERADO PELO ADRIANO
+    //FUNÇÃO PARA RETORNAR OS IDS DOS ITENS QUE DEVEM QUE SER FEITOS PELOS COZINHEIROS
+    public ArrayList PedidosAtender() {
+        Connection cn = null;
+        ArrayList<Produto> array = new ArrayList<Produto>();
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            Statement st = cn.createStatement();
+            String SQL = "select fp.id_pedido_cardapio,fp.ds_status,cl.id_cliente\n"
+                    + "from tb_pedido_cardapio pc inner join tb_fila_pedido fp on(pc.id_pedido_cardapio = fp.id_pedido_cardapio)\n"
+                    + "inner join tb_pedido p on(p.id_pedido = pc.id_pedido)\n"
+                    + "inner join tb_cliente cl on(p.id_mesa = cl.id_mesa)\n"
+                    + "where fp.ds_status like'FAZER' and p.ds_pago = FALSE";
+
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                int i = rs.getInt(1);
+                String s = rs.getString(2);
+                int c = rs.getInt(3);
+                Produto p = new Produto(i, s, c);
+                array.add(p);
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+            return array;
+        }
+    }
+
+    public void atualizarStatus(int id) {
+        Connection cn = null;
+        try {
+            cn = ConnectionFactory.getConnection();
+
+            Statement st = cn.createStatement();
+            String SQL = "update tb_fila_pedido set ds_status='CONSUMIDO' where id_pedido_cardapio=" + id + "";
+
+            st.execute(SQL);
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+        }
     }
 
 }

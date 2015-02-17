@@ -122,4 +122,36 @@ public class CardapioDAO {
 
     }
 
+    /////////////ALTERADO POR ADRIANO
+
+    public double verValorItem(int id) {
+        Connection cn = null;
+        double valor = 0;
+        try {
+
+            cn = ConnectionFactory.getConnection();
+
+            Statement st = cn.createStatement();
+
+            String SQL = "select ca.vl_item\n"
+                    + "from tb_cardapio ca\n" + "where ca.id_cardapio =" + id;
+
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                valor = rs.getDouble(1);
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+            return valor;
+        }
+
+    }
+
 }
