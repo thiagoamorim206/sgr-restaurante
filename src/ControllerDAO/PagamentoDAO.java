@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class PagamentoDAO {
 
@@ -129,7 +131,7 @@ public class PagamentoDAO {
                         + " - Data: " + rs.getDate(3)
                         + " - Total Pago: " + rs.getDouble(4)
                 );
-             
+
             }
 
             ConnectionFactory.desconecta(cn);
@@ -167,4 +169,30 @@ public class PagamentoDAO {
         return null;
     }
 
+    public ArrayList fecharCaixa(String  i, String f) {
+        Connection cn = null;
+        ArrayList array = new ArrayList<Double>(); 
+        try {
+            cn = ConnectionFactory.getConnection();
+            Statement st = cn.createStatement();
+            String SQL = "select vl_total_pago from tb_pagamento where dt_pagamento between "+i+" and "+f;
+
+            ResultSet rs = st.executeQuery(SQL);
+
+            while (rs.next()) {
+                 Double x = new Double (rs.getInt(1));
+                 array.add(x);
+            }
+
+            ConnectionFactory.desconecta(cn);
+            cn = ConnectionFactory.getConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionFactory.desconecta(cn);
+            return array;
+        }
+
+    }
 }

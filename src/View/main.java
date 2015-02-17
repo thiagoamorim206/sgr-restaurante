@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Buffer;
+import Controller.CalcTotal;
 import Controller.Consumidor;
 import Controller.CreateTipoCardapio;
 import Controller.CreateTipoRestaurante;
@@ -62,8 +63,9 @@ public class main {
             System.out.println("5 - Produzir os pedidos");
             System.out.println("6 - Mostrar itens com estoque baixo");
             System.out.println("7 - Atualizar Estoque (fazer baixa)");
+            System.out.println("8 - Feichar caixa");
 
-            System.out.println("8 - Verificar Reserva.");
+            System.out.println("9 - Verificar Reserva.");
             System.out.println("14- Fechar Mesa.");
             System.out.println("15- Mostrar Mesas Reservadas.");
             System.out.println("16- Mostrar Cardapio.");
@@ -1594,6 +1596,7 @@ public class main {
 
                     break;
 
+                //ALTERADO POR ADRIANO
                 case 6:
                     do {
                         flag = true;
@@ -1612,7 +1615,7 @@ public class main {
                         }
                     } while (!flag);
                     break;
-
+                //ALTERADO POR ADRIANO
                 case 7:
                     System.out.println("Itens do Estoque:");
                     MateriaPrimaBean materia = new MateriaPrimaBean();
@@ -1632,6 +1635,36 @@ public class main {
                                 var.nextLine();
                                 materia.abaterestoque(codigo, abater);
                             }
+                        } catch (Exception e) {
+                            System.out.println("Ocoreu um erro digite Novamente! ");
+                            flag = false;
+                            var.nextLine();
+                        } finally {
+
+                        }
+
+                    } while (!flag);
+                    break;
+
+                //ALTERADO POR ADRIANO
+                case 8:
+                    do {
+                        flag = true;
+                        try {
+                            System.out.println("Digite a Data de Inicio: ");
+                            String datai = var.nextLine();
+                            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                            Date dt = df.parse(datai);
+
+                            System.out.println("Digite a Data de Termino: ");
+                            String datat = var.nextLine();
+                            DateFormat dg = new SimpleDateFormat("dd/MM/yyyy");
+                            Date dr = dg.parse(datat);
+                            
+                            PagamentoBean pagamento = new PagamentoBean();
+                            ArrayList array = pagamento.fechar(datai, datat);
+                           double total =  CalcTotal.calcularTotal(array);
+                           System.out.println("Total - R$"+total);
                         } catch (Exception e) {
                             System.out.println("Ocoreu um erro digite Novamente! ");
                             flag = false;
