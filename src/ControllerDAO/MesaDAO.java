@@ -103,17 +103,21 @@ public class MesaDAO {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "select *from tb_mesa";
+            String SQL = "select m.id_mesa, m.nm_nome mesa, p.nm_nome cliente, m.nr_lugares, m.fl_ocupada, m.ds_obs\n"
+                    + "from tb_mesa m, tb_cliente c, tb_pessoa p\n"
+                    + "where c.id_pessoa = p.id_pessoa\n"
+                    + "and c.id_mesa = m.id_mesa";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                System.out.println("Codigo: " + rs.getInt(1) + " - Mesa: " + rs.getString(5)
-                        + " - Lugares: " + rs.getInt(2)
-                        + " - Ocupada: " + rs.getBoolean(3)
-                        + " - Obs: " + rs.getString(4)
+                System.out.println("Codigo: " + rs.getInt(1) + " - Mesa: " + rs.getString(2)
+                        + " - Cliente: " + rs.getString(3)
+                        + " - Lugares: " + rs.getInt(4)
+                        + " - Ocupada: " + rs.getBoolean(5)
+                        + " - Obs: " + rs.getString(6)
                 );
 
             }
