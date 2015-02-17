@@ -57,7 +57,7 @@ public class FilaPedidoDAO {
 
             while (rs.next()) {
                 System.out.println("Codigo: " + rs.getInt(1) + " - Cliente: " + rs.getString(2)
-                        + " - Mea: " + rs.getString(3)
+                        + " - Mesa: " + rs.getString(3)
                         + " - Item: " + rs.getString(4)
                         + " - Status: " + rs.getString(5)
                         + " - Empregado: " + rs.getString(6)
