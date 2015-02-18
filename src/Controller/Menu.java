@@ -22,7 +22,7 @@ public class Menu {
             System.out.println("5 - Produzir os pedidos");
             System.out.println("6 - Mostrar itens com estoque baixo");
             System.out.println("7 - Atualizar Estoque (fazer baixa)");
-            System.out.println("8 - Feichar caixa");
+            System.out.println("8 - Fechar caixa");
             System.out.println("9 - Sair.");
             System.out.print("Digite uma opção: ");
 
