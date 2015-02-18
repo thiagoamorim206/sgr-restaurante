@@ -175,13 +175,15 @@ public class PagamentoDAO {
         try {
             cn = ConnectionFactory.getConnection();
             Statement st = cn.createStatement();
-            String SQL = "select vl_total_pago from tb_pagamento where dt_pagamento between '" + i + "' and '" + f + "'";
+            String SQL = "select vl_total_pago,dt_pagamento from tb_pagamento where dt_pagamento between '" + i + "' and '" + f + "'";
 
             ResultSet rs = st.executeQuery(SQL);
-
+            System.out.println("-----------------------------------------------");
             while (rs.next()) {
                 Double x = new Double(rs.getInt(1));
+                String data = rs.getString(2);
                 array.add(x);
+                System.out.println("Data:"+data+" - Valor:R$"+x);
             }
 
             ConnectionFactory.desconecta(cn);

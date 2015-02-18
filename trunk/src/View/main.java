@@ -1355,6 +1355,7 @@ public class main {
                     break;
 
                 case 5:
+                    System.out.println("------------------Produzir os pedidos------------------");
                     ClienteBean clientebean = new ClienteBean();
                     ArrayList<Integer> array_clientes = clientebean.verclientesAtender();
                     EmpregadoBean empregadobean = new EmpregadoBean();
@@ -1398,6 +1399,7 @@ public class main {
 
                 //ALTERADO POR ADRIANO
                 case 6:
+                    System.out.println("------------------Mostrar itens com estoque baixo------------------");
                     do {
                         flag = true;
                         try {
@@ -1417,7 +1419,7 @@ public class main {
                     break;
                 //ALTERADO POR ADRIANO
                 case 7:
-                    System.out.println("Itens do Estoque:");
+                    System.out.println("------------------Atualizar Estoque (fazer baixa)------------------");
                     MateriaPrimaBean materia = new MateriaPrimaBean();
                     materia.ListarTodosProduto();
                     do {
@@ -1448,6 +1450,7 @@ public class main {
 
                 //ALTERADO POR ADRIANO
                 case 8:
+                    System.out.println("------------------Fechar caixa------------------");
                     do {
                         flag = true;
                         try {
