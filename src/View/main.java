@@ -750,6 +750,17 @@ public class main {
                                         int cliente = var.nextInt();
                                         var.nextLine();
 
+                                         ////ALTERADO POR ADRIANO 
+                                        //ATUALIZANDO O STATUS DA MESA
+                                        int mesa = clienteBean.mesadoCliente(cliente);
+                                        MesaBean mesabean = new MesaBean();
+                                        mesabean.AtualizarMesa(false, mesa);
+
+                                        //MOSTRANDO O TOTAL A PAGAR
+                                        PedidoBean pedidobean = new PedidoBean();
+                                        double totalmesa = pedidobean.totaldaMesa(mesa);
+                                        System.out.println("Valor total a pagar:R$ " + totalmesa);  ////ALTERADO POR ADRIANO                                           
+
                                         Date dt = new Date(System.currentTimeMillis());
 
                                         double valorTotal = pagamentoBean.ValorTotalPagar(cliente);
@@ -761,6 +772,7 @@ public class main {
 
                                         PedidoBean pedidoBean = new PedidoBean();
                                         pedidoBean.AtualizarPago(pago, aux);
+                                        System.out.printf("Mesa %d fechada.\n", mesa);  ////ALTERADO POR ADRIANO 
                                     } catch (Exception e) {
                                         System.out.println("Ocoreu um erro digite Novamente! ");
                                         flag = false;
@@ -1571,7 +1583,6 @@ public class main {
                         ArrayList<Produto> produtos = new ArrayList<Produto>();
                         produtos = fila.PedidosaAtender();
                         for (int i = 0; i < produtos.size(); i++) {
-                            System.out.println(produtos.get(i).getId_pedido());
                             fila.atualizaStatus(produtos.get(i).getId_pedido()); //mudando o status no banco
                         }
                         try {
@@ -1660,11 +1671,11 @@ public class main {
                             String datat = var.nextLine();
                             DateFormat dg = new SimpleDateFormat("dd/MM/yyyy");
                             Date dr = dg.parse(datat);
-                            
+
                             PagamentoBean pagamento = new PagamentoBean();
                             ArrayList array = pagamento.fechar(datai, datat);
-                           double total =  CalcTotal.calcularTotal(array);
-                           System.out.println("Total - R$"+total);
+                            double total = CalcTotal.calcularTotal(array);
+                            System.out.println("Total - R$" + total);
                         } catch (Exception e) {
                             System.out.println("Ocoreu um erro digite Novamente! ");
                             flag = false;
