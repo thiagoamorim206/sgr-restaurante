@@ -1,9 +1,5 @@
 package Controller;
 
-/**
- *
- * @author Adriano
- */
 import ControllerBean.FilaPedidoBean;
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
@@ -73,29 +69,29 @@ public class Sincronizador implements Buffer {
         int x = 0, contador = 0;
         boolean teste = false;
         try {
-            do{
-            for (int i = 0; i < feitos.size(); i++) {
-                if (feitos.get(i).getId_cliente() == id) {
-                    x = i;
-                    teste=true;
+            do {
+                for (int i = 0; i < feitos.size(); i++) {
+                    if (feitos.get(i).getId_cliente() == id) {
+                        x = i;
+                        teste = true;
+                    }
                 }
-            }
-            if (!produtos.isEmpty() && !teste) { // se não tiver itens feitos
-                System.out.printf("Cliente[%d] aguardando\n", id);
-                comer.await(); //bloqueia alguem comer
-            }
-            for (int i = 0; i < feitos.size(); i++) {
-                if (feitos.get(i).getId_cliente() == id) {
-                    x = i;
-                    teste=true;
+                if (!produtos.isEmpty() && !teste) { // se não tiver itens feitos
+                    System.out.printf("Cliente[%d] aguardando\n", id);
+                    comer.await(); //bloqueia alguem comer
                 }
-            }
-            }while(!teste && !produtos.isEmpty());
-            if(teste){
-            feitos.get(x).setStatus("CONSUMIDO");            
-            System.out.printf("O Cliente[%d] consumiu o item[%d]\n", id, feitos.get(x).getId_pedido());
-            feitos.remove(x);
-            cozinhar.signalAll();//libera a producao de mais itens 
+                for (int i = 0; i < feitos.size(); i++) {
+                    if (feitos.get(i).getId_cliente() == id) {
+                        x = i;
+                        teste = true;
+                    }
+                }
+            } while (!teste && !produtos.isEmpty());
+            if (teste) {
+                feitos.get(x).setStatus("CONSUMIDO");
+                System.out.printf("O Cliente[%d] consumiu o item[%d]\n", id, feitos.get(x).getId_pedido());
+                feitos.remove(x);
+                cozinhar.signalAll();//libera a producao de mais itens 
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

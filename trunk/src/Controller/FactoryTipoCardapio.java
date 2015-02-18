@@ -1,9 +1,5 @@
 package Controller;
 
-/**
- *
- * @author Adriano
- */
 public class FactoryTipoCardapio {
 
     public TipoCardapio createCardapio(String nome) {

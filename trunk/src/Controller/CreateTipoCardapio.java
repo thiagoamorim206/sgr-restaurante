@@ -2,16 +2,13 @@ package Controller;
 
 import java.util.Scanner;
 
-/**
- *
- * @author Adriano
- */
 public class CreateTipoCardapio {
-    public static TipoCardapio novoTipoCardapio(){
+
+    public static TipoCardapio novoTipoCardapio() {
         FactoryTipoCardapio cardapio = new FactoryTipoCardapio();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Tipos possíveis: Acompanhamento,Bebida, Sobremesa, Suco");
-        String tipo = scanner.nextLine();        
+        String tipo = scanner.nextLine();
         return cardapio.createCardapio(tipo);
-    }    
+    }
 }

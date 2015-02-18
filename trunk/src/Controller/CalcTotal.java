@@ -2,10 +2,6 @@ package Controller;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Adriano
- */
 public class CalcTotal {
 
     public static <T extends Number> double calcularTotal(ArrayList<T> valores) {
