@@ -1,21 +1,17 @@
 package Controller;
 
-/**
- *
- * @author Adriano
- */
 public class Consumidor implements Runnable {
 
     private Buffer buffer;
-    private int id,quantidade;
+    private int id, quantidade;
 
-    public Consumidor(Buffer b,int id) {
+    public Consumidor(Buffer b, int id) {
         this.buffer = b;
-        this.id=id;
+        this.id = id;
     }
 
     public void run() {
-        quantidade= buffer.getQuantidade();
+        quantidade = buffer.getQuantidade();
         for (int i = 0; i < quantidade; i++) {
             try {
                 Thread.sleep(1000); //espera de 3s
@@ -26,6 +22,5 @@ public class Consumidor implements Runnable {
 
         }
     }
-    
-}
 
+}

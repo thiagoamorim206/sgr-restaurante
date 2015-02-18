@@ -1,9 +1,5 @@
 package Controller;
 
-/**
- *
- * @author Adriano
- */
 public class FactoryTipoRestaurante {
 
     public TipoRestaurante createRestaurante(String nome) {

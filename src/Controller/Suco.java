@@ -1,13 +1,9 @@
-
 package Controller;
 
-/**
- *
- * @author Adriano
- */
 public class Suco extends TipoCardapio {
-       @Override
+
+    @Override
     public String getDescricao() {
         return "Suco";
-    } 
+    }
 }

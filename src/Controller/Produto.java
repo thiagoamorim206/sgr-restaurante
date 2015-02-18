@@ -1,9 +1,5 @@
 package Controller;
 
-/**
- *
- * @author Adriano
- */
 public class Produto {
 
     private int id_pedido, id_cliente;

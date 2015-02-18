@@ -1,14 +1,9 @@
 package Controller;
 
-/**
- *
- * @author Adriano
- */
-
 public class Produtor implements Runnable {
 
     private Buffer buffer;
-    private int id,quantidade;
+    private int id, quantidade;
 
     public Produtor(Buffer b, int id) {
         this.buffer = b;
@@ -16,7 +11,7 @@ public class Produtor implements Runnable {
     }
 
     public void run() {
-        int sum=0;
+        int sum = 0;
         quantidade = buffer.getQuantidade();
         for (int i = 0; i < quantidade; i++) {
             try {
@@ -30,4 +25,3 @@ public class Produtor implements Runnable {
     }
 
 }
-

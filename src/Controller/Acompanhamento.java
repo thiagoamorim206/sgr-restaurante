@@ -1,11 +1,8 @@
 package Controller;
 
-/**
- *
- * @author Adriano
- */
 public class Acompanhamento extends TipoCardapio {
-        @Override
+
+    @Override
     public String getDescricao() {
         return "Acompanhamento";
     }
