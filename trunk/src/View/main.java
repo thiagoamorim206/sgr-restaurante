@@ -6,6 +6,7 @@ import Controller.Consumidor;
 import Controller.CreateTipoCardapio;
 import Controller.CreateTipoRestaurante;
 import Controller.Item;
+import Controller.Menu;
 import Controller.Produto;
 import Controller.Produtor;
 import Controller.Sincronizador;
@@ -46,220 +47,6 @@ import java.util.concurrent.Executors;
 
 public class main {
 
-    private static int menuInicial() {
-        Scanner scan = new Scanner(System.in);
-        boolean flag = false;
-        int optNumberMenuPrincipal = 0;
-        /**
-         * Menu Principal do sistema
-         */
-        do {
-
-            System.out.println("-----------Menu inicial Restaurante-----------");
-            System.out.println("1 - Cadastrar Dados.");
-            System.out.println("2 - Deletar Dados.");
-            System.out.println("3 - Editar Dados.");
-            System.out.println("4 - Listar Dados.");
-            System.out.println("5 - Produzir os pedidos");
-            System.out.println("6 - Mostrar itens com estoque baixo");
-            System.out.println("7 - Atualizar Estoque (fazer baixa)");
-            System.out.println("8 - Feichar caixa");
-
-            System.out.println("9 - Verificar Reserva.");
-            System.out.println("14- Fechar Mesa.");
-            System.out.println("15- Mostrar Mesas Reservadas.");
-            System.out.println("16- Mostrar Cardapio.");
-            System.out.println("17- Mostrar Fila Pedidos.");
-            System.out.println("18- Fechar pedido.");
-            System.out.println("19- Sair.");
-            System.out.print("Digite uma opção: ");
-
-            try {
-                optNumberMenuPrincipal = scan.nextInt();
-
-                System.out.println("----------------------------------------------------------");
-                flag = true;
-
-            } catch (InputMismatchException entreComInt) {
-                System.out.println("ERRO! Entre com um número inteiro.");
-
-            } catch (Exception e) {
-                System.out.println("Ocoreu um erro: " + e.getMessage());
-
-            } finally {
-                scan.nextLine();
-            }
-
-        } while ((optNumberMenuPrincipal < 1 || optNumberMenuPrincipal > 19) || !flag);
-        return optNumberMenuPrincipal;
-    }
-
-    private static int Submenu() {
-        Scanner scan = new Scanner(System.in);
-        boolean flag = false;
-        int optNumberSubMenu = 0;
-        /**
-         * Menu Principal do sistema
-         */
-        do {
-
-            System.out.println("-----------Menu de Cadastro-----------");
-            System.out.println("1 - Cadastrar Pessoa.");
-            System.out.println("2 - Cadastrar Fornecedor.");
-            System.out.println("3 - Cadastrar Produto.");
-            System.out.println("4 - Cadastrar Compra Produto.");
-            System.out.println("5 - Cadastrar Tipo Cardapio.");
-            System.out.println("6 - Cadastrar Tipo Restaurante.");
-            System.out.println("7 - Cadastrar Cardapio.");
-            System.out.println("8 - Cadastrar Mesa.");
-            System.out.println("9 - Cadastrar Pedido.");
-            System.out.println("10- Cadastrar Reserva.");
-            System.out.println("11- Cadastrar Pagamento.");
-            System.out.println("12- Sair.");
-            System.out.print("Digite uma opção: ");
-
-            try {
-                optNumberSubMenu = scan.nextInt();
-                System.out.println("----------------------------------------------------------");
-                flag = true;
-
-            } catch (InputMismatchException entreComInt) {
-                System.out.println("ERRO! Entre com um número inteiro.");
-
-            } catch (Exception e) {
-                System.out.println("Ocoreu um erro: " + e.getMessage());
-
-            } finally {
-                scan.nextLine();
-            }
-
-        } while ((optNumberSubMenu < 1 || optNumberSubMenu > 12) || !flag);
-        return optNumberSubMenu;
-    }
-
-    private static int SubmenuDeletar() {
-        Scanner scan = new Scanner(System.in);
-        boolean flag = false;
-        int optNumberSubMenuDeletar = 0;
-        /**
-         * Menu Principal do sistema
-         */
-        do {
-
-            System.out.println("-----------Menu de Deletar Cadastro-----------");
-            System.out.println("1 - Deletar Pessoa.");
-            System.out.println("2 - Deletar Fornecedor.");
-            System.out.println("3 - Deletar Produto.");
-            System.out.println("4 - Deletar Compra Produto.");
-            System.out.println("5 - Deletar Tipo Cardapio.");
-            System.out.println("6 - Deletar Tipo Restaurante.");
-            System.out.println("7 - Deletar Cardapio.");
-            System.out.println("8 - Deletar Mesa.");
-            System.out.println("9 - Deletar Pedido.");
-            System.out.println("10- Deletar Reserva.");
-            System.out.println("11- Deletar Pagamento.");
-            System.out.println("12- Sair.");
-            System.out.print("Digite uma opção: ");
-
-            try {
-                optNumberSubMenuDeletar = scan.nextInt();
-                System.out.println("----------------------------------------------------------");
-                flag = true;
-
-            } catch (InputMismatchException entreComInt) {
-                System.out.println("ERRO! Entre com um número inteiro.");
-
-            } catch (Exception e) {
-                System.out.println("Ocoreu um erro: " + e.getMessage());
-
-            } finally {
-                scan.nextLine();
-            }
-
-        } while ((optNumberSubMenuDeletar < 1 || optNumberSubMenuDeletar > 12) || !flag);
-        return optNumberSubMenuDeletar;
-    }
-
-    private static int SubmenuEditar() {
-        Scanner scan = new Scanner(System.in);
-        boolean flag = false;
-        int optNumberSubMenuEditar = 0;
-
-        do {
-
-            System.out.println("-----------Menu de Editar Cadastro-----------");
-            System.out.println("1 - Editar Pessoa.");
-            System.out.println("2 - Editar Fornecedor.");
-            System.out.println("3 - Editar Produto.");
-            System.out.println("4 - Editar Tipo Cardapio.");
-            System.out.println("5 - Editar Tipo Restaurante.");
-            System.out.println("6 - Editar Cardapio.");
-            System.out.println("7 - Editar Mesa.");
-            System.out.println("8- Sair.");
-            System.out.print("Digite uma opção: ");
-
-            try {
-                optNumberSubMenuEditar = scan.nextInt();
-                System.out.println("----------------------------------------------------------");
-                flag = true;
-
-            } catch (InputMismatchException entreComInt) {
-                System.out.println("ERRO! Entre com um número inteiro.");
-
-            } catch (Exception e) {
-                System.out.println("Ocoreu um erro: " + e.getMessage());
-
-            } finally {
-                scan.nextLine();
-            }
-
-        } while ((optNumberSubMenuEditar < 1 || optNumberSubMenuEditar > 8) || !flag);
-        return optNumberSubMenuEditar;
-    }
-
-    private static int SubmenuListar() {
-        Scanner scan = new Scanner(System.in);
-        boolean flag = false;
-        int optNumberSubMenuListar = 0;
-
-        do {
-
-            System.out.println("-----------Menu de Listar-----------");
-            System.out.println("1 - Listar Cliente.");
-            System.out.println("2 - Listar Empregado.");
-            System.out.println("3 - Listar Fornecedor.");
-            System.out.println("4 - Listar Produto.");
-            System.out.println("5 - Listar Compra Produto.");
-            System.out.println("6 - Listar Tipo Cardapio.");
-            System.out.println("7 - Listar Tipo Restaurante.");
-            System.out.println("8 - Listar Cardapio.");
-            System.out.println("9 - Listar Mesa.");
-            System.out.println("10- Listar Pagamento.");
-            System.out.println("11- Listar Reserva.");
-            System.out.println("12- Listar Pedido.");
-            System.out.println("13- Listar Fila Pedido.");
-            System.out.println("14- Sair.");
-            System.out.print("Digite uma opção: ");
-
-            try {
-                optNumberSubMenuListar = scan.nextInt();
-                System.out.println("----------------------------------------------------------");
-                flag = true;
-
-            } catch (InputMismatchException entreComInt) {
-                System.out.println("ERRO! Entre com um número inteiro.");
-
-            } catch (Exception e) {
-                System.out.println("Ocoreu um erro: " + e.getMessage());
-
-            } finally {
-                scan.nextLine();
-            }
-
-        } while ((optNumberSubMenuListar < 1 || optNumberSubMenuListar > 14) || !flag);
-        return optNumberSubMenuListar;
-    }
-
     @SuppressWarnings("empty-statement")
     public static void main(String[] args) {
 
@@ -275,7 +62,7 @@ public class main {
         int optNumberSubMenuListar;
 
         do {
-            opMenuPrincipal = menuInicial();
+            opMenuPrincipal = Menu.menuInicial();
 
             switch (opMenuPrincipal) {
 
@@ -283,7 +70,7 @@ public class main {
 
                     int pessoa = 0;
                     do {
-                        optNumberSubMenu = Submenu();
+                        optNumberSubMenu = Menu.Submenu();
 
                         switch (optNumberSubMenu) {
                             case 1:
@@ -325,8 +112,11 @@ public class main {
 
                                         if (pessoa == 1) {
                                             MesaBean mesaBean = new MesaBean();
-                                            mesaBean.ListarMesa();
-
+                                            ArrayList lista = mesaBean.ListarMesa();
+                                            if (lista.isEmpty()) {
+                                                System.out.println("Todas as Mesas estão Ocupadas");
+                                                break;
+                                            }
                                             System.out.println("Digite o codigo da mesa: ");
                                             int mesa = var.nextInt();
 
@@ -689,7 +479,6 @@ public class main {
                                     try {
                                         System.out.println("------------------Listando Empregados------------------");
                                         EmpregadoBean empregadoBean = new EmpregadoBean();
-
                                         empregadoBean.ListarEmpregadoFuncao();
 
                                         System.out.println("Digite o codigo do empregado: ");
@@ -750,7 +539,7 @@ public class main {
                                         int cliente = var.nextInt();
                                         var.nextLine();
 
-                                         ////ALTERADO POR ADRIANO 
+                                        ////ALTERADO POR ADRIANO 
                                         //ATUALIZANDO O STATUS DA MESA
                                         int mesa = clienteBean.mesadoCliente(cliente);
                                         MesaBean mesabean = new MesaBean();
@@ -790,7 +579,7 @@ public class main {
                 case 2:
 
                     do {
-                        optNumberSubMenuDeletar = SubmenuDeletar();
+                        optNumberSubMenuDeletar = Menu.SubmenuDeletar();
 
                         switch (optNumberSubMenuDeletar) {
 
@@ -1116,7 +905,7 @@ public class main {
                 case 3:
 
                     do {
-                        optNumberSubMenuEditar = SubmenuEditar();
+                        optNumberSubMenuEditar = Menu.SubmenuEditar();
 
                         switch (optNumberSubMenuEditar) {
 
@@ -1469,7 +1258,7 @@ public class main {
 
                 case 4:
                     do {
-                        optNumberSubMenuListar = SubmenuListar();
+                        optNumberSubMenuListar = Menu.SubmenuListar();
 
                         switch (optNumberSubMenuListar) {
                             case 1:
@@ -1676,6 +1465,7 @@ public class main {
                             ArrayList array = pagamento.fechar(datai, datat);
                             double total = CalcTotal.calcularTotal(array);
                             System.out.println("Total - R$" + total);
+
                         } catch (Exception e) {
                             System.out.println("Ocoreu um erro digite Novamente! ");
                             flag = false;
@@ -1689,7 +1479,7 @@ public class main {
 
             }
         } while (opMenuPrincipal
-                != 19);
+                != 9);
 
     }
 }
