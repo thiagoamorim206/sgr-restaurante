@@ -169,19 +169,19 @@ public class PagamentoDAO {
         return null;
     }
 
-    public ArrayList fecharCaixa(String  i, String f) {
+    public ArrayList fecharCaixa(String i, String f) {
         Connection cn = null;
-        ArrayList array = new ArrayList<Double>(); 
+        ArrayList array = new ArrayList<Double>();
         try {
             cn = ConnectionFactory.getConnection();
             Statement st = cn.createStatement();
-            String SQL = "select vl_total_pago from tb_pagamento where dt_pagamento between "+i+" and "+f;
+            String SQL = "select vl_total_pago from tb_pagamento where dt_pagamento between '" + i + "' and '" + f + "'";
 
             ResultSet rs = st.executeQuery(SQL);
 
             while (rs.next()) {
-                 Double x = new Double (rs.getInt(1));
-                 array.add(x);
+                Double x = new Double(rs.getInt(1));
+                array.add(x);
             }
 
             ConnectionFactory.desconecta(cn);

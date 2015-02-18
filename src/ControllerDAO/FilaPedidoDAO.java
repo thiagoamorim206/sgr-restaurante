@@ -78,8 +78,8 @@ public class FilaPedidoDAO {
         }
         return false;
     }
-    
-     ///////ALTERADO PELO ADRIANO
+
+    ///////ALTERADO PELO ADRIANO
     //FUNÇÃO PARA RETORNAR OS IDS DOS ITENS QUE DEVEM QUE SER FEITOS PELOS COZINHEIROS
     public ArrayList PedidosAtender() {
         Connection cn = null;
@@ -112,8 +112,9 @@ public class FilaPedidoDAO {
             e.printStackTrace();
         } finally {
             ConnectionFactory.desconecta(cn);
-            return array;
+
         }
+        return array;
     }
 
     public void atualizarStatus(int id) {

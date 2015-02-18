@@ -1,5 +1,6 @@
 package ControllerDAO;
 
+import Controller.Mesa;
 import Model.TbMesa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,9 +35,9 @@ public class MesaDAO {
         return null;
     }
 
-    public boolean listarMesa() {
+    public ArrayList listarMesa() {
         Connection cn = null;
-
+        ArrayList<Mesa> array = new ArrayList<Mesa>();
         try {
 
             cn = ConnectionFactory.getConnection();
@@ -45,20 +46,23 @@ public class MesaDAO {
                     + "from tb_mesa m, tb_cliente c, tb_pessoa p\n"
                     + "where fl_ocupada = 'false'\n"
                     + "and c.id_pessoa = p.id_pessoa\n"
-                    + "and c.id_mesa = m.id_mesa";
+                    + "and c.id_mesa = m.id_mesa ";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                System.out.println("Codigo: " + rs.getInt(1) + " - Mesa: " + rs.getString(2)
-                        + " - Cliente: " + rs.getString(3)
-                        + " - Lugares: " + rs.getInt(4)
-                        + " - Ocupada: " + rs.getBoolean(5)
-                        + " - Obs: " + rs.getString(6)
-                );
+                int i = rs.getInt(1);
+                String mesa = rs.getString(2);
+                String cliente = rs.getString(3);
+                int lugares = rs.getInt(4);
+                boolean ocupada = rs.getBoolean(5);
+                String obs = rs.getString(6);
 
+                Mesa m = new Mesa(i, lugares, mesa, cliente, obs, ocupada);
+
+                array.add(m);
             }
 
             ConnectionFactory.desconecta(cn);
@@ -69,7 +73,7 @@ public class MesaDAO {
         } finally {
             ConnectionFactory.desconecta(cn);
         }
-        return false;
+        return array;
     }
 
     public void AtualizarMesa(TbMesa t) {

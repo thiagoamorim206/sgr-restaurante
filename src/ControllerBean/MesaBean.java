@@ -1,5 +1,6 @@
 package ControllerBean;
 
+import Controller.Mesa;
 import ControllerDAO.MesaDAO;
 import Model.TbCliente;
 import Model.TbMesa;
@@ -37,10 +38,20 @@ public class MesaBean {
 
     }
 
-    public String ListarMesa() {
+    public ArrayList ListarMesa() {
+        ArrayList<Mesa> lista = mesaDAO.listarMesa();
+        
+        for (int i = 0; i < lista.size(); i++) {
 
-        mesaDAO.listarMesa();
-        return "Sucesso";
+            System.out.println("Codigo: " + lista.get(i).getId_mesa() + " - Mesa: " + lista.get(i).getNm_mesa()
+                    + " - Cliente: " + lista.get(i).getNm_cliente()
+                    + " - Lugares: " + lista.get(i).getNr_lugares()
+                    + " - Ocupada: " + lista.get(i).isFl_ocupada()
+                    + " - Obs: " + lista.get(i).getDs_obs());
+              
+        }
+
+        return lista;
 
     }
 
