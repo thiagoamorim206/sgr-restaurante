@@ -42,11 +42,9 @@ public class MesaDAO {
 
             cn = ConnectionFactory.getConnection();
 
-            String SQL = "select m.id_mesa, m.nm_nome mesa, p.nm_nome cliente, m.nr_lugares, m.fl_ocupada, m.ds_obs\n"
-                    + "from tb_mesa m, tb_cliente c, tb_pessoa p\n"
-                    + "where fl_ocupada = 'false'\n"
-                    + "and c.id_pessoa = p.id_pessoa\n"
-                    + "and c.id_mesa = m.id_mesa ";
+            String SQL = "select m.id_mesa,m.nr_lugares,m.nm_nome\n"
+                    + "from tb_mesa m\n"
+                    + "where fl_ocupada = 'false'";
 
             PreparedStatement ps = cn.prepareStatement(SQL);
 
@@ -54,13 +52,9 @@ public class MesaDAO {
 
             while (rs.next()) {
                 int i = rs.getInt(1);
-                String mesa = rs.getString(2);
-                String cliente = rs.getString(3);
-                int lugares = rs.getInt(4);
-                boolean ocupada = rs.getBoolean(5);
-                String obs = rs.getString(6);
-
-                Mesa m = new Mesa(i, lugares, mesa, cliente, obs, ocupada);
+                int mesa = rs.getInt(2);
+                String nome = rs.getString(3);
+                Mesa m = new Mesa(i, mesa, nome);
 
                 array.add(m);
             }
@@ -223,5 +217,6 @@ public class MesaDAO {
         }
 
     }
+
 
 }

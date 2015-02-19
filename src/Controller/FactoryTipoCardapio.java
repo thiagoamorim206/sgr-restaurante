@@ -12,6 +12,8 @@ public class FactoryTipoCardapio {
             cardapio = new Acompanhamento();
         } else if (nome.equals("Bebida")) {
             cardapio = new Bebida();
+        } else if(nome.equals("Prato")){
+            cardapio = new Pratos();
         }
 
         return cardapio;
