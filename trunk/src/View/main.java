@@ -438,7 +438,7 @@ public class main {
                                             int cardapio = var.nextInt();
                                             var.nextLine();
 
-                                            //ALTERADO PELO ADRIANO DECORATOR
+                                            //DECORATOR
                                             Integer a = new Integer(cardapio);
                                             array_id_itens.add(a); //salvando os itens escolhidos
                                             v = cardapioBean.verValor(cardapio);
@@ -449,11 +449,11 @@ public class main {
                                             System.out.println("Digite uma obs para o Pedido: ");
                                             String obs = var.nextLine();
                                         }
-                                        ///////////ALTERADO POR ADRIANO CALCULANDO O CUSTO DO PEDIDO E SALVANDO NO BANCO
+                                      
                                         v = pedidoBean.getPedido().coust();
                                         pedidoBean.getPedido().setVlTotalConsumo(v);
                                         pedidoBean.CadastroPedido();// salva o pedido no banco
-                                        //ALTERADO PELO ADRIANO  SALVANDO OS ITENS DO PEDIDO NO BANCO
+                               
                                         for (int i = 0; i < array_id_itens.size(); i++) {
                                             PedidoCardapioBean pedidoCardapioBean = new PedidoCardapioBean(array_id_itens.get(i), pedidoBean.listaUltimo());
                                             pedidoCardapioBean.CadastroPedidoCardapio();
@@ -539,7 +539,7 @@ public class main {
                                         int cliente = var.nextInt();
                                         var.nextLine();
 
-                                        ////ALTERADO POR ADRIANO 
+                                      
                                         //ATUALIZANDO O STATUS DA MESA
                                         int mesa = clienteBean.mesadoCliente(cliente);
                                         MesaBean mesabean = new MesaBean();
@@ -548,7 +548,7 @@ public class main {
                                         //MOSTRANDO O TOTAL A PAGAR
                                         PedidoBean pedidobean = new PedidoBean();
                                         double totalmesa = pedidobean.totaldaMesa(mesa);
-                                        System.out.println("Valor total a pagar:R$ " + totalmesa);  ////ALTERADO POR ADRIANO                                           
+                                        System.out.printf("Valor total a pagar:R$ %.2f ",totalmesa);                                         
 
                                         Date dt = new Date(System.currentTimeMillis());
 
@@ -561,7 +561,7 @@ public class main {
 
                                         PedidoBean pedidoBean = new PedidoBean();
                                         pedidoBean.AtualizarPago(pago, aux);
-                                        System.out.printf("Mesa %d fechada.\n", mesa);  ////ALTERADO POR ADRIANO 
+                                        System.out.printf("Mesa %d fechada.\n", mesa); 
                                     } catch (Exception e) {
                                         System.out.println("Ocoreu um erro digite Novamente! ");
                                         flag = false;
@@ -1397,7 +1397,7 @@ public class main {
 
                     break;
 
-                //ALTERADO POR ADRIANO
+            
                 case 6:
                     System.out.println("------------------Mostrar itens com estoque baixo------------------");
                     do {
@@ -1417,7 +1417,7 @@ public class main {
                         }
                     } while (!flag);
                     break;
-                //ALTERADO POR ADRIANO
+            
                 case 7:
                     System.out.println("------------------Atualizar Estoque (fazer baixa)------------------");
                     MateriaPrimaBean materia = new MateriaPrimaBean();
@@ -1448,7 +1448,7 @@ public class main {
                     } while (!flag);
                     break;
 
-                //ALTERADO POR ADRIANO
+               
                 case 8:
                     System.out.println("------------------Fechar caixa------------------");
                     do {

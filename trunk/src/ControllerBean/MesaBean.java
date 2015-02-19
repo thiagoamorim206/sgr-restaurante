@@ -44,11 +44,7 @@ public class MesaBean {
         for (int i = 0; i < lista.size(); i++) {
 
             System.out.println("Codigo: " + lista.get(i).getId_mesa() + " - Mesa: " + lista.get(i).getNm_mesa()
-                    + " - Cliente: " + lista.get(i).getNm_cliente()
-                    + " - Lugares: " + lista.get(i).getNr_lugares()
-                    + " - Ocupada: " + lista.get(i).isFl_ocupada()
-                    + " - Obs: " + lista.get(i).getDs_obs());
-              
+                    + " - Lugares: " + lista.get(i).getNr_lugares());
         }
 
         return lista;
